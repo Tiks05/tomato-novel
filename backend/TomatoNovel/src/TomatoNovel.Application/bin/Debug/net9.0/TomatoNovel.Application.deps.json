@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "TomatoNovel.Application/1.0.0": {
+        "dependencies": {
+          "TomatoNovel.Domain": "1.0.0"
+        },
+        "runtime": {
+          "TomatoNovel.Application.dll": {}
+        }
+      },
+      "TomatoNovel.Domain/1.0.0": {
+        "runtime": {
+          "TomatoNovel.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TomatoNovel.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TomatoNovel.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

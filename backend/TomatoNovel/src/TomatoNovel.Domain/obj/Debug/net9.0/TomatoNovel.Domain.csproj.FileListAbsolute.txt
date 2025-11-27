@@ -1,0 +1,11 @@
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Domain\bin\Debug\net9.0\TomatoNovel.Domain.deps.json
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Domain\bin\Debug\net9.0\TomatoNovel.Domain.dll
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Domain\bin\Debug\net9.0\TomatoNovel.Domain.pdb
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Domain\obj\Debug\net9.0\TomatoNovel.Domain.GeneratedMSBuildEditorConfig.editorconfig
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Domain\obj\Debug\net9.0\TomatoNovel.Domain.AssemblyInfoInputs.cache
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Domain\obj\Debug\net9.0\TomatoNovel.Domain.AssemblyInfo.cs
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Domain\obj\Debug\net9.0\TomatoNovel.Domain.csproj.CoreCompileInputs.cache
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Domain\obj\Debug\net9.0\TomatoNovel.Domain.dll
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Domain\obj\Debug\net9.0\refint\TomatoNovel.Domain.dll
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Domain\obj\Debug\net9.0\TomatoNovel.Domain.pdb
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Domain\obj\Debug\net9.0\ref\TomatoNovel.Domain.dll

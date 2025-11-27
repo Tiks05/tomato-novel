@@ -1,0 +1,124 @@
+{
+  "version": 3,
+  "targets": {
+    "net9.0": {
+      "TomatoNovel.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "TomatoNovel.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TomatoNovel.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TomatoNovel.Application.dll": {}
+        }
+      },
+      "TomatoNovel.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/TomatoNovel.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TomatoNovel.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TomatoNovel.Application/1.0.0": {
+      "type": "project",
+      "path": "../TomatoNovel.Application/TomatoNovel.Application.csproj",
+      "msbuildProject": "../TomatoNovel.Application/TomatoNovel.Application.csproj"
+    },
+    "TomatoNovel.Domain/1.0.0": {
+      "type": "project",
+      "path": "../TomatoNovel.Domain/TomatoNovel.Domain.csproj",
+      "msbuildProject": "../TomatoNovel.Domain/TomatoNovel.Domain.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net9.0": [
+      "TomatoNovel.Application >= 1.0.0",
+      "TomatoNovel.Domain >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\31844\\.nuget\\packages\\": {},
+    "E:\\ALLIDE\\VisualStudio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "G:\\Web Programming\\TomatoNovel\\backend\\TomatoNovel\\src\\TomatoNovel.Infrastructure\\TomatoNovel.Infrastructure.csproj",
+      "projectName": "TomatoNovel.Infrastructure",
+      "projectPath": "G:\\Web Programming\\TomatoNovel\\backend\\TomatoNovel\\src\\TomatoNovel.Infrastructure\\TomatoNovel.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\31844\\.nuget\\packages\\",
+      "outputPath": "G:\\Web Programming\\TomatoNovel\\backend\\TomatoNovel\\src\\TomatoNovel.Infrastructure\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "E:\\ALLIDE\\VisualStudio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\31844\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net9.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "projectReferences": {
+            "G:\\Web Programming\\TomatoNovel\\backend\\TomatoNovel\\src\\TomatoNovel.Application\\TomatoNovel.Application.csproj": {
+              "projectPath": "G:\\Web Programming\\TomatoNovel\\backend\\TomatoNovel\\src\\TomatoNovel.Application\\TomatoNovel.Application.csproj"
+            },
+            "G:\\Web Programming\\TomatoNovel\\backend\\TomatoNovel\\src\\TomatoNovel.Domain\\TomatoNovel.Domain.csproj": {
+              "projectPath": "G:\\Web Programming\\TomatoNovel\\backend\\TomatoNovel\\src\\TomatoNovel.Domain\\TomatoNovel.Domain.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.300"
+    },
+    "frameworks": {
+      "net9.0": {
+        "targetAlias": "net9.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

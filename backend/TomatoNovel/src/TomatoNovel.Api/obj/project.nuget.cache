@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "CDYP/7ovwgU=",
+  "success": true,
+  "projectFilePath": "G:\\Web Programming\\TomatoNovel\\backend\\TomatoNovel\\src\\TomatoNovel.Api\\TomatoNovel.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\31844\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.11\\microsoft.aspnetcore.openapi.9.0.11.nupkg.sha512",
+    "C:\\Users\\31844\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}

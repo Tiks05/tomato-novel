@@ -1,0 +1,15 @@
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\bin\Debug\net9.0\TomatoNovel.Application.deps.json
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\bin\Debug\net9.0\TomatoNovel.Application.dll
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\bin\Debug\net9.0\TomatoNovel.Application.pdb
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\bin\Debug\net9.0\TomatoNovel.Domain.dll
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\bin\Debug\net9.0\TomatoNovel.Domain.pdb
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\obj\Debug\net9.0\TomatoNovel.Application.csproj.AssemblyReference.cache
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\obj\Debug\net9.0\TomatoNovel.Application.GeneratedMSBuildEditorConfig.editorconfig
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\obj\Debug\net9.0\TomatoNovel.Application.AssemblyInfoInputs.cache
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\obj\Debug\net9.0\TomatoNovel.Application.AssemblyInfo.cs
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\obj\Debug\net9.0\TomatoNovel.Application.csproj.CoreCompileInputs.cache
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\obj\Debug\net9.0\TomatoNo.60141E76.Up2Date
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\obj\Debug\net9.0\TomatoNovel.Application.dll
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\obj\Debug\net9.0\refint\TomatoNovel.Application.dll
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\obj\Debug\net9.0\TomatoNovel.Application.pdb
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\obj\Debug\net9.0\ref\TomatoNovel.Application.dll
