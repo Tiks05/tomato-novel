@@ -9,3 +9,4 @@ G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Domain\obj\De
 G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Domain\obj\Debug\net9.0\refint\TomatoNovel.Domain.dll
 G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Domain\obj\Debug\net9.0\TomatoNovel.Domain.pdb
 G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Domain\obj\Debug\net9.0\ref\TomatoNovel.Domain.dll
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Domain\obj\Debug\net9.0\TomatoNovel.Domain.sourcelink.json

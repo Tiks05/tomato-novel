@@ -8,10 +8,74 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.11"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.12.0-beta1.25218.8">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.11">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.14.15">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\TomatoNovel.Application\TomatoNovel.Application.csproj" />
+      <ProjectReference Include="..\TomatoNovel.Infrastructure\TomatoNovel.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\news\news-interaction-contest.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\news\news-June.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\news\news-summer.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\news\news-survival-plan.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\avatars\04458d3ca07c4acca4b58d2de7d6a360.JPG" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\avatars\086b211e09fb41fdb1331990c6113418.JPG" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\avatars\0ba27ab0ad774d6692649205adc5a735.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\avatars\0c185b6b3e0d488489fc3f807eab4a22.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\avatars\0d3c8f6b786646bead144e1f32180681.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\avatars\0eb762f760b44a9ea5f8cc42d45f9ce9.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\avatars\10ca0852b8bb48fb94158d70333c0c9f.PNG" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\avatars\1591bf640fe541719d50024a6a13ba04.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\avatars\1c8fb4d594fd45e3b58f93710e91e087.PNG" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\avatars\1e77caf83df24e1982938a9affba2136.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\avatars\28b5392882b7463dbbadf01cbae1c0b8.JPG" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1001.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1002.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1011.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1022.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1027.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1029.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1030.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1031.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1032.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1033.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1034.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1035.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1036.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1037.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1038.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1039.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1040.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1041.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1042.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1043.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1044.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1045.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1046.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1047.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\user\life\1048.png" />
     </ItemGroup>
 
 </Project>

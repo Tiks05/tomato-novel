@@ -8,12 +8,23 @@
     ".NETCoreApp,Version=v9.0": {
       "TomatoNovel.Application/1.0.0": {
         "dependencies": {
+          "Microsoft.CodeAnalysis.Analyzers": "3.12.0-beta1.25218.8",
+          "Microsoft.VisualStudio.Threading.Analyzers": "17.14.15",
+          "StyleCop.Analyzers": "1.2.0-beta.556",
           "TomatoNovel.Domain": "1.0.0"
         },
         "runtime": {
           "TomatoNovel.Application.dll": {}
         }
       },
+      "Microsoft.CodeAnalysis.Analyzers/3.12.0-beta1.25218.8": {},
+      "Microsoft.VisualStudio.Threading.Analyzers/17.14.15": {},
+      "StyleCop.Analyzers/1.2.0-beta.556": {
+        "dependencies": {
+          "StyleCop.Analyzers.Unstable": "1.2.0.556"
+        }
+      },
+      "StyleCop.Analyzers.Unstable/1.2.0.556": {},
       "TomatoNovel.Domain/1.0.0": {
         "runtime": {
           "TomatoNovel.Domain.dll": {
@@ -29,6 +40,34 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Microsoft.CodeAnalysis.Analyzers/3.12.0-beta1.25218.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5Y2rb7NaxyXkeGNig7F9Ua7lJEKI+sXxe8BuuMsQMZ2s9cyY1XdbcFRM0BC8axqtoVHvrm4blhQXLF84VWB9RA==",
+      "path": "microsoft.codeanalysis.analyzers/3.12.0-beta1.25218.8",
+      "hashPath": "microsoft.codeanalysis.analyzers.3.12.0-beta1.25218.8.nupkg.sha512"
+    },
+    "Microsoft.VisualStudio.Threading.Analyzers/17.14.15": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mXQPJsbuUD2ydq4/ffd8h8tSOFCXec+2xJOVNCvXjuMOq/+5EKHq3D2m2MC2+nUaXeFMSt66VS/J4HdKBixgcw==",
+      "path": "microsoft.visualstudio.threading.analyzers/17.14.15",
+      "hashPath": "microsoft.visualstudio.threading.analyzers.17.14.15.nupkg.sha512"
+    },
+    "StyleCop.Analyzers/1.2.0-beta.556": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-llRPgmA1fhC0I0QyFLEcjvtM2239QzKr/tcnbsjArLMJxJlu0AA5G7Fft0OI30pHF3MW63Gf4aSSsjc5m82J1Q==",
+      "path": "stylecop.analyzers/1.2.0-beta.556",
+      "hashPath": "stylecop.analyzers.1.2.0-beta.556.nupkg.sha512"
+    },
+    "StyleCop.Analyzers.Unstable/1.2.0.556": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zvn9Mqs/ox/83cpYPignI8hJEM2A93s2HkHs8HYMOAQW0PkampyoErAiIyKxgTLqbbad29HX/shv/6LGSjPJNQ==",
+      "path": "stylecop.analyzers.unstable/1.2.0.556",
+      "hashPath": "stylecop.analyzers.unstable.1.2.0.556.nupkg.sha512"
     },
     "TomatoNovel.Domain/1.0.0": {
       "type": "project",

@@ -1,0 +1,68 @@
+root = true
+
+# ---------------------------------------------------------------------------
+# 基础格式（所有 C# 项目统一）
+# ---------------------------------------------------------------------------
+
+[*.cs]
+indent_style = space
+indent_size = 4
+charset = utf-8-bom
+end_of_line = crlf
+insert_final_newline = true
+
+# ---------------------------------------------------------------------------
+# using 相关（非常重要）
+# ---------------------------------------------------------------------------
+
+# System.* 放最前
+dotnet_sort_system_directives_first = true
+
+# 删除未使用的 using
+dotnet_diagnostic.IDE0005.severity = warning
+
+# ---------------------------------------------------------------------------
+# 命名规范
+# ---------------------------------------------------------------------------
+
+# 私有字段使用 _camelCase
+dotnet_naming_rule.private_fields_rule.severity = suggestion
+dotnet_naming_rule.private_fields_rule.symbols = private_fields
+dotnet_naming_rule.private_fields_rule.style = private_field_style
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+
+dotnet_naming_style.private_field_style.capitalization = camel_case
+dotnet_naming_style.private_field_style.required_prefix = _
+
+# ---------------------------------------------------------------------------
+# C# 代码风格
+# ---------------------------------------------------------------------------
+
+# var 优先
+csharp_style_var_for_built_in_types = true
+csharp_style_var_when_type_is_apparent = true
+csharp_style_var_elsewhere = true
+
+# 花括号换行（Allman）
+csharp_new_line_before_open_brace = all
+
+# 成员之间空行（类成员分隔）
+csharp_new_line_between_members = true
+
+# 不允许多个连续空行
+dotnet_style_allow_multiple_blank_lines_experimental = false
+
+# ---------------------------------------------------------------------------
+# 关闭部分 StyleCop 规则（避免过度严格）
+# ---------------------------------------------------------------------------
+
+# SA1633：文件头（版权）要求 —— 暂时关闭
+dotnet_diagnostic.SA1633.severity = none
+
+# SA1600：所有公开成员要求 XML 文档 —— 暂时关闭
+dotnet_diagnostic.SA1600.severity = none
+
+# SA1649：文件名必须和类名完全一致 —— 暂时关闭
+dotnet_diagnostic.SA1649.severity = none

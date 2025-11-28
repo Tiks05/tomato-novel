@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "wbvL9BW2uHI=",
+  "dgSpecHash": "VBRX9BTLOyE=",
   "success": true,
   "projectFilePath": "G:\\Web Programming\\TomatoNovel\\backend\\TomatoNovel\\src\\TomatoNovel.Domain\\TomatoNovel.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\31844\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.12.0-beta1.25218.8\\microsoft.codeanalysis.analyzers.3.12.0-beta1.25218.8.nupkg.sha512",
+    "C:\\Users\\31844\\.nuget\\packages\\microsoft.visualstudio.threading.analyzers\\17.14.15\\microsoft.visualstudio.threading.analyzers.17.14.15.nupkg.sha512",
+    "C:\\Users\\31844\\.nuget\\packages\\stylecop.analyzers\\1.2.0-beta.556\\stylecop.analyzers.1.2.0-beta.556.nupkg.sha512",
+    "C:\\Users\\31844\\.nuget\\packages\\stylecop.analyzers.unstable\\1.2.0.556\\stylecop.analyzers.unstable.1.2.0.556.nupkg.sha512"
+  ],
   "logs": []
 }

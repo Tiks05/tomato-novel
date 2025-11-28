@@ -13,3 +13,4 @@ G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\o
 G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\obj\Debug\net9.0\refint\TomatoNovel.Application.dll
 G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\obj\Debug\net9.0\TomatoNovel.Application.pdb
 G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\obj\Debug\net9.0\ref\TomatoNovel.Application.dll
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Application\obj\Debug\net9.0\TomatoNovel.Application.sourcelink.json
