@@ -2,7 +2,9 @@ G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Infrastructur
 G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Infrastructure\bin\Debug\net9.0\TomatoNovel.Infrastructure.runtimeconfig.json
 G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Infrastructure\bin\Debug\net9.0\TomatoNovel.Infrastructure.dll
 G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Infrastructure\bin\Debug\net9.0\TomatoNovel.Infrastructure.pdb
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Infrastructure\bin\Debug\net9.0\TomatoNovel.Application.dll
 G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Infrastructure\bin\Debug\net9.0\TomatoNovel.Domain.dll
+G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Infrastructure\bin\Debug\net9.0\TomatoNovel.Application.pdb
 G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Infrastructure\bin\Debug\net9.0\TomatoNovel.Domain.pdb
 G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Infrastructure\obj\Debug\net9.0\TomatoNovel.Infrastructure.csproj.AssemblyReference.cache
 G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Infrastructure\obj\Debug\net9.0\TomatoNovel.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig

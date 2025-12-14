@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿namespace TomatoNovel.Infrastructure.Persistence.Configurations;
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TomatoNovel.Domain.Entities;
-
-namespace TomatoNovel.Infrastructure.Persistence.Configurations;
 
 /// <summary>
 /// Configures the User entity for Entity Framework Core.
@@ -26,7 +26,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasIndex(u => u.Phone)
             .IsUnique();
 
-        builder.Property(u => u.Password)
+        builder.Property(u => u.PasswordHash)
             .HasMaxLength(60);
 
         builder.Property(u => u.Nickname)

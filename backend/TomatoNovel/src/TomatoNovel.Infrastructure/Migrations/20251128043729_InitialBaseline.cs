@@ -1,11 +1,10 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-#nullable disable
+﻿#nullable disable
 
 namespace TomatoNovel.Infrastructure.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Metadata;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     /// <inheritdoc />
     public partial class InitialBaseline : Migration
     {
@@ -32,7 +31,7 @@ namespace TomatoNovel.Infrastructure.Migrations
                     IsIncludeVideo = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
                     Content = table.Column<string>(type: "text", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreateAt = table.Column<DateTime>(type: "datetime", nullable: false)
+                    CreateAt = table.Column<DateTime>(type: "datetime", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -61,7 +60,7 @@ namespace TomatoNovel.Infrastructure.Migrations
                     Type = table.Column<string>(type: "varchar(16)", maxLength: 16, nullable: false, defaultValue: "notice")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -95,7 +94,7 @@ namespace TomatoNovel.Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Level = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     BecomeAuthorAt = table.Column<DateTime>(type: "datetime", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -137,7 +136,7 @@ namespace TomatoNovel.Infrastructure.Migrations
                     SignStatus = table.Column<string>(type: "varchar(16)", maxLength: 16, nullable: false, defaultValue: "Unsigned")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -159,7 +158,7 @@ namespace TomatoNovel.Infrastructure.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     FollowerId = table.Column<int>(type: "int", nullable: false),
                     FollowedId = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -192,7 +191,7 @@ namespace TomatoNovel.Infrastructure.Migrations
                     Likes = table.Column<int>(type: "int", nullable: true, defaultValue: 0),
                     Content = table.Column<string>(type: "text", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -231,7 +230,7 @@ namespace TomatoNovel.Infrastructure.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     BookId = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -261,7 +260,7 @@ namespace TomatoNovel.Infrastructure.Migrations
                     Title = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Sort = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -291,7 +290,7 @@ namespace TomatoNovel.Infrastructure.Migrations
                     Status = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false, defaultValue: "published")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
                 },
                 constraints: table =>
                 {

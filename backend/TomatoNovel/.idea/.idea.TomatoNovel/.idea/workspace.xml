@@ -9,57 +9,73 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc35ad99-6fbb-4185-acc4-fc2214cc59ad" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/Entities/Book.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/Entities/Chapter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/Entities/Classroom.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/Entities/Comment.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/Entities/Favorite.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/Entities/Follow.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/Entities/News.py.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/Entities/User.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/Entities/Volume.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/BookConfiguration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/ChapterConfiguration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/ClassroomConfiguration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/CommentConfiguration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/FavoriteConfiguration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/FollowConfiguration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/NewsConfiguration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/UserConfiguration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/VolumeConfiguration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/TomatoNovelDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TomatoNovel/.idea/.gitignore" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/Controllers/AuthController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/Middlewares/ExceptionMiddleware.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/Middlewares/ExceptionMiddlewareExtensions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/Responses/ApiResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/DTOs/Auth/Requests/LoginOrRegisterRequestDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/DTOs/Auth/Responses/LoginOrRegisterResponseDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/DTOs/Auth/Responses/TokenResponseDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/DTOs/Auth/Responses/UserInfoDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/Exceptions/BusinessException.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/Interfaces/IAuthService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/Interfaces/IOpenIddictTokenService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/Services/AuthService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/Interfaces/IAuthRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Repositories/AuthRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Services/OpenIddictTokenService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TomatoNovel/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TomatoNovel/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TomatoNovel/.idea/dataSources/324b3fe3-665c-45a1-8618-41159613848d.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TomatoNovel/.idea/dataSources/324b3fe3-665c-45a1-8618-41159613848d/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TomatoNovel/.idea/dataSources/324b3fe3-665c-45a1-8618-41159613848d/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TomatoNovel/.idea/dataSources/324b3fe3-665c-45a1-8618-41159613848d/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TomatoNovel/.idea/dataSources/324b3fe3-665c-45a1-8618-41159613848d/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TomatoNovel/.idea/data_source_mapping.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TomatoNovel/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TomatoNovel/.idea/indexLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TomatoNovel/.idea/projectSettingsUpdater.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TomatoNovel/.idea/queries/Query.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TomatoNovel/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TomatoNovel/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TomatoNovel/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TomatoNovel.sln" beforeDir="false" afterPath="$PROJECT_DIR$/TomatoNovel.WebAPI.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/Properties/launchSettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/TomatoNovel.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/TomatoNovel.Api.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/TomatoNovel.Api.http" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/appsettings.Development.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Api.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Api.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Api.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Api.exe" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Api.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Api.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Api.runtimeconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Api.runtimeconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Api.staticwebassets.endpoints.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Api.staticwebassets.endpoints.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Application.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Application.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Domain.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Domain.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Infrastructure.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/TomatoNovel.Infrastructure.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/appsettings.Development.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/bin/Debug/net9.0/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.genruntimeconfig.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/TomatoNovel.Api.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/apphost.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/ref/TomatoNovel.Api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/ref/TomatoNovel.Api.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/refint/TomatoNovel.Api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/refint/TomatoNovel.Api.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/rjsmcshtml.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/rjsmcshtml.dswa.cache.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/rjsmrazor.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/rjsmrazor.dswa.cache.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/rpswa.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/rpswa.dswa.cache.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/staticwebassets.build.endpoints.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/staticwebassets.build.endpoints.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/staticwebassets.build.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/staticwebassets.build.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/staticwebassets.build.json.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/Debug/net9.0/staticwebassets.build.json.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/TomatoNovel.Api.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/TomatoNovel.Api.csproj.nuget.dgspec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/TomatoNovel.Api.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/TomatoNovel.Api.csproj.nuget.g.props" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/TomatoNovel.Api.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/TomatoNovel.Api.csproj.nuget.g.targets" afterDir="false" />
@@ -68,7 +84,6 @@
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/project.packagespec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/rider.project.model.nuget.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Api/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/Class1.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/TomatoNovel.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/TomatoNovel.Application.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/bin/Debug/net9.0/TomatoNovel.Application.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/bin/Debug/net9.0/TomatoNovel.Application.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/bin/Debug/net9.0/TomatoNovel.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/bin/Debug/net9.0/TomatoNovel.Application.dll" afterDir="false" />
@@ -77,53 +92,64 @@
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/bin/Debug/net9.0/TomatoNovel.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/bin/Debug/net9.0/TomatoNovel.Domain.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/TomatoNovel.Application.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/ref/TomatoNovel.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/ref/TomatoNovel.Application.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/refint/TomatoNovel.Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/Debug/net9.0/refint/TomatoNovel.Application.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/TomatoNovel.Application.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/TomatoNovel.Application.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/TomatoNovel.Application.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/TomatoNovel.Application.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/TomatoNovel.Application.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/TomatoNovel.Application.csproj.nuget.g.targets" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/project.assets.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/project.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/project.packagespec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/rider.project.model.nuget.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Application/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/Class1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/TomatoNovel.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/TomatoNovel.Domain.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/bin/Debug/net9.0/TomatoNovel.Domain.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/bin/Debug/net9.0/TomatoNovel.Domain.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/Entities/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/Entities/User.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/bin/Debug/net9.0/TomatoNovel.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/bin/Debug/net9.0/TomatoNovel.Domain.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/bin/Debug/net9.0/TomatoNovel.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/bin/Debug/net9.0/TomatoNovel.Domain.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/TomatoNovel.Domain.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/ref/TomatoNovel.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/ref/TomatoNovel.Domain.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/refint/TomatoNovel.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/Debug/net9.0/refint/TomatoNovel.Domain.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/TomatoNovel.Domain.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/TomatoNovel.Domain.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/TomatoNovel.Domain.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/TomatoNovel.Domain.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/TomatoNovel.Domain.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/TomatoNovel.Domain.csproj.nuget.g.targets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/project.packagespec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/rider.project.model.nuget.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Domain/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Class1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Migrations/20251128043729_InitialBaseline.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Migrations/20251128043729_InitialBaseline.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/BookConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/BookConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/ChapterConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/ChapterConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/ClassroomConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/ClassroomConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/CommentConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/CommentConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/FavoriteConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/FavoriteConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/FollowConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/FollowConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/NewsConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/NewsConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/UserConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/UserConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/VolumeConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/VolumeConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/TomatoNovelDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/TomatoNovelDbContext.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/TomatoNovel.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/TomatoNovel.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/bin/Debug/net9.0/TomatoNovel.Domain.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/bin/Debug/net9.0/TomatoNovel.Domain.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/bin/Debug/net9.0/TomatoNovel.Domain.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/bin/Debug/net9.0/TomatoNovel.Domain.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/bin/Debug/net9.0/TomatoNovel.Infrastructure.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/bin/Debug/net9.0/TomatoNovel.Infrastructure.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/bin/Debug/net9.0/TomatoNovel.Infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/bin/Debug/net9.0/TomatoNovel.Infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/bin/Debug/net9.0/TomatoNovel.Infrastructure.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/bin/Debug/net9.0/TomatoNovel.Infrastructure.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/bin/Debug/net9.0/TomatoNovel.Infrastructure.runtimeconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/bin/Debug/net9.0/TomatoNovel.Infrastructure.runtimeconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/TomatoNovel.Infrastructure.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/ref/TomatoNovel.Infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/ref/TomatoNovel.Infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/refint/TomatoNovel.Infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/Debug/net9.0/refint/TomatoNovel.Infrastructure.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/TomatoNovel.Infrastructure.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/TomatoNovel.Infrastructure.csproj.nuget.dgspec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/TomatoNovel.Infrastructure.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/TomatoNovel.Infrastructure.csproj.nuget.g.props" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/TomatoNovel.Infrastructure.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/TomatoNovel.Infrastructure.csproj.nuget.g.targets" afterDir="false" />
@@ -132,16 +158,42 @@
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/project.packagespec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/rider.project.model.nuget.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/TomatoNovel.Infrastructure/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/TomatoNovel.Web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/TomatoNovel.Web/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/TomatoNovel.Web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/TomatoNovel.Web/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/TomatoNovel.Web/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/TomatoNovel.Web/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/TomatoNovel.Web/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/TomatoNovel.Web/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/TomatoNovel.Web/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/TomatoNovel.Web/src/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/TomatoNovel.Web/tsconfig.app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/TomatoNovel.Web/tsconfig.app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/TomatoNovel.Web/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/TomatoNovel.Web/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DpaMonitoringSettings">
+    <option name="firstShow" value="false" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/53428d95742549e8968df3e76ebd1d7de8e928/40/7c5ed246/Exception.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/25c17a5694af3e1179e68d84db415db2726312cb8882d79b324f908bec83c52e/HttpContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a54af938a2dc2bcc438ee1b0f67d1f8719f14f2b9011248f5a0852edbf6e4f2/ServerSession.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Api/Controllers/AuthController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Api/Controllers/TokenController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Api/Middlewares/ExceptionMiddleware.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Api/Middlewares/ExceptionMiddlewareExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Api/Responses/ApiResponse.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Application/DTOs/Auth/Requests/LoginOrRegisterRequestDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Application/DTOs/Auth/Responses/LoginOrRegisterResponseDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Application/DTOs/Auth/Responses/TokenResponseDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Application/DTOs/Auth/Responses/UserInfoDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Application/Exceptions/BusinessException.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Application/Interfaces/IAuthService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Application/Interfaces/IOpenIddictTokenService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Application/Services/AuthService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Domain/Entities/Book.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Domain/Entities/Chapter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Domain/Entities/Classroom.cs" root0="FORCE_HIGHLIGHTING" />
@@ -151,6 +203,7 @@
     <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Domain/Entities/News.py.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Domain/Entities/User.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Domain/Entities/Volume.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Domain/Interfaces/IAuthRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/BookConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/ChapterConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/ClassroomConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
@@ -161,7 +214,10 @@
     <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/UserConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/Configurations/VolumeConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Persistence/TomatoNovelDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Repositories/AuthRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Services/OpenIddictTokenService.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 8
@@ -174,29 +230,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET 启动设置配置文件.TomatoNovel.Api: http.executor&quot;: &quot;Run&quot;,
+    &quot;.NET 启动设置配置文件.TomatoNovel.Api: https.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
-  <component name="RunManager" selected=".NET 启动设置配置文件.TomatoNovel.Api: http">
+}</component>
+  <component name="RunManager" selected=".NET 启动设置配置文件.TomatoNovel.Api: https">
     <configuration name="TomatoNovel.Api: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/src/TomatoNovel.Api/TomatoNovel.Api.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net9.0" />
@@ -244,14 +302,43 @@
       <workItem from="1764247990264" duration="39000" />
       <workItem from="1764248046123" duration="777000" />
       <workItem from="1764250610281" duration="4609000" />
-      <workItem from="1764303385388" duration="3109000" />
+      <workItem from="1764303385388" duration="8437000" />
+      <workItem from="1764322543392" duration="127000" />
+      <workItem from="1765090107852" duration="1558000" />
+      <workItem from="1765097607993" duration="509000" />
+      <workItem from="1765098173467" duration="1776000" />
+      <workItem from="1765099967274" duration="43000" />
+      <workItem from="1765100026397" duration="86000" />
+      <workItem from="1765100122963" duration="3176000" />
+      <workItem from="1765103444326" duration="3281000" />
+      <workItem from="1765108739648" duration="4011000" />
+      <workItem from="1765180370961" duration="8235000" />
+      <workItem from="1765188702559" duration="4547000" />
+      <workItem from="1765196128210" duration="3974000" />
+      <workItem from="1765266227741" duration="4235000" />
+      <workItem from="1765284868884" duration="2387000" />
+      <workItem from="1765531633497" duration="77000" />
+      <workItem from="1765531759872" duration="23000" />
+      <workItem from="1765531830394" duration="194000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
@@ -270,6 +357,45 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Services/OpenIddictTokenService.cs</url>
+          <line>58</line>
+          <properties documentPath="G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Infrastructure\Services\OpenIddictTokenService.cs" containingFunctionPresentation="方法 'GenerateTokenAsync'">
+            <startOffsets>
+              <option value="2109" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2185" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Services/OpenIddictTokenService.cs</url>
+          <line>52</line>
+          <properties documentPath="G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Infrastructure\Services\OpenIddictTokenService.cs" containingFunctionPresentation="方法 'GenerateTokenAsync'">
+            <startOffsets>
+              <option value="1878" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1943" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/TomatoNovel.Infrastructure/Services/OpenIddictTokenService.cs</url>
+          <line>55</line>
+          <properties documentPath="G:\Web Programming\TomatoNovel\backend\TomatoNovel\src\TomatoNovel.Infrastructure\Services\OpenIddictTokenService.cs" containingFunctionPresentation="方法 'GenerateTokenAsync'">
+            <startOffsets>
+              <option value="1986" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2039" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

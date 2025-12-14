@@ -1,0 +1,113 @@
+/* ResetPwdForm.module.scss */
+
+/* 居中外层容器 */
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 336px;
+  box-sizing: content-box;
+}
+
+/* 返回栏 */
+.backTab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  cursor: pointer;
+}
+
+.backIcon {
+  width: 20px;
+  height: 20px;
+}
+
+/* AntD 表单间距去除 */
+.resetForm :global(.ant-form-item) {
+  margin-bottom: 0 !important;
+}
+
+.resetForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 输入框统一样式 */
+.inputRounded {
+  height: 48px !important;
+  border-radius: 12px !important;
+  background-color: #f7f7f7 !important;
+  border: none !important;
+  padding: 0 14px !important;
+  display: flex;
+  align-items: center;
+
+  input {
+    background: transparent !important;
+    font-size: 14px !important;
+  }
+
+  input::placeholder {
+    color: #bfbfbf;
+    font-size: 14px !important;
+  }
+}
+
+/* 验证码区域 */
+.codeLine {
+  display: flex;
+  gap: 12px;
+}
+
+.codeInput {
+  flex: 1;
+}
+
+.codeBtn {
+  height: 48px !important;
+  border: none !important;
+  border-radius: 12px !important;
+}
+
+/* 提交按钮基础样式（浅橙渐变） */
+.commonBtn {
+  width: 100%;
+  height: 48px;
+  background: linear-gradient(to right, #ffd8c2, #ffe9df);
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff !important;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+/* 激活态（深橙渐变） */
+.active {
+  background: linear-gradient(to right, #ff8140, #ffa56f) !important;
+}
+
+/* 始终保持白色字体 */
+.commonBtn,
+.commonBtn:hover,
+.commonBtn:active,
+.commonBtn:focus,
+.active,
+.active:hover,
+.active:active,
+.active:focus {
+  color: #fff !important;
+}
+
+/* 禁用态（透明度降低） */
+.commonBtn:disabled {
+  opacity: 0.6;
+  color: #fff !important;
+}

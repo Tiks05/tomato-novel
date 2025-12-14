@@ -1,10 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "j4yqBPn0VvM=",
+  "dgSpecHash": "alOKqcL1NdU=",
   "success": true,
   "projectFilePath": "G:\\Web Programming\\TomatoNovel\\backend\\TomatoNovel\\src\\TomatoNovel.Application\\TomatoNovel.Application.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\31844\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
+    "C:\\Users\\31844\\.nuget\\packages\\fluentvalidation\\12.1.1\\fluentvalidation.12.1.1.nupkg.sha512",
+    "C:\\Users\\31844\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\12.1.1\\fluentvalidation.dependencyinjectionextensions.12.1.1.nupkg.sha512",
     "C:\\Users\\31844\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.12.0-beta1.25218.8\\microsoft.codeanalysis.analyzers.3.12.0-beta1.25218.8.nupkg.sha512",
+    "C:\\Users\\31844\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\2.1.0\\microsoft.extensions.dependencyinjection.abstractions.2.1.0.nupkg.sha512",
     "C:\\Users\\31844\\.nuget\\packages\\microsoft.visualstudio.threading.analyzers\\17.14.15\\microsoft.visualstudio.threading.analyzers.17.14.15.nupkg.sha512",
     "C:\\Users\\31844\\.nuget\\packages\\stylecop.analyzers\\1.2.0-beta.556\\stylecop.analyzers.1.2.0-beta.556.nupkg.sha512",
     "C:\\Users\\31844\\.nuget\\packages\\stylecop.analyzers.unstable\\1.2.0.556\\stylecop.analyzers.unstable.1.2.0.556.nupkg.sha512"

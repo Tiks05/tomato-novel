@@ -22,6 +22,214 @@ namespace TomatoNovel.Infrastructure.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ApplicationType")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("ClientId")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("ClientSecret")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ClientType")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("ConsentType")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("DisplayName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DisplayNames")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("JsonWebKeySet")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Permissions")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PostLogoutRedirectUris")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Properties")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("RedirectUris")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Requirements")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Settings")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId")
+                        .IsUnique();
+
+                    b.ToTable("OpenIddictApplications", (string)null);
+                });
+
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreAuthorization", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ApplicationId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<DateTime?>("CreationDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Properties")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Scopes")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Status")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Subject")
+                        .HasMaxLength(400)
+                        .HasColumnType("varchar(400)");
+
+                    b.Property<string>("Type")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationId", "Status", "Subject", "Type");
+
+                    b.ToTable("OpenIddictAuthorizations", (string)null);
+                });
+
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreScope", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Descriptions")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DisplayName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DisplayNames")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("Properties")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Resources")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("OpenIddictScopes", (string)null);
+                });
+
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreToken", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ApplicationId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("AuthorizationId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<DateTime?>("CreationDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("ExpirationDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Payload")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Properties")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("RedemptionDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ReferenceId")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Status")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Subject")
+                        .HasMaxLength(400)
+                        .HasColumnType("varchar(400)");
+
+                    b.Property<string>("Type")
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorizationId");
+
+                    b.HasIndex("ReferenceId")
+                        .IsUnique();
+
+                    b.HasIndex("ApplicationId", "Status", "Subject", "Type");
+
+                    b.ToTable("OpenIddictTokens", (string)null);
+                });
+
             modelBuilder.Entity("TomatoNovel.Domain.Entities.Book", b =>
                 {
                     b.Property<int>("Id")
@@ -353,57 +561,70 @@ namespace TomatoNovel.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AuthorLevel")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)");
+                        .HasColumnType("varchar(16)")
+                        .HasColumnName("author_level");
 
                     b.Property<string>("Avatar")
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("avatar");
 
                     b.Property<DateTime?>("BecomeAuthorAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("become_author_at");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("created_at");
 
                     b.Property<int>("Level")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasDefaultValue(0)
+                        .HasColumnName("level");
 
                     b.Property<string>("LifePhoto")
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("life_photo");
 
                     b.Property<string>("Masterpiece")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)");
+                        .HasColumnType("varchar(64)")
+                        .HasColumnName("masterpiece");
 
                     b.Property<string>("Nickname")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)");
+                        .HasColumnType("varchar(16)")
+                        .HasColumnName("nickname");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .HasMaxLength(60)
-                        .HasColumnType("varchar(60)");
+                        .HasColumnType("varchar(60)")
+                        .HasColumnName("password_hash");
 
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(11)
-                        .HasColumnType("varchar(11)");
+                        .HasColumnType("varchar(11)")
+                        .HasColumnName("phone");
 
                     b.Property<string>("Role")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)");
+                        .HasColumnType("varchar(16)")
+                        .HasColumnName("role");
 
                     b.Property<string>("Signature")
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("signature");
 
                     b.HasKey("Id");
 
@@ -442,6 +663,30 @@ namespace TomatoNovel.Infrastructure.Migrations
                     b.HasIndex("BookId");
 
                     b.ToTable("volume", (string)null);
+                });
+
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreAuthorization", b =>
+                {
+                    b.HasOne("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", "Application")
+                        .WithMany("Authorizations")
+                        .HasForeignKey("ApplicationId");
+
+                    b.Navigation("Application");
+                });
+
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreToken", b =>
+                {
+                    b.HasOne("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", "Application")
+                        .WithMany("Tokens")
+                        .HasForeignKey("ApplicationId");
+
+                    b.HasOne("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreAuthorization", "Authorization")
+                        .WithMany("Tokens")
+                        .HasForeignKey("AuthorizationId");
+
+                    b.Navigation("Application");
+
+                    b.Navigation("Authorization");
                 });
 
             modelBuilder.Entity("TomatoNovel.Domain.Entities.Book", b =>
@@ -545,6 +790,18 @@ namespace TomatoNovel.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Book");
+                });
+
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", b =>
+                {
+                    b.Navigation("Authorizations");
+
+                    b.Navigation("Tokens");
+                });
+
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreAuthorization", b =>
+                {
+                    b.Navigation("Tokens");
                 });
 
             modelBuilder.Entity("TomatoNovel.Domain.Entities.Book", b =>

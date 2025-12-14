@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿namespace TomatoNovel.Infrastructure.Persistence.Configurations;
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TomatoNovel.Domain.Entities;
-
-namespace TomatoNovel.Infrastructure.Persistence.Configurations;
 
 /// <summary>
 /// Configures the Comment entity for Entity Framework Core.
@@ -42,7 +42,6 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
         // -------------------------
         // Navigation: User (author of the comment)
         // -------------------------
-
         builder.HasOne(c => c.User)
             .WithMany(u => u.Comments)
             .HasForeignKey(c => c.UserId)
@@ -51,7 +50,6 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
         // -------------------------
         // Navigation: Reply-to user (no collection navigation on User)
         // -------------------------
-
         builder.HasOne(c => c.ReplyToUser)
             .WithMany()
             .HasForeignKey(c => c.ReplyToUserId)
@@ -60,7 +58,6 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
         // -------------------------
         // Navigation: Book
         // -------------------------
-
         builder.HasOne(c => c.Book)
             .WithMany(b => b.Comments)
             .HasForeignKey(c => c.BookId)
@@ -69,7 +66,6 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
         // -------------------------
         // Self-reference: Parent Comment → Replies
         // -------------------------
-
         builder.HasOne(c => c.Parent)
             .WithMany(p => p.Replies)
             .HasForeignKey(c => c.ParentId)

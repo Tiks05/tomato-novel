@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\TomatoNovel.Application\TomatoNovel.Application.csproj" />
       <ProjectReference Include="..\TomatoNovel.Domain\TomatoNovel.Domain.csproj" />
     </ItemGroup>
 
@@ -24,6 +25,11 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+      <PackageReference Include="OpenIddict" Version="7.2.0" />
+      <PackageReference Include="OpenIddict.AspNetCore" Version="7.2.0" />
+      <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="7.2.0" />
+      <PackageReference Include="OpenIddict.Server" Version="7.2.0" />
+      <PackageReference Include="OpenIddict.Server.AspNetCore" Version="7.2.0" />
       <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
       <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556">
         <PrivateAssets>all</PrivateAssets>

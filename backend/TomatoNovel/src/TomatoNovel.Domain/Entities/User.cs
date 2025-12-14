@@ -1,96 +1,99 @@
-﻿namespace TomatoNovel.Domain.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TomatoNovel.Domain.Entities;
 
 /// <summary>
 /// Represents a user entity.
 /// </summary>
+[Table("user")]
 public class User
 {
     /// <summary>
     /// Gets or sets the primary key identifier.
     /// </summary>
+    [Column("id")]
     public int Id { get; set; }
 
     /// <summary>
-    /// Gets or sets the user's phone number. This value must be unique.
+    /// Gets or sets the user's phone number.
     /// </summary>
+    [Column("phone")]
     public string Phone { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the hashed password. This may be null, for example in third-party login scenarios.
+    /// Gets or sets the user's hashed password.
     /// </summary>
-    public string? Password { get; set; }
+    [Column("password_hash")]
+    public string? PasswordHash { get; set; }
 
     /// <summary>
     /// Gets or sets the user's nickname.
     /// </summary>
+    [Column("nickname")]
     public string? Nickname { get; set; }
 
     /// <summary>
-    /// Gets or sets the user's role, such as user, author, or admin.
+    /// Gets or sets the user's role.
     /// </summary>
+    [Column("role")]
     public string? Role { get; set; }
 
     /// <summary>
-    /// Gets or sets the URL of the user's avatar image.
+    /// Gets or sets the user's avatar.
     /// </summary>
+    [Column("avatar")]
     public string? Avatar { get; set; }
 
     /// <summary>
-    /// Gets or sets the user's personal signature.
+    /// Gets or sets the user's signature.
     /// </summary>
+    [Column("signature")]
     public string? Signature { get; set; }
 
     /// <summary>
-    /// Gets or sets the URL of the user's life photo.
+    /// Gets or sets the user's life photo.
     /// </summary>
+    [Column("life_photo")]
     public string? LifePhoto { get; set; }
 
     /// <summary>
-    /// Gets or sets the user's representative work.
+    /// Gets or sets the user's masterpiece.
     /// </summary>
+    [Column("masterpiece")]
     public string? Masterpiece { get; set; }
 
     /// <summary>
-    /// Gets or sets the author's textual level, such as "LV3".
+    /// Gets or sets the author's textual level.
     /// </summary>
+    [Column("author_level")]
     public string? AuthorLevel { get; set; }
 
     /// <summary>
-    /// Gets or sets the numerical author level, starting from 0.
+    /// Gets or sets the numerical author level.
     /// </summary>
+    [Column("level")]
     public int Level { get; set; } = 0;
 
     /// <summary>
-    /// Gets or sets the timestamp indicating when the user became an author.
+    /// Gets or sets the timestamp when the user became an author.
     /// </summary>
+    [Column("become_author_at")]
     public DateTime? BecomeAuthorAt { get; set; }
 
     /// <summary>
     /// Gets or sets the timestamp when the user registered.
     /// </summary>
+    [Column("created_at")]
     public DateTime CreatedAt { get; set; }
 
-    // -------------------------
+    // -------------------------------------------------------
     // Navigation properties
-    // -------------------------
+    // -------------------------------------------------------
 
-    /// <summary>
-    /// Gets or sets the collection of books written by the user.
-    /// </summary>
     public ICollection<Book> Books { get; set; } = new List<Book>();
-
-    /// <summary>
-    /// Gets or sets the collection of comments posted by the user.
-    /// </summary>
     public ICollection<Comment> Comments { get; set; } = new List<Comment>();
-
-    /// <summary>
-    /// Gets or sets the collection of favorite records created by the user.
-    /// </summary>
     public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
-
-    /// <summary>
-    /// Gets or sets the collection of follow relationships associated with the user.
-    /// </summary>
     public ICollection<Follow> Follows { get; set; } = new List<Follow>();
 }

@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿namespace TomatoNovel.Infrastructure.Persistence.Configurations;
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TomatoNovel.Domain.Entities;
-
-namespace TomatoNovel.Infrastructure.Persistence.Configurations;
 
 /// <summary>
 /// Configures the Volume entity for Entity Framework Core.

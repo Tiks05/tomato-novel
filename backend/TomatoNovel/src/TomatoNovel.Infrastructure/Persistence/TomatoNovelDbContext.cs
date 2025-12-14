@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TomatoNovel.Domain.Entities;
-using System.Reflection;
+﻿namespace TomatoNovel.Infrastructure.Persistence;
 
-namespace TomatoNovel.Infrastructure.Persistence;
+using System.Reflection;
+using Microsoft.EntityFrameworkCore;
+using TomatoNovel.Domain.Entities;
+using OpenIddict.Abstractions;
+using OpenIddict.EntityFrameworkCore.Models;
 
 /// <summary>
 /// Represents the Entity Framework database context for the TomatoNovel application.
@@ -75,6 +77,7 @@ public class TomatoNovelDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        modelBuilder.UseOpenIddict();
 
         // Apply all IEntityTypeConfiguration<T> automatically from the assembly.
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
