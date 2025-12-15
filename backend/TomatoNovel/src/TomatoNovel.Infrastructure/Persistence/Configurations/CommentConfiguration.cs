@@ -9,66 +9,98 @@ using TomatoNovel.Domain.Entities;
 /// </summary>
 public class CommentConfiguration : IEntityTypeConfiguration<Comment>
 {
-    /// <inheritdoc />
     public void Configure(EntityTypeBuilder<Comment> builder)
     {
-        // Table name
+        // =========================
+        // Table
+        // =========================
         builder.ToTable("comment");
 
-        // Primary key
+        // =========================
+        // Primary Key
+        // =========================
         builder.HasKey(c => c.Id);
 
-        // Properties
+        builder.Property(c => c.Id)
+               .HasColumnName("id");
+
+        // =========================
+        // Foreign Keys
+        // =========================
+
         builder.Property(c => c.UserId)
-            .IsRequired();
+               .HasColumnName("user_id")
+               .IsRequired();
 
         builder.Property(c => c.BookId)
-            .IsRequired();
+               .HasColumnName("book_id")
+               .IsRequired();
 
-        builder.Property(c => c.ParentId);
+        builder.Property(c => c.ParentId)
+               .HasColumnName("parent_id");
 
-        builder.Property(c => c.ReplyToUserId);
+        builder.Property(c => c.ReplyToUserId)
+               .HasColumnName("reply_to_user_id");
+
+        // =========================
+        // Properties
+        // =========================
 
         builder.Property(c => c.Content)
-            .HasColumnType("text")
-            .IsRequired();
+               .HasColumnName("content")
+               .HasColumnType("text")
+               .IsRequired();
 
         builder.Property(c => c.Likes)
-            .HasDefaultValue(0);
+               .HasColumnName("likes")
+               .HasDefaultValue(0);
+
+        // =========================
+        // Time fields
+        // =========================
 
         builder.Property(c => c.CreatedAt)
-            .HasColumnType("datetime");
+               .HasColumnName("created_at")
+               .HasColumnType("datetime");
 
-        // -------------------------
-        // Navigation: User (author of the comment)
-        // -------------------------
+        // =========================
+        // Indexes（常用）
+        // =========================
+
+        builder.HasIndex(c => c.BookId);
+        builder.HasIndex(c => c.UserId);
+        builder.HasIndex(c => c.ParentId);
+        builder.HasIndex(c => c.CreatedAt);
+
+        // =========================
+        // Relationships
+        // =========================
+
+        // Comment → User（评论作者）
         builder.HasOne(c => c.User)
-            .WithMany(u => u.Comments)
-            .HasForeignKey(c => c.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
+               .WithMany(u => u.Comments)
+               .HasForeignKey(c => c.UserId)
+               .OnDelete(DeleteBehavior.Cascade);
 
-        // -------------------------
-        // Navigation: Reply-to user (no collection navigation on User)
-        // -------------------------
+        // Comment → ReplyToUser（被回复的人，无反向集合）
         builder.HasOne(c => c.ReplyToUser)
-            .WithMany()
-            .HasForeignKey(c => c.ReplyToUserId)
-            .OnDelete(DeleteBehavior.ClientSetNull);
+               .WithMany()
+               .HasForeignKey(c => c.ReplyToUserId)
+               .OnDelete(DeleteBehavior.ClientSetNull);
 
-        // -------------------------
-        // Navigation: Book
-        // -------------------------
+        // Comment → Book
         builder.HasOne(c => c.Book)
-            .WithMany(b => b.Comments)
-            .HasForeignKey(c => c.BookId)
-            .OnDelete(DeleteBehavior.Cascade);
+               .WithMany(b => b.Comments)
+               .HasForeignKey(c => c.BookId)
+               .OnDelete(DeleteBehavior.Cascade);
 
-        // -------------------------
-        // Self-reference: Parent Comment → Replies
-        // -------------------------
+        // =========================
+        // Self-reference（父评论 → 子评论）
+        // =========================
+
         builder.HasOne(c => c.Parent)
-            .WithMany(p => p.Replies)
-            .HasForeignKey(c => c.ParentId)
-            .OnDelete(DeleteBehavior.Cascade);
+               .WithMany(p => p.Replies)
+               .HasForeignKey(c => c.ParentId)
+               .OnDelete(DeleteBehavior.Cascade);
     }
 }

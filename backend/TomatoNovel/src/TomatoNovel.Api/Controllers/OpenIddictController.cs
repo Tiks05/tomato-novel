@@ -5,39 +5,38 @@
 
 namespace TomatoNovel.Api.Controllers;
 
+using System.Security.Claims;
 using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
-using System.Security.Claims;
-
 using TomatoNovel.Infrastructure.Persistence;
-using TomatoNovel.Domain.Entities;
 
 [ApiController]
 public class OpenIddictController : ControllerBase
 {
-    private readonly TomatoNovelDbContext _dbContext;
+    private readonly TomatoNovelDbContext dbContext;
 
     public OpenIddictController(TomatoNovelDbContext dbContext)
     {
-        _dbContext = dbContext;
+        this.dbContext = dbContext;
     }
 
     /// <summary>
     /// OAuth2 / OpenID Connect token endpoint.
-    /// ⚠️ 注意：不做密码校验，只做 Token 颁发
+    /// ⚠️ 注意：不做密码校验，只做 Token 颁发.
     /// </summary>
+    /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
     [HttpPost("~/connect/token")]
     [AllowAnonymous]
     [Consumes("application/x-www-form-urlencoded")]
     [Produces("application/json")]
-    public async Task<IActionResult> Exchange()
+    public async Task<IActionResult> ExchangeAsync()
     {
-        var request = HttpContext.GetOpenIddictServerRequest()
+        var request = this.HttpContext.GetOpenIddictServerRequest()
             ?? throw new InvalidOperationException("无法获取 OpenIddict 请求参数");
 
         // ---------------------------------------------------------------------
@@ -47,23 +46,23 @@ public class OpenIddictController : ControllerBase
         {
             if (string.IsNullOrWhiteSpace(request.Username))
             {
-                return BadRequest(new
+                return this.BadRequest(new
                 {
                     error = "invalid_request",
-                    error_description = "用户名不能为空"
+                    error_description = "用户名不能为空",
                 });
             }
 
             // ⚠️ 只确认用户存在（密码已在 AuthService 校验过）
-            var user = await _dbContext.Users
+            var user = await this.dbContext.Users
                 .SingleOrDefaultAsync(u => u.Phone == request.Username);
 
             if (user == null)
             {
-                return BadRequest(new
+                return this.BadRequest(new
                 {
                     error = "invalid_grant",
-                    error_description = "用户不存在"
+                    error_description = "用户不存在",
                 });
             }
 
@@ -97,7 +96,7 @@ public class OpenIddictController : ControllerBase
             // 业务自定义 Claims
             // ----------------------------
             identity.AddClaim(new Claim("phone", user.Phone));
-            identity.AddClaim(new Claim("avatar", user.Avatar ?? ""));
+            identity.AddClaim(new Claim("avatar", user.Avatar ?? string.Empty));
             identity.AddClaim(new Claim("level", user.Level.ToString()));
 
             // ----------------------------
@@ -113,13 +112,13 @@ public class OpenIddictController : ControllerBase
                     => new[]
                     {
                         OpenIddictConstants.Destinations.AccessToken,
-                        OpenIddictConstants.Destinations.IdentityToken
+                        OpenIddictConstants.Destinations.IdentityToken,
                     },
 
-                _ => new[] { OpenIddictConstants.Destinations.AccessToken }
+                _ => new[] { OpenIddictConstants.Destinations.AccessToken },
             });
 
-            return SignIn(
+            return this.SignIn(
                 new ClaimsPrincipal(identity),
                 OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
         }
@@ -130,19 +129,19 @@ public class OpenIddictController : ControllerBase
         if (request.IsRefreshTokenGrantType())
         {
             var authenticateResult =
-                await HttpContext.AuthenticateAsync(
+                await this.HttpContext.AuthenticateAsync(
                     OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
 
             if (!authenticateResult.Succeeded)
             {
-                return BadRequest(new
+                return this.BadRequest(new
                 {
                     error = "invalid_grant",
-                    error_description = "刷新令牌无效或已过期"
+                    error_description = "刷新令牌无效或已过期",
                 });
             }
 
-            return SignIn(
+            return this.SignIn(
                 authenticateResult.Principal!,
                 OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
         }
@@ -150,10 +149,10 @@ public class OpenIddictController : ControllerBase
         // ---------------------------------------------------------------------
         // Unsupported Grant
         // ---------------------------------------------------------------------
-        return BadRequest(new
+        return this.BadRequest(new
         {
             error = "unsupported_grant_type",
-            error_description = "不支持的授权模式"
+            error_description = "不支持的授权模式",
         });
     }
 }

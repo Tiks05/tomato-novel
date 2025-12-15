@@ -4,17 +4,13 @@ import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import { Spin } from 'antd'
 
 import { authRoutes } from './routes/auth.routes'
+import { layoutRoutes } from './routes/layout.routes'
 import { notFoundRoutes } from './routes/not-found.routes'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    children: [
-      { index: true, element: <Navigate to="/login" replace /> },
-
-      ...authRoutes,
-      ...notFoundRoutes,
-    ],
+    children: [{ index: true, element: <Navigate to="/home" replace /> }, ...authRoutes, ...notFoundRoutes, ...layoutRoutes],
   },
 ])
 

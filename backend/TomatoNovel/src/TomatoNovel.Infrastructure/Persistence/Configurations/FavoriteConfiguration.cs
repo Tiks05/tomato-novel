@@ -9,44 +9,67 @@ using TomatoNovel.Domain.Entities;
 /// </summary>
 public class FavoriteConfiguration : IEntityTypeConfiguration<Favorite>
 {
-    /// <inheritdoc />
     public void Configure(EntityTypeBuilder<Favorite> builder)
     {
-        // Table name
+        // =========================
+        // Table
+        // =========================
         builder.ToTable("favorite");
 
-        // Primary key
+        // =========================
+        // Primary Key
+        // =========================
         builder.HasKey(f => f.Id);
 
-        // Properties
+        builder.Property(f => f.Id)
+               .HasColumnName("id");
+
+        // =========================
+        // Foreign Keys
+        // =========================
+
         builder.Property(f => f.UserId)
-            .IsRequired();
+               .HasColumnName("user_id")
+               .IsRequired();
 
         builder.Property(f => f.BookId)
-            .IsRequired();
+               .HasColumnName("book_id")
+               .IsRequired();
+
+        // =========================
+        // Properties
+        // =========================
 
         builder.Property(f => f.CreatedAt)
-            .HasColumnType("datetime");
+               .HasColumnName("created_at")
+               .HasColumnType("datetime");
 
-        // Unique constraint: one user cannot favorite the same book twice
+        // =========================
+        // Indexes
+        // =========================
+
+        // 一个用户不能重复收藏同一本书
         builder.HasIndex(f => new { f.UserId, f.BookId })
-            .IsUnique()
-            .HasDatabaseName("uniq_favorite");
+               .IsUnique()
+               .HasDatabaseName("uniq_favorite");
 
-        // -------------------------
-        // Navigation properties
-        // -------------------------
+        builder.HasIndex(f => f.UserId);
+        builder.HasIndex(f => f.BookId);
 
-        // Favorite → User (many favorites belong to one user)
+        // =========================
+        // Relationships
+        // =========================
+
+        // Favorite → User (N:1)
         builder.HasOne(f => f.User)
-            .WithMany(u => u.Favorites)
-            .HasForeignKey(f => f.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
+               .WithMany(u => u.Favorites)
+               .HasForeignKey(f => f.UserId)
+               .OnDelete(DeleteBehavior.Cascade);
 
-        // Favorite → Book (many favorites belong to one book)
+        // Favorite → Book (N:1)
         builder.HasOne(f => f.Book)
-            .WithMany(b => b.Favorites)
-            .HasForeignKey(f => f.BookId)
-            .OnDelete(DeleteBehavior.Cascade);
+               .WithMany(b => b.Favorites)
+               .HasForeignKey(f => f.BookId)
+               .OnDelete(DeleteBehavior.Cascade);
     }
 }

@@ -19,6 +19,6 @@ public class BusinessException : Exception
     public BusinessException(int errorCode, string message)
         : base(message)
     {
-        ErrorCode = errorCode;
+        this.ErrorCode = errorCode;
     }
 }

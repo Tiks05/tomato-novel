@@ -1,0 +1,36 @@
+.index_banner {
+  width: 100%;
+  position: relative;
+
+  img {
+    width: 100%;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+
+  /* Swiper 分页整体位置 */
+  :global(.swiper-pagination) {
+    bottom: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; // 白条之间的间距
+  }
+
+  /* 每一根白条 */
+  :global(.swiper-pagination-bullet) {
+    width: 24px; // 横条长度
+    height: 2px; // 扁平高度
+    background-color: rgba(255, 255, 255, 0.9);
+    opacity: 1;
+    border-radius: 0; // ⚠️ 关键：去圆角
+    margin: 0 !important; // 防止 Swiper 默认 margin 干扰
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  /* 当前激活的横条 */
+  :global(.swiper-pagination-bullet-active) {
+    background-color: #fa6725; // 番茄橙
+  }
+}

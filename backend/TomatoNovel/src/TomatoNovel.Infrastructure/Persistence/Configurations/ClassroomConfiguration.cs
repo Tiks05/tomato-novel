@@ -9,38 +9,64 @@ using TomatoNovel.Domain.Entities;
 /// </summary>
 public class ClassroomConfiguration : IEntityTypeConfiguration<Classroom>
 {
-    /// <inheritdoc />
     public void Configure(EntityTypeBuilder<Classroom> builder)
     {
-        // Table name
+        // =========================
+        // Table
+        // =========================
         builder.ToTable("classroom");
 
-        // Primary key
+        // =========================
+        // Primary Key
+        // =========================
         builder.HasKey(c => c.Id);
 
+        builder.Property(c => c.Id)
+               .HasColumnName("id");
+
+        // =========================
         // Properties
+        // =========================
+
         builder.Property(c => c.Title)
-            .HasMaxLength(255)
-            .IsRequired();
+               .HasColumnName("title")
+               .HasMaxLength(255)
+               .IsRequired();
 
         builder.Property(c => c.CategoryType)
-            .HasMaxLength(50);
+               .HasColumnName("category_type")
+               .HasMaxLength(50);
 
         builder.Property(c => c.CoverUrl)
-            .HasMaxLength(255);
+               .HasColumnName("cover_url")
+               .HasMaxLength(255);
 
         builder.Property(c => c.Intro)
-            .HasMaxLength(255);
+               .HasColumnName("intro")
+               .HasMaxLength(255);
 
         builder.Property(c => c.IsIncludeVideo)
-            .HasDefaultValue(false);
+               .HasColumnName("is_include_video")
+               .HasDefaultValue(false);
 
         builder.Property(c => c.Content)
-            .HasColumnType("text");
+               .HasColumnName("content")
+               .HasColumnType("text");
 
         builder.Property(c => c.CreateAt)
-            .HasColumnType("datetime");
+               .HasColumnName("create_at")
+               .HasColumnType("datetime");
 
-        // No navigation properties to configure here.
+        // =========================
+        // Indexes（可选）
+        // =========================
+
+        builder.HasIndex(c => c.CategoryType);
+        builder.HasIndex(c => c.CreateAt);
+
+        // =========================
+        // Relationships
+        // =========================
+        // Classroom 当前无导航属性
     }
 }

@@ -9,49 +9,80 @@ using TomatoNovel.Domain.Entities;
 /// </summary>
 public class NewsConfiguration : IEntityTypeConfiguration<News>
 {
-    /// <inheritdoc />
     public void Configure(EntityTypeBuilder<News> builder)
     {
-        // Table name
+        // =========================
+        // Table
+        // =========================
         builder.ToTable("news");
 
-        // Primary key
+        // =========================
+        // Primary Key
+        // =========================
         builder.HasKey(n => n.Id);
 
+        builder.Property(n => n.Id)
+               .HasColumnName("id");
+
+        // =========================
         // Properties
+        // =========================
+
         builder.Property(n => n.Title)
-            .HasMaxLength(255)
-            .IsRequired();
+               .HasColumnName("title")
+               .HasMaxLength(255)
+               .IsRequired();
 
         builder.Property(n => n.Content)
-            .HasColumnType("text");
+               .HasColumnName("content")
+               .HasColumnType("text");
 
         builder.Property(n => n.NoticeUrl)
-            .HasMaxLength(255);
+               .HasColumnName("notice_url")
+               .HasMaxLength(255);
 
         builder.Property(n => n.CoverUrl)
-            .HasMaxLength(255);
+               .HasColumnName("cover_url")
+               .HasMaxLength(255);
 
         builder.Property(n => n.BannerUrl)
-            .HasMaxLength(255);
+               .HasColumnName("banner_url")
+               .HasMaxLength(255);
 
         builder.Property(n => n.IsBanner)
-            .HasDefaultValue(false);
+               .HasColumnName("is_banner")
+               .HasDefaultValue(false);
 
         builder.Property(n => n.IsNotice)
-            .HasDefaultValue(false);
+               .HasColumnName("is_notice")
+               .HasDefaultValue(false);
 
         builder.Property(n => n.Type)
-            .HasMaxLength(16)
-            .HasDefaultValue("notice")
-            .IsRequired();
+               .HasColumnName("type")
+               .HasMaxLength(16)
+               .HasDefaultValue("notice")
+               .IsRequired();
 
         builder.Property(n => n.CreatedAt)
-            .HasColumnType("datetime");
+               .HasColumnName("created_at")
+               .HasColumnType("datetime");
 
         builder.Property(n => n.UpdatedAt)
-            .HasColumnType("datetime");
+               .HasColumnName("updated_at")
+               .HasColumnType("datetime");
 
-        // No navigation properties to configure for News.
+        // =========================
+        // Indexes (optional but common)
+        // =========================
+
+        builder.HasIndex(n => n.Type);
+        builder.HasIndex(n => n.IsBanner);
+        builder.HasIndex(n => n.IsNotice);
+        builder.HasIndex(n => n.CreatedAt);
+
+        // =========================
+        // Relationships
+        // =========================
+        // News has no navigation properties
     }
 }

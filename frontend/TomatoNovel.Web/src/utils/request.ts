@@ -1,23 +1,22 @@
 import axios from 'axios'
-import type { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
+import type { AxiosInstance, InternalAxiosRequestConfig } from 'axios'
 
 import { mapRequest, mapResponse } from '@/utils/case.mapper'
 import { useUserStore } from '@/store/use-user-store'
 
-// 创建实例
-const httpInstance: AxiosInstance = axios.create({
+/**
+ * 原始 axios 实例（只负责通信）
+ */
+const axiosInstance: AxiosInstance = axios.create({
   baseURL: '/api',
   timeout: 5000,
 })
 
 /**
  * 请求拦截器
- * 1. 自动注入 token（从 zustand）
- * 2. 请求数据 snake_case -> camelCase
  */
-httpInstance.interceptors.request.use(
+axiosInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    // 注入 Authorization
     const token = useUserStore.getState().authToken()
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
@@ -37,17 +36,14 @@ httpInstance.interceptors.request.use(
 )
 
 /**
- * 响应拦截器
- * 1. 判断业务 code
- * 2. 统一字段映射
+ * 响应拦截器（运行时解包）
  */
-httpInstance.interceptors.response.use(
-  (res: AxiosResponse) => {
+axiosInstance.interceptors.response.use(
+  res => {
     const body = res.data
 
     if (body.code === 0) {
-      // ✅ 你说得完全对：直接映射整个 body
-      return mapResponse(body)
+      return mapResponse(body.data)
     }
 
     return Promise.reject(new Error(body.message || '请求失败'))
@@ -55,4 +51,26 @@ httpInstance.interceptors.response.use(
   error => Promise.reject(error),
 )
 
-export default httpInstance
+/**
+ * 对外暴露的 request
+ * 关键点：Promise<T>
+ */
+const request = {
+  get<T>(url: string, config?: any): Promise<T> {
+    return axiosInstance.get(url, config)
+  },
+
+  post<T>(url: string, data?: any, config?: any): Promise<T> {
+    return axiosInstance.post(url, data, config)
+  },
+
+  put<T>(url: string, data?: any, config?: any): Promise<T> {
+    return axiosInstance.put(url, data, config)
+  },
+
+  delete<T>(url: string, config?: any): Promise<T> {
+    return axiosInstance.delete(url, config)
+  },
+}
+
+export default request

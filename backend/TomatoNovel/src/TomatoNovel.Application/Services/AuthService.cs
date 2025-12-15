@@ -9,15 +9,15 @@ using TomatoNovel.Domain.Interfaces;
 
 public class AuthService : IAuthService
 {
-    private readonly IAuthRepository _authRepository;
-    private readonly IOpenIddictTokenService _tokenService;
+    private readonly IAuthRepository authRepository;
+    private readonly IOpenIddictTokenService tokenService;
 
     public AuthService(
         IAuthRepository authRepository,
         IOpenIddictTokenService tokenService)
     {
-        _authRepository = authRepository;
-        _tokenService = tokenService;
+        this.authRepository = authRepository;
+        this.tokenService = tokenService;
     }
 
     public async Task<LoginOrRegisterResponseDto> LoginOrRegisterAsync(
@@ -32,7 +32,7 @@ public class AuthService : IAuthService
         // ---------------------------------------------------------------------
         // 登录 / 自动注册（纯业务逻辑）
         // ---------------------------------------------------------------------
-        var user = await _authRepository.GetUserByPhoneAsync(request.Phone);
+        var user = await this.authRepository.GetUserByPhoneAsync(request.Phone);
 
         if (user != null)
         {
@@ -54,12 +54,11 @@ public class AuthService : IAuthService
         {
             string hash = BCrypt.HashPassword(request.Password);
 
-            user = await _authRepository.CreateUserAsync(
+            user = await this.authRepository.CreateUserAsync(
                 phone: request.Phone,
                 passwordHash: hash,
                 nickname: request.Phone[..3] + "****",
-                avatar: "/assets/avatars/icons8-user-pulsar-color-32.png"
-            );
+                avatar: "/assets/avatars/icons8-user-pulsar-color-32.png");
         }
 
         // ---------------------------------------------------------------------
@@ -69,10 +68,9 @@ public class AuthService : IAuthService
 
         try
         {
-            accessToken = await _tokenService.GenerateTokenAsync(
+            accessToken = await this.tokenService.GenerateTokenAsync(
                 username: request.Phone,
-                password: request.Password
-            );
+                password: request.Password);
         }
         catch (Exception ex)
         {
@@ -96,9 +94,9 @@ public class AuthService : IAuthService
                 BecomeAuthorAt = user.BecomeAuthorAt?
                     .ToString("yyyy-MM-dd HH:mm:ss") ?? string.Empty,
                 Signature = user.Signature,
-                Level = user.Level
+                Level = user.Level,
             },
-            AccessToken = accessToken
+            AccessToken = accessToken,
         };
     }
 }

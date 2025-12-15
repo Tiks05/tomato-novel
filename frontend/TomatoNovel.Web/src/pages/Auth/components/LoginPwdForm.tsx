@@ -32,7 +32,7 @@ const LoginPwdForm = () => {
 
       const res = await loginByPassword({ phone: account, password })
 
-      setUser(res.data)
+      setUser(res)
 
       message.success('登录成功')
       goTo('/home')

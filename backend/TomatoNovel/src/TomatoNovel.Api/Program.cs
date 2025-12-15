@@ -120,7 +120,7 @@ builder.Services.AddOpenIddict()
         options.AllowPasswordFlow();
         options.AllowRefreshTokenFlow();
 
-        // ✅ 注册完整且“规范”的 Scope
+        // 注册完整且“规范”的 Scope
         options.RegisterScopes(
             OpenIddictConstants.Scopes.OpenId,
             OpenIddictConstants.Scopes.OfflineAccess,
@@ -128,7 +128,7 @@ builder.Services.AddOpenIddict()
             "onlinestudy_api.write"
         );
 
-        // ✅ MySQL 方案（你这块写得是对的）
+        // MySQL 方案（你这块写得是对的）
         options.AddEphemeralEncryptionKey()
             .AddEphemeralSigningKey()
             .DisableAccessTokenEncryption();
@@ -172,7 +172,13 @@ builder.Services.AddHttpClient();
 /// Registers application/infrastructure services.
 /// </summary>
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ICommonService, CommonService>();
+builder.Services.AddScoped<IHomeService, HomeService>();
+
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<ICommonRepository, CommonRepository>();
+builder.Services.AddScoped<IHomeRepository, HomeRepository>();
+
 builder.Services.AddScoped<IOpenIddictTokenService, OpenIddictTokenService>();
 
 // -----------------------------------------------------------------------------
@@ -200,6 +206,7 @@ if (app.Environment.IsDevelopment())
 // -----------------------------------------------------------------------------
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
@@ -207,7 +214,7 @@ app.UseAuthorization();
 // -----------------------------------------------------------------------------
 // Endpoints
 // -----------------------------------------------------------------------------
-app.UseExceptionMiddleware();
+// app.UseExceptionMiddleware();
 
 app.UseEndpoints(endpoints =>
 {

@@ -10,27 +10,14 @@ export function pascalToSnake(key: string): string {
 }
 
 /**
- * PascalCase → camelCase
- * BecomeAuthorAt → becomeAuthorAt
+ * snake_case → PascalCase
+ * become_author_at → BecomeAuthorAt
  */
-export function pascalToCamel(key: string): string {
-  return key.charAt(0).toLowerCase() + key.slice(1)
-}
-
-/**
- * snake_case → camelCase
- * become_author_at → becomeAuthorAt
- */
-export function snakeToCamel(key: string): string {
-  return key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase())
-}
-
-/**
- * camelCase → snake_case
- * becomeAuthorAt → become_author_at
- */
-export function camelToSnake(key: string): string {
-  return key.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`)
+export function snakeToPascal(key: string): string {
+  return key
+    .split('_')
+    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+    .join('')
 }
 
 /**
@@ -41,7 +28,7 @@ function isPlainObject(value: any): boolean {
 }
 
 /**
- * 深度映射工具 —— 内部使用
+ * 深度映射工具（核心）
  */
 function deepMap(obj: any, keyMapper: (k: string) => string): any {
   if (Array.isArray(obj)) {
@@ -61,15 +48,28 @@ function deepMap(obj: any, keyMapper: (k: string) => string): any {
 }
 
 /**
- * 后端 → 前端：PascalCase → snake_case（响应拦截器用）
+ * 后端 → 前端
+ * PascalCase → snake_case
+ *
+ * ⭐ 关键点：
+ * 1. 只处理 body.data
+ * 2. 自动摊平 { items: [] }，避免 bannerList.map 报错
  */
 export function mapResponse<T = any>(data: T): T {
-  return deepMap(data, pascalToSnake)
+  const mapped = deepMap(data, pascalToSnake)
+
+  // 🔑 自动处理列表响应：{ items: [...] } → [...]
+  if (mapped && typeof mapped === 'object' && 'items' in mapped && Array.isArray((mapped as any).items)) {
+    return (mapped as any).items
+  }
+
+  return mapped
 }
 
 /**
- * 前端 → 后端：snake_case → camelCase（请求拦截器用）
+ * 前端 → 后端
+ * snake_case → PascalCase
  */
 export function mapRequest<T = any>(data: T): T {
-  return deepMap(data, snakeToCamel)
+  return deepMap(data, snakeToPascal)
 }

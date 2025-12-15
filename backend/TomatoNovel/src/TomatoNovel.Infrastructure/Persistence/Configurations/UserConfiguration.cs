@@ -9,82 +9,103 @@ using TomatoNovel.Domain.Entities;
 /// </summary>
 public class UserConfiguration : IEntityTypeConfiguration<User>
 {
-    /// <inheritdoc />
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        // Table name
+        // =========================
+        // Table
+        // =========================
         builder.ToTable("user");
 
-        // Primary key
+        // =========================
+        // Primary Key
+        // =========================
         builder.HasKey(u => u.Id);
 
+        builder.Property(u => u.Id)
+               .HasColumnName("id");
+
+        // =========================
         // Properties
+        // =========================
+
         builder.Property(u => u.Phone)
-            .HasMaxLength(11)
-            .IsRequired();
+               .HasColumnName("phone")
+               .HasMaxLength(11)
+               .IsRequired();
 
         builder.HasIndex(u => u.Phone)
-            .IsUnique();
+               .IsUnique();
 
         builder.Property(u => u.PasswordHash)
-            .HasMaxLength(60);
+               .HasColumnName("password_hash")
+               .HasMaxLength(60);
 
         builder.Property(u => u.Nickname)
-            .HasMaxLength(16);
+               .HasColumnName("nickname")
+               .HasMaxLength(16);
 
         builder.Property(u => u.Role)
-            .HasMaxLength(16);
+               .HasColumnName("role")
+               .HasMaxLength(16);
 
         builder.Property(u => u.Avatar)
-            .HasMaxLength(255);
+               .HasColumnName("avatar")
+               .HasMaxLength(255);
 
         builder.Property(u => u.Signature)
-            .HasMaxLength(255);
+               .HasColumnName("signature")
+               .HasMaxLength(255);
 
         builder.Property(u => u.LifePhoto)
-            .HasMaxLength(255);
+               .HasColumnName("life_photo")
+               .HasMaxLength(255);
 
         builder.Property(u => u.Masterpiece)
-            .HasMaxLength(64);
+               .HasColumnName("masterpiece")
+               .HasMaxLength(64);
 
         builder.Property(u => u.AuthorLevel)
-            .HasMaxLength(16);
+               .HasColumnName("author_level")
+               .HasMaxLength(16);
 
         builder.Property(u => u.Level)
-            .HasDefaultValue(0);
+               .HasColumnName("level")
+               .HasDefaultValue(0);
 
         builder.Property(u => u.BecomeAuthorAt)
-            .HasColumnType("datetime");
+               .HasColumnName("become_author_at")
+               .HasColumnType("datetime");
 
         builder.Property(u => u.CreatedAt)
-            .HasColumnType("datetime");
+               .HasColumnName("created_at")
+               .HasColumnType("datetime");
 
-        // -------------------------
-        // Navigation properties
-        // -------------------------
+        // =========================
+        // Relationships
+        // =========================
 
         // User → Books (1:N)
         builder.HasMany(u => u.Books)
-            .WithOne(b => b.Author)
-            .HasForeignKey(b => b.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
+               .WithOne(b => b.Author)
+               .HasForeignKey(b => b.UserId)
+               .OnDelete(DeleteBehavior.Cascade);
 
         // User → Comments (1:N)
         builder.HasMany(u => u.Comments)
-            .WithOne(c => c.User)
-            .HasForeignKey(c => c.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
+               .WithOne(c => c.User)
+               .HasForeignKey(c => c.UserId)
+               .OnDelete(DeleteBehavior.Cascade);
 
         // User → Favorites (1:N)
         builder.HasMany(u => u.Favorites)
-            .WithOne(f => f.User)
-            .HasForeignKey(f => f.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
+               .WithOne(f => f.User)
+               .HasForeignKey(f => f.UserId)
+               .OnDelete(DeleteBehavior.Cascade);
 
         // User → Follows (1:N, follower side)
         builder.HasMany(u => u.Follows)
-            .WithOne(f => f.Follower)
-            .HasForeignKey(f => f.FollowerId)
-            .OnDelete(DeleteBehavior.Cascade);
+               .WithOne(f => f.Follower)
+               .HasForeignKey(f => f.FollowerId)
+               .OnDelete(DeleteBehavior.Cascade);
     }
 }

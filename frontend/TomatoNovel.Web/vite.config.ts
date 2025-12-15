@@ -11,7 +11,15 @@ export default defineConfig({
   },
   server: {
     proxy: {
+      // API 接口代理
       '/api': {
+        target: 'https://localhost:7000',
+        changeOrigin: true,
+        secure: false,
+      },
+
+      // 静态资源代理
+      '/uploads': {
         target: 'https://localhost:7000',
         changeOrigin: true,
         secure: false,

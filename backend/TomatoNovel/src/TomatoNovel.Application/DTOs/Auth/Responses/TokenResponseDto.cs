@@ -1,6 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace TomatoNovel.Application.DTOs.Auth.Responses;
 
-namespace TomatoNovel.Application.DTOs.Auth.Responses;
+using System.Text.Json.Serialization;
 
 /// <summary>
 /// Represents the token response returned by the OpenIddict token endpoint.

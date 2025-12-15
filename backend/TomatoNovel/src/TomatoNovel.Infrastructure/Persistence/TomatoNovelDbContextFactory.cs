@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿namespace TomatoNovel.Infrastructure.Persistence;
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using System.IO;
-
-namespace TomatoNovel.Infrastructure.Persistence;
 
 public class TomatoNovelDbContextFactory
     : IDesignTimeDbContextFactory<TomatoNovelDbContext>

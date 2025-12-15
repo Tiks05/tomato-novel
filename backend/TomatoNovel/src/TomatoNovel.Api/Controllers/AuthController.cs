@@ -18,7 +18,7 @@ using TomatoNovel.Application.Interfaces;
 /// Provides authentication endpoints including login and automatic registration.
 /// </summary>
 [ApiController]
-[Route("api/auth")]
+[Route("api/auth/login_or_register")]
 public class AuthController : ControllerBase
 {
     private readonly IAuthService _authService;
@@ -31,7 +31,7 @@ public class AuthController : ControllerBase
     /// <summary>
     /// Logs the user in or registers a new user, then returns user info and access token.
     /// </summary>
-    [HttpPost("login_or_register/pwd")]
+    [HttpPost("pwd")]
     [AllowAnonymous]
     [ProducesResponseType(typeof(ApiResponse<LoginOrRegisterResponseDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> LoginOrRegister([FromBody] LoginOrRegisterRequestDto request)

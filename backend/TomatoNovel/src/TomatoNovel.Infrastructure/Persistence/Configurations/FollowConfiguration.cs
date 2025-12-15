@@ -9,44 +9,67 @@ using TomatoNovel.Domain.Entities;
 /// </summary>
 public class FollowConfiguration : IEntityTypeConfiguration<Follow>
 {
-    /// <inheritdoc />
     public void Configure(EntityTypeBuilder<Follow> builder)
     {
-        // Table name
+        // =========================
+        // Table
+        // =========================
         builder.ToTable("follow");
 
-        // Primary key
+        // =========================
+        // Primary Key
+        // =========================
         builder.HasKey(f => f.Id);
 
-        // Properties
+        builder.Property(f => f.Id)
+               .HasColumnName("id");
+
+        // =========================
+        // Foreign Keys
+        // =========================
+
         builder.Property(f => f.FollowerId)
-            .IsRequired();
+               .HasColumnName("follower_id")
+               .IsRequired();
 
         builder.Property(f => f.FollowedId)
-            .IsRequired();
+               .HasColumnName("followed_id")
+               .IsRequired();
+
+        // =========================
+        // Properties
+        // =========================
 
         builder.Property(f => f.CreatedAt)
-            .HasColumnType("datetime");
+               .HasColumnName("created_at")
+               .HasColumnType("datetime");
 
-        // Unique constraint: one user cannot follow the same user twice
+        // =========================
+        // Indexes
+        // =========================
+
+        // 一个用户不能重复关注同一个用户
         builder.HasIndex(f => new { f.FollowerId, f.FollowedId })
-            .IsUnique()
-            .HasDatabaseName("uniq_follow");
+               .IsUnique()
+               .HasDatabaseName("uniq_follow");
 
-        // -------------------------
-        // Navigation properties
-        // -------------------------
+        builder.HasIndex(f => f.FollowerId);
+        builder.HasIndex(f => f.FollowedId);
 
-        // Follow → Follower (one user can follow many others)
+        // =========================
+        // Relationships
+        // =========================
+
+        // Follow → Follower（发起关注的人）
         builder.HasOne(f => f.Follower)
-            .WithMany(u => u.Follows)
-            .HasForeignKey(f => f.FollowerId)
-            .OnDelete(DeleteBehavior.Cascade);
+               .WithMany(u => u.Follows)
+               .HasForeignKey(f => f.FollowerId)
+               .OnDelete(DeleteBehavior.Cascade);
 
-        // Follow → Followed (we do not expose a collection navigation on User here)
+        // Follow → Followed（被关注的人，无反向集合）
         builder.HasOne(f => f.Followed)
-            .WithMany()
-            .HasForeignKey(f => f.FollowedId)
-            .OnDelete(DeleteBehavior.Cascade);
+               .WithMany()
+               .HasForeignKey(f => f.FollowedId)
+               .OnDelete(DeleteBehavior.Cascade);
     }
 }

@@ -34,7 +34,7 @@ public class ApiResponse<T>
         {
             Code = 0,
             Message = message,
-            Data = data
+            Data = data,
         };
     }
 
@@ -50,7 +50,7 @@ public class ApiResponse<T>
         {
             Code = code,
             Message = message,
-            Data = default
+            Data = default,
         };
     }
 }

@@ -69,9 +69,7 @@ const LoginSmsForm = () => {
     <div className={styles.wrapper}>
       <div className={styles.container}>
         {/* 返回按钮 */}
-        <div className={styles.backTab}>
-          验证码登录
-        </div>
+        <div className={styles.backTab}>验证码登录</div>
 
         <Form form={form} layout="vertical" className={styles.smsForm}>
           {/* 手机号 */}

@@ -12,7 +12,7 @@ using TomatoNovel.Application.Exceptions;
 /// </summary>
 public class ExceptionMiddleware
 {
-    private readonly RequestDelegate _next;
+    private readonly RequestDelegate next;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ExceptionMiddleware"/> class.
@@ -20,7 +20,7 @@ public class ExceptionMiddleware
     /// <param name="next">The next middleware component in the request pipeline.</param>
     public ExceptionMiddleware(RequestDelegate next)
     {
-        _next = next;
+        this.next = next;
     }
 
     /// <summary>
@@ -32,7 +32,7 @@ public class ExceptionMiddleware
     {
         try
         {
-            await _next(context);
+            await this.next(context);
         }
         catch (Exception ex)
         {
@@ -94,7 +94,7 @@ public class ExceptionMiddleware
             response,
             new JsonSerializerOptions
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             });
 
         await context.Response.WriteAsync(json);

@@ -1,0 +1,65 @@
+.index_booklist {
+  overflow: hidden;
+  padding: 0 50px;
+  width: 100%;
+  height: 850px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.booklist_con {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+  justify-content: center;
+}
+
+.index_booklist .dong_list {
+  width: 318px;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(73px);
+}
+
+.index_booklist .dong_list .item {
+  margin: 40px 0;
+  text-align: center;
+}
+
+.index_booklist .dong_list .item:first-child {
+  margin-top: 0;
+}
+
+.index_booklist .dong_list .item:last-child {
+  margin-bottom: 0;
+}
+
+.index_booklist .dong_list .item .pic {
+  width: 215px;
+  height: 290px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  border-radius: 5px;
+}
+
+.index_booklist .dong_list .item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease-out;
+}
+
+.index_booklist .dong_list .item:hover img {
+  transform: scale(1.08);
+}
+
+.index_booklist .dong_list.dong_list_on {
+  transform: translateY(-73px);
+}

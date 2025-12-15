@@ -3,8 +3,6 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using TomatoNovel.Domain.Entities;
-using OpenIddict.Abstractions;
-using OpenIddict.EntityFrameworkCore.Models;
 
 /// <summary>
 /// Represents the Entity Framework database context for the TomatoNovel application.

@@ -7,16 +7,16 @@ using TomatoNovel.Infrastructure.Persistence;
 
 public class AuthRepository : IAuthRepository
 {
-    private readonly TomatoNovelDbContext _db;
+    private readonly TomatoNovelDbContext db;
 
     public AuthRepository(TomatoNovelDbContext db)
     {
-        _db = db;
+        this.db = db;
     }
 
     public async Task<User?> GetUserByPhoneAsync(string phone)
     {
-        return await _db.Users.FirstOrDefaultAsync(u => u.Phone == phone);
+        return await this.db.Users.FirstOrDefaultAsync(u => u.Phone == phone);
     }
 
     public async Task<User> CreateUserAsync(
@@ -31,11 +31,11 @@ public class AuthRepository : IAuthRepository
             PasswordHash = passwordHash,
             Role = "user",
             Nickname = nickname,
-            Avatar = avatar
+            Avatar = avatar,
         };
 
-        _db.Users.Add(user);
-        await _db.SaveChangesAsync();
+        this.db.Users.Add(user);
+        await this.db.SaveChangesAsync();
 
         return user;
     }

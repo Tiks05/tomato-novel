@@ -1,0 +1,67 @@
+.bg_hui {
+  background-color: #fbfbfb;
+  padding: 85px 0;
+}
+
+.recently_wrapper {
+  width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.recently_wrapper .tit {
+  text-align: center;
+}
+
+.recently_wrapper h2 {
+  font-size: 24px;
+  color: #000;
+  position: relative;
+  display: inline-block;
+  padding-right: 35px;
+  line-height: 1;
+}
+
+.recently_wrapper h2:after {
+  content: '';
+  display: block;
+  right: 0;
+  top: 50%;
+  transform: translateY(-60%);
+  position: absolute;
+  width: 31px;
+  height: 32px;
+  background-image: url('@/assets/images/tit1.png');
+  background-size: 100% 100%;
+}
+
+.recently_list {
+  margin-top: 42px;
+}
+.recently_list table {
+  width: 100%;
+}
+.recently_list table th {
+  height: 68px;
+  border-bottom: 1px solid #e4e4e4;
+  text-align: left;
+  font-size: 16px;
+  color: #999;
+}
+.recently_list table td {
+  height: 68px;
+  border-bottom: 1px solid #e4e4e4;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+
+.recently_list table td.one {
+  color: #999;
+}
+.recently_list table td.one:hover {
+  color: #999;
+}
+.recently_list table td:hover {
+  color: #ff5f00;
+}

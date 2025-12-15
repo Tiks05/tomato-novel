@@ -11,89 +11,134 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
 {
     public void Configure(EntityTypeBuilder<Book> builder)
     {
-        // Table name
+        // =========================
+        // Table
+        // =========================
         builder.ToTable("book");
 
-        // Primary key
+        // =========================
+        // Primary Key
+        // =========================
         builder.HasKey(b => b.Id);
 
-        // Basic properties
+        builder.Property(b => b.Id)
+               .HasColumnName("id");
+
+        // =========================
+        // Foreign Key
+        // =========================
+        builder.Property(b => b.UserId)
+               .HasColumnName("user_id")
+               .IsRequired();
+
+        // =========================
+        // Properties
+        // =========================
+
         builder.Property(b => b.Title)
-            .HasMaxLength(255)
-            .IsRequired();
+               .HasColumnName("title")
+               .HasMaxLength(255)
+               .IsRequired();
 
         builder.Property(b => b.ReaderType)
-            .HasMaxLength(8);
+               .HasColumnName("reader_type")
+               .HasMaxLength(8);
 
         builder.Property(b => b.ThemeType)
-            .HasMaxLength(64);
+               .HasColumnName("theme_type")
+               .HasMaxLength(64);
 
         builder.Property(b => b.RoleType)
-            .HasMaxLength(64);
+               .HasColumnName("role_type")
+               .HasMaxLength(64);
 
         builder.Property(b => b.PlotType)
-            .HasMaxLength(64);
+               .HasColumnName("plot_type")
+               .HasMaxLength(64);
 
         builder.Property(b => b.Hero)
-            .HasMaxLength(64);
+               .HasColumnName("hero")
+               .HasMaxLength(64);
 
         builder.Property(b => b.Status)
-            .HasMaxLength(16);
+               .HasColumnName("status")
+               .HasMaxLength(16);
 
-        builder.Property(b => b.WordCount);
+        builder.Property(b => b.WordCount)
+               .HasColumnName("word_count");
 
         builder.Property(b => b.WordCountRange)
-            .HasMaxLength(20);
+               .HasColumnName("word_count_range")
+               .HasMaxLength(20);
 
         builder.Property(b => b.Tags)
-            .HasMaxLength(255);
+               .HasColumnName("tags")
+               .HasMaxLength(255);
 
         builder.Property(b => b.Intro)
-            .HasColumnType("text");
+               .HasColumnName("intro")
+               .HasColumnType("text");
 
         builder.Property(b => b.CoverUrl)
-            .HasMaxLength(255);
+               .HasColumnName("cover_url")
+               .HasMaxLength(255);
 
         builder.Property(b => b.FavoriteCount)
-            .HasDefaultValue(0);
+               .HasColumnName("favorite_count")
+               .HasDefaultValue(0);
 
         builder.Property(b => b.SignStatus)
-            .HasMaxLength(16)
-            .HasDefaultValue("Unsigned");
+               .HasColumnName("sign_status")
+               .HasMaxLength(16)
+               .HasDefaultValue("Unsigned");
 
+        // =========================
         // Time fields
+        // =========================
+
         builder.Property(b => b.CreatedAt)
-            .HasColumnType("datetime");
+               .HasColumnName("created_at")
+               .HasColumnType("datetime");
 
         builder.Property(b => b.UpdatedAt)
-            .HasColumnType("datetime");
+               .HasColumnName("updated_at")
+               .HasColumnType("datetime");
 
-        // -------------------------
-        // Relations
-        // -------------------------
+        // =========================
+        // Indexes（可选但常用）
+        // =========================
+
+        builder.HasIndex(b => b.UserId);
+        builder.HasIndex(b => b.ReaderType);
+        builder.HasIndex(b => b.Status);
+        builder.HasIndex(b => b.CreatedAt);
+
+        // =========================
+        // Relationships
+        // =========================
 
         // Book → User (Author)
         builder.HasOne(b => b.Author)
-            .WithMany(u => u.Books)
-            .HasForeignKey(b => b.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
+               .WithMany(u => u.Books)
+               .HasForeignKey(b => b.UserId)
+               .OnDelete(DeleteBehavior.Cascade);
 
         // Book → Volume (1:N)
         builder.HasMany(b => b.Volumes)
-            .WithOne(v => v.Book)
-            .HasForeignKey(v => v.BookId)
-            .OnDelete(DeleteBehavior.Cascade);
+               .WithOne(v => v.Book)
+               .HasForeignKey(v => v.BookId)
+               .OnDelete(DeleteBehavior.Cascade);
 
         // Book → Favorite (1:N)
         builder.HasMany(b => b.Favorites)
-            .WithOne(f => f.Book)
-            .HasForeignKey(f => f.BookId)
-            .OnDelete(DeleteBehavior.Cascade);
+               .WithOne(f => f.Book)
+               .HasForeignKey(f => f.BookId)
+               .OnDelete(DeleteBehavior.Cascade);
 
         // Book → Comment (1:N)
         builder.HasMany(b => b.Comments)
-            .WithOne(c => c.Book)
-            .HasForeignKey(c => c.BookId)
-            .OnDelete(DeleteBehavior.Cascade);
+               .WithOne(c => c.Book)
+               .HasForeignKey(c => c.BookId)
+               .OnDelete(DeleteBehavior.Cascade);
     }
 }

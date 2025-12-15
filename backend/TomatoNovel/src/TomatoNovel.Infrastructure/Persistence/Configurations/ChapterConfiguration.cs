@@ -9,51 +9,83 @@ using TomatoNovel.Domain.Entities;
 /// </summary>
 public class ChapterConfiguration : IEntityTypeConfiguration<Chapter>
 {
-    /// <inheritdoc />
     public void Configure(EntityTypeBuilder<Chapter> builder)
     {
-        // Table name
+        // =========================
+        // Table
+        // =========================
         builder.ToTable("chapter");
 
-        // Primary key
+        // =========================
+        // Primary Key
+        // =========================
         builder.HasKey(c => c.Id);
 
-        // Properties
+        builder.Property(c => c.Id)
+               .HasColumnName("id");
+
+        // =========================
+        // Foreign Keys
+        // =========================
         builder.Property(c => c.VolumeId)
-            .IsRequired();
+               .HasColumnName("volume_id")
+               .IsRequired();
+
+        // =========================
+        // Properties
+        // =========================
 
         builder.Property(c => c.ChapterNum)
-            .IsRequired();
+               .HasColumnName("chapter_num")
+               .IsRequired();
 
         builder.Property(c => c.Title)
-            .HasMaxLength(255)
-            .IsRequired();
+               .HasColumnName("title")
+               .HasMaxLength(255)
+               .IsRequired();
 
-        builder.Property(c => c.WordCount);
+        builder.Property(c => c.WordCount)
+               .HasColumnName("word_count");
 
         builder.Property(c => c.Content)
-            .HasColumnType("text")
-            .IsRequired();
+               .HasColumnName("content")
+               .HasColumnType("text")
+               .IsRequired();
 
         builder.Property(c => c.Status)
-            .HasMaxLength(20)
-            .HasDefaultValue("published")
-            .IsRequired();
+               .HasColumnName("status")
+               .HasMaxLength(20)
+               .HasDefaultValue("published")
+               .IsRequired();
+
+        // =========================
+        // Time fields
+        // =========================
 
         builder.Property(c => c.CreatedAt)
-            .HasColumnType("datetime");
+               .HasColumnName("created_at")
+               .HasColumnType("datetime");
 
         builder.Property(c => c.UpdatedAt)
-            .HasColumnType("datetime");
+               .HasColumnName("updated_at")
+               .HasColumnType("datetime");
 
-        // -------------------------
-        // Navigation properties
-        // -------------------------
+        // =========================
+        // Indexes（常用）
+        // =========================
 
-        // Chapter → Volume (many chapters belong to one volume)
+        builder.HasIndex(c => c.VolumeId);
+        builder.HasIndex(c => new { c.VolumeId, c.ChapterNum })
+               .IsUnique();
+
+        // =========================
+        // Relationships
+        // =========================
+
+        // Chapter → Volume (N:1)
         builder.HasOne(c => c.Volume)
-            .WithMany(v => v.Chapters)
-            .HasForeignKey(c => c.VolumeId)
-            .OnDelete(DeleteBehavior.Cascade);
+               .WithMany(v => v.Chapters)
+               .HasForeignKey(c => c.VolumeId)
+               .OnDelete(DeleteBehavior.Cascade);
     }
 }

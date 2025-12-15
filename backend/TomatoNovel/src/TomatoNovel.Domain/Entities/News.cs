@@ -1,8 +1,11 @@
-﻿namespace TomatoNovel.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TomatoNovel.Domain.Entities;
 
 /// <summary>
 /// Represents a news or announcement entry.
 /// </summary>
+[Table("news")]
 public class News
 {
     /// <summary>
@@ -16,7 +19,7 @@ public class News
     public string Title { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the content of the news entry. This may include rich text or HTML.
+    /// Gets or sets the content of the news entry.
     /// </summary>
     public string? Content { get; set; }
 
@@ -36,17 +39,20 @@ public class News
     public string? BannerUrl { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether this news entry is displayed as a homepage banner.
+    /// Gets or sets a value indicating whether this news entry
+    /// is displayed as a homepage banner.
     /// </summary>
     public bool IsBanner { get; set; } = false;
 
     /// <summary>
-    /// Gets or sets a value indicating whether this news entry is marked as a notice.
+    /// Gets or sets a value indicating whether this news entry
+    /// is marked as a notice.
     /// </summary>
     public bool IsNotice { get; set; } = false;
 
     /// <summary>
-    /// Gets or sets the type of the news entry, such as "notice" or "active".
+    /// Gets or sets the type of the news entry.
+    /// Example: "notice", "active".
     /// </summary>
     public string Type { get; set; } = "notice";
 
