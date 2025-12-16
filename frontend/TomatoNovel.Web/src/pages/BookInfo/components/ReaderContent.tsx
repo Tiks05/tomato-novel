@@ -24,7 +24,7 @@ const ReaderContent = () => {
     if (!bookId || !volumeId || !chapterId) return
 
     try {
-      const res = await getChapterContent({bookId, volumeId, chapterId} as any)
+      const res = await getChapterContent({ bookId, volumeId, chapterId } as any)
 
       const data = res
 

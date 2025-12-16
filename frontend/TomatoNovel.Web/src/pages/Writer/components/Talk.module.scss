@@ -1,0 +1,104 @@
+.talk_title {
+  text-align: center;
+  background-color: #fff;
+  height: 620px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.talk_title span {
+  display: inline-block;
+  width: 1em;
+  position: relative;
+  font-size: 38px;
+  line-height: 1.1;
+}
+
+.talk_title span img {
+  position: absolute;
+  width: 62px;
+  vertical-align: middle;
+  left: 102%;
+  bottom: 0;
+}
+
+/* ===== 内容区 ===== */
+
+.author_talk .con {
+  margin: 0 auto;
+  width: 1240px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.author_talk .con .pic img {
+  height: 507px;
+  width: 380px;
+}
+
+.author_talk .con .text {
+  width: 660px;
+}
+
+.author_talk .con .text p {
+  font-size: 18px;
+  color: #000;
+  line-height: 1.6;
+}
+
+/* ===== 每一段 ===== */
+
+.item {
+  height: 760px;
+  margin-top: -200px;
+}
+
+.item_one {
+  mask: url('@/assets/images/writer/talk/talk-bkg-2.svg');
+  background-color: #dad6cc;
+  padding-top: 150px;
+}
+
+.item .text img {
+  width: 131px;
+  vertical-align: middle;
+  margin-top: 30px;
+  float: right;
+}
+
+.item_two {
+  mask: url('@/assets/images/writer/talk/talk-bkg-3.svg');
+  background-color: #ff5f00;
+  padding-top: 100px;
+}
+
+.item_two .con .text p {
+  color: #fff;
+}
+
+.item_three {
+  mask: url('@/assets/images/writer/talk/talk-bkg-2.svg');
+  background-color: #dad6cc;
+  padding-top: 100px;
+  margin-top: -330px;
+}
+
+.item_three .text img {
+  width: 95px;
+  margin-top: 60px;
+}
+
+/* ===== 底部大图 ===== */
+
+.item_pic {
+  margin-top: -230px;
+  position: relative;
+  z-index: 9;
+}
+
+.item_pic img {
+  width: 100%;
+  vertical-align: middle;
+}

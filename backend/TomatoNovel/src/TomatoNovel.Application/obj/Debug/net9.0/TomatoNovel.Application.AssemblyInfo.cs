@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TomatoNovel.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+567791d09a432dad9248cf0052d0ce8f48359a86")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7e021ff88ca8aac5d215e5aedab28c75f224ad0b")]
 [assembly: System.Reflection.AssemblyProductAttribute("TomatoNovel.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TomatoNovel.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

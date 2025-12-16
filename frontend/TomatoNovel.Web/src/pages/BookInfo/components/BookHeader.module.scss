@@ -185,10 +185,10 @@
 
 .author-info {
   cursor: pointer;
-  
+
   display: flex;
-  flex-direction: column;   // 纵向排列：头像 → 名字 → 简介
-  align-items: center;   
+  flex-direction: column; // 纵向排列：头像 → 名字 → 简介
+  align-items: center;
 }
 
 .author-img {

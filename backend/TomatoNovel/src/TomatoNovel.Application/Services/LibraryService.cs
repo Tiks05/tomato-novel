@@ -1,6 +1,5 @@
 ﻿namespace TomatoNovel.Application.Services;
 
-using TomatoNovel.Application.DTOs.Library;
 using TomatoNovel.Application.DTOs.Library.Requests;
 using TomatoNovel.Application.DTOs.Library.Responses;
 using TomatoNovel.Application.Interfaces;
@@ -35,7 +34,7 @@ public class LibraryService : ILibraryService
                 "theme_type" => query.Where(b => b.ThemeType == request.CategoryType),
                 "role_type" => query.Where(b => b.RoleType == request.CategoryType),
                 "plot_type" => query.Where(b => b.PlotType == request.CategoryType),
-                _ => query
+                _ => query,
             };
         }
 
@@ -53,7 +52,7 @@ public class LibraryService : ILibraryService
             "50-100万" => query.Where(b => b.WordCount >= 500_000 && b.WordCount <= 1_000_000),
             "100-200万" => query.Where(b => b.WordCount >= 1_000_000 && b.WordCount <= 2_000_000),
             "200万以上" => query.Where(b => b.WordCount >= 2_000_000),
-            _ => query
+            _ => query,
         };
 
         // Sort
@@ -62,7 +61,7 @@ public class LibraryService : ILibraryService
             "hot" => query.OrderByDescending(b => b.FavoriteCount),
             "new" => query.OrderByDescending(b => b.UpdatedAt),
             "words" => query.OrderByDescending(b => b.WordCount),
-            _ => query
+            _ => query,
         };
 
         var total = query.Count();
@@ -75,7 +74,7 @@ public class LibraryService : ILibraryService
         return new BookListResponseDto
         {
             Total = total,
-            Records = books.Select(MapToDto).ToList()
+            Records = books.Select(MapToDto).ToList(),
         };
     }
 
@@ -91,7 +90,7 @@ public class LibraryService : ILibraryService
             Intro = book.Intro ?? string.Empty,
             CoverUrl = book.CoverUrl ?? string.Empty,
             UpdatedAt = FormatTime(book.UpdatedAt),
-            Path = $"/bookinfo/{book.Id}"
+            Path = $"/bookinfo/{book.Id}",
         };
     }
 
@@ -100,13 +99,19 @@ public class LibraryService : ILibraryService
         var delta = DateTime.UtcNow - updatedAt;
 
         if (delta.TotalDays >= 1)
+        {
             return updatedAt.ToString("yyyy-MM-dd HH:mm");
+        }
 
         if (delta.TotalHours >= 1)
+        {
             return $"{(int)delta.TotalHours}小时前";
+        }
 
         if (delta.TotalMinutes >= 1)
+        {
             return $"{(int)delta.TotalMinutes}分钟前";
+        }
 
         return $"{(int)delta.TotalSeconds}秒前";
     }

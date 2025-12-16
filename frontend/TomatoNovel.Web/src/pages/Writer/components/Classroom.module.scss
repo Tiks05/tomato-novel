@@ -1,0 +1,97 @@
+.author_classroom {
+  padding: 80px 0;
+  background-color: #f6f6f6;
+}
+
+.classroom_wp {
+  width: 1240px;
+  margin: 0 auto;
+}
+
+/* ===== 标题 ===== */
+
+.title {
+  text-align: center;
+  font-size: 26px;
+}
+
+.title img {
+  width: 32px;
+  vertical-align: middle;
+  margin-left: 3px;
+}
+
+.title span {
+  vertical-align: middle;
+}
+
+/* ===== 分类切换 ===== */
+
+.type_list {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.custom-pagination-bullet {
+  height: 34px;
+  line-height: 34px;
+  padding: 0 16px;
+  cursor: pointer;
+  border-radius: 50px;
+  background-color: #f1f1f1;
+  display: inline-block;
+  margin: 0 6px;
+  font-size: 14px;
+  color: #666;
+}
+
+.custom-pagination-bullet:hover {
+  background-color: #e7e7e7;
+}
+
+.on {
+  background-color: #ff5f00;
+  color: #fff;
+}
+
+.on:hover {
+  background-color: #ff5f00;
+}
+
+/* ===== 列表 ===== */
+
+.classroom_list {
+  overflow: hidden;
+  margin-left: -20px;
+  margin-top: 20px;
+}
+
+.item {
+  width: 20%;
+  float: left;
+  padding-right: 20px;
+  margin-top: 20px;
+}
+
+/* ===== 更多 ===== */
+
+.more {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.more span {
+  display: inline-block;
+  width: 150px;
+  height: 40px;
+  text-align: center;
+  cursor: pointer;
+  line-height: 40px;
+  background-color: #ececec;
+  margin-top: 15px;
+  border-radius: 50px;
+  background-size: 12px auto;
+  padding-right: 15px;
+  background-repeat: no-repeat;
+  background-position: 80% center;
+}

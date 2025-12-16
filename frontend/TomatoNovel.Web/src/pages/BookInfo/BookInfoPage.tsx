@@ -28,10 +28,7 @@ const BookInfoPage = () => {
 
     const fetchData = async () => {
       try {
-        const [headerRes, contentRes] = await Promise.all([
-          getBookHeader(id),
-          getBookContent(id),
-        ])
+        const [headerRes, contentRes] = await Promise.all([getBookHeader(id), getBookContent(id)])
 
         setBookHeader(headerRes)
         setBookContent(contentRes)

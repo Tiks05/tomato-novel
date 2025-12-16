@@ -11,7 +11,7 @@ public class WriterDto
     public string Intro { get; set; } = string.Empty;
 
     /// <summary>
-    /// 成为作者时间（ISO 字符串）
+    /// Gets or sets 成为作者时间（ISO 字符串）.
     /// </summary>
     public string BecomeAuthorAt { get; set; } = string.Empty;
 

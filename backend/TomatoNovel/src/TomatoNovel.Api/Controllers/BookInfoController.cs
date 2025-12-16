@@ -23,7 +23,7 @@ public class BookInfoController : ControllerBase
     public IActionResult GetBookHeader([FromRoute] int bookId)
     {
         var result = this.bookInfoService.GetBookHeader(bookId);
-        return Ok(ApiResponse<BookHeaderResponseDto>.Success(result));
+        return this.Ok(ApiResponse<BookHeaderResponseDto>.Success(result));
     }
 
     [HttpGet("content/{bookId}")]
@@ -31,7 +31,7 @@ public class BookInfoController : ControllerBase
     public IActionResult GetBookContent([FromRoute] int bookId)
     {
         var result = this.bookInfoService.GetBookContent(bookId);
-        return Ok(ApiResponse<BookContentResponseDto>.Success(result));
+        return this.Ok(ApiResponse<BookContentResponseDto>.Success(result));
     }
 
     [HttpGet("chapter")]
@@ -39,6 +39,6 @@ public class BookInfoController : ControllerBase
     public IActionResult ReadChapter([FromQuery] ChapterReadRequestDto request)
     {
         var result = this.bookInfoService.ReadChapter(request);
-        return Ok(ApiResponse<ChapterReadResponseDto>.Success(result));
+        return this.Ok(ApiResponse<ChapterReadResponseDto>.Success(result));
     }
 }

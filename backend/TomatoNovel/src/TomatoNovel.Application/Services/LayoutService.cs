@@ -15,12 +15,12 @@ public class LayoutService : ILayoutService
     }
 
     public UserProfileUpdateResponseDto UpdateUserProfile(
-        long Id,
+        long id,
         string name,
         string introduction,
         Stream? avatarStream)
     {
-        var user = this.layoutRepository.GetUserById(Id);
+        var user = this.layoutRepository.GetUserById(id);
         if (user == null)
         {
             throw new Exception("用户不存在");

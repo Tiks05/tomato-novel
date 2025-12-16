@@ -34,7 +34,7 @@ public class WriterInfoService : IWriterInfoService
                 BecomeAuthorAt = author.BecomeAuthorAt?.ToString("O") ?? string.Empty,
                 TotalWords = totalWords,
                 FollowerCount = 0 // 预留：后续从 Follow 表统计
-            }
+            },
         };
     }
 
@@ -62,13 +62,13 @@ public class WriterInfoService : IWriterInfoService
                 UpdatedAt = book.UpdatedAt.ToString("O"),
                 BookinfoPath = $"/bookinfo/{book.Id}",
                 MaxChapter = maxChapterNum,
-                MaxChapterTitle = maxChapterTitle
+                MaxChapterTitle = maxChapterTitle,
             };
         }).ToList();
 
         return new WriterWorksResponseDto
         {
-            Works = works
+            Works = works,
         };
     }
 }

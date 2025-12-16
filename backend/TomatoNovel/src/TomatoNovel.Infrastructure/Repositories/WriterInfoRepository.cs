@@ -1,6 +1,5 @@
 ﻿namespace TomatoNovel.Infrastructure.Repositories;
 
-using Microsoft.EntityFrameworkCore;
 using TomatoNovel.Domain.Entities;
 using TomatoNovel.Domain.Interfaces;
 using TomatoNovel.Infrastructure.Persistence;

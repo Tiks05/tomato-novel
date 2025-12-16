@@ -19,8 +19,9 @@ public class LibraryController : ControllerBase
     }
 
     /// <summary>
-    /// 获取书库列表
+    /// 获取书库列表.
     /// </summary>
+    /// <returns></returns>
     [HttpGet("books")]
     [AllowAnonymous]
     [ProducesResponseType(
