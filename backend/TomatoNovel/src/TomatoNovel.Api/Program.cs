@@ -175,11 +175,17 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICommonService, CommonService>();
 builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<ILayoutService, LayoutService>();
+builder.Services.AddScoped<ILibraryService, LibraryService>();
+builder.Services.AddScoped<IBookInfoService, BookInfoService>();
+builder.Services.AddScoped<IWriterInfoService, WriterInfoService>();
 
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<ICommonRepository, CommonRepository>();
 builder.Services.AddScoped<IHomeRepository, HomeRepository>();
 builder.Services.AddScoped<ILayoutRepository, LayoutRepository>();
+builder.Services.AddScoped<ILibraryRepository, LibraryRepository>();
+builder.Services.AddScoped<IBookInfoRepository, BookInfoRepository>();
+builder.Services.AddScoped<IWriterInfoRepository, WriterInfoRepository>();
 
 builder.Services.AddScoped<IOpenIddictTokenService, OpenIddictTokenService>();
 

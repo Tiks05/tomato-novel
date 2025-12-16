@@ -3,7 +3,7 @@ import type { RouteObject } from 'react-router-dom'
 
 // ===== 懒加载页面 =====
 const HomePage = lazy(() => import('@/pages/Home/HomePage'))
-// const LibraryPage = lazy(() => import('@/pages/Library/LibraryPage'))
+const LibraryPage = lazy(() => import('@/pages/Library/LibraryPage'))
 // const WriterPage = lazy(() => import('@/pages/Writer/WriterPage'))
 const ProfilePage = lazy(() => import('@/components/layout/Profile'))
 const SearchPage = lazy(() => import('@/components/layout/Search'))
@@ -19,15 +19,15 @@ export const layoutRoutes: RouteObject[] = [
     },
   },
 
-  // // /library
-  // {
-  //   path: 'library',
-  //   element: <LibraryPage />,
-  //   handle: {
-  //     title: '书库',
-  //     requiresAuth: false,
-  //   },
-  // },
+  // /library
+  {
+    path: 'library',
+    element: <LibraryPage />,
+    handle: {
+      title: '书库',
+      requiresAuth: false,
+    },
+  },
 
   // // /writer
   // {

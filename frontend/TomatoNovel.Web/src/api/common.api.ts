@@ -14,5 +14,5 @@ export function getBannerList(params: BannerListRequest) {
  * 获取首页改编作品列表
  */
 export const getAdaptList = (params?: AdaptListRequest) => {
-  return request.get<AdaptListResponse>('/common/adaptlist', { params })
+  return request.get<AdaptListResponse>('/common/adapt-list', { params })
 }

@@ -1,6 +1,5 @@
 ﻿namespace TomatoNovel.Infrastructure.Repositories;
 
-using Microsoft.EntityFrameworkCore;
 using TomatoNovel.Domain.Entities;
 using TomatoNovel.Domain.Interfaces;
 using TomatoNovel.Infrastructure.Persistence;
@@ -20,9 +19,11 @@ public class LayoutRepository : ILayoutRepository
     // -----------------------------
     // User
     // -----------------------------
+
     /// <summary>
     /// Get user by primary key.
     /// </summary>
+    /// <returns></returns>
     public User GetUserById(long userId)
     {
         return this.context.Users
@@ -36,8 +37,7 @@ public class LayoutRepository : ILayoutRepository
     public void UpdateUser(
         User user,
         Stream avatarStream,
-        string avatarUuid
-    )
+        string avatarUuid)
     {
         // -----------------------------
         // 情况一：没有上传头像
@@ -61,8 +61,7 @@ public class LayoutRepository : ILayoutRepository
             "uploads",
             "user",
             "avatars",
-            fileName
-        );
+            fileName);
 
         // 确保目录存在
         Directory.CreateDirectory(Path.GetDirectoryName(savePath)!);
@@ -83,11 +82,9 @@ public class LayoutRepository : ILayoutRepository
         this.context.SaveChanges();
     }
 
-
     // -----------------------------
     // Book search
     // -----------------------------
-
     public int CountBooks(
         string? keyword,
         int stateIndex,
@@ -100,7 +97,7 @@ public class LayoutRepository : ILayoutRepository
             select new
             {
                 book,
-                AuthorName = user.Nickname
+                AuthorName = user.Nickname,
             };
 
         // keyword
@@ -113,32 +110,54 @@ public class LayoutRepository : ILayoutRepository
 
         // state
         if (stateIndex == 1)
+        {
             query = query.Where(x => x.book.Status == "已完结");
+        }
         else if (stateIndex == 2)
+        {
             query = query.Where(x => x.book.Status == "连载中");
+        }
 
         // word count
         if (numIndex == 1)
+        {
             query = query.Where(x => x.book.WordCount < 300_000);
+        }
         else if (numIndex == 2)
+        {
             query = query.Where(x => x.book.WordCount >= 300_000 && x.book.WordCount < 500_000);
+        }
         else if (numIndex == 3)
+        {
             query = query.Where(x => x.book.WordCount >= 500_000 && x.book.WordCount < 1_000_000);
+        }
         else if (numIndex == 4)
+        {
             query = query.Where(x => x.book.WordCount >= 1_000_000);
+        }
 
         // time
         var now = DateTime.Now;
         if (timeIndex == 1)
+        {
             query = query.Where(x => x.book.UpdatedAt >= now.AddMinutes(-30));
+        }
         else if (timeIndex == 2)
+        {
             query = query.Where(x => x.book.UpdatedAt >= now.Date);
+        }
         else if (timeIndex == 3)
+        {
             query = query.Where(x => x.book.UpdatedAt >= now.Date.AddDays(-(int)now.DayOfWeek + 1));
+        }
         else if (timeIndex == 4)
+        {
             query = query.Where(x => x.book.UpdatedAt >= new DateTime(now.Year, now.Month, 1));
+        }
         else if (timeIndex == 5)
+        {
             query = query.Where(x => x.book.UpdatedAt >= new DateTime(now.Year, 1, 1));
+        }
 
         return query.Count();
     }
@@ -157,8 +176,7 @@ public class LayoutRepository : ILayoutRepository
         int? FirstVolumeSort,
         int? FirstChapterNum,
         int? LatestVolumeSort,
-        int? LatestChapterNum
-    )> SearchBooks(
+        int? LatestChapterNum)> SearchBooks(
         string? keyword,
         int stateIndex,
         int numIndex,
@@ -173,11 +191,10 @@ public class LayoutRepository : ILayoutRepository
             select new
             {
                 Book = book,
-                AuthorName = user.Nickname
+                AuthorName = user.Nickname,
             };
 
         // -------- filters --------
-
         if (!string.IsNullOrWhiteSpace(keyword))
         {
             baseQuery = baseQuery.Where(x =>
@@ -186,42 +203,62 @@ public class LayoutRepository : ILayoutRepository
         }
 
         if (stateIndex == 1)
+        {
             baseQuery = baseQuery.Where(x => x.Book.Status == "已完结");
+        }
         else if (stateIndex == 2)
+        {
             baseQuery = baseQuery.Where(x => x.Book.Status == "连载中");
+        }
 
         if (numIndex == 1)
+        {
             baseQuery = baseQuery.Where(x => x.Book.WordCount < 300_000);
+        }
         else if (numIndex == 2)
+        {
             baseQuery = baseQuery.Where(x => x.Book.WordCount >= 300_000 && x.Book.WordCount < 500_000);
+        }
         else if (numIndex == 3)
+        {
             baseQuery = baseQuery.Where(x => x.Book.WordCount >= 500_000 && x.Book.WordCount < 1_000_000);
+        }
         else if (numIndex == 4)
+        {
             baseQuery = baseQuery.Where(x => x.Book.WordCount >= 1_000_000);
+        }
 
         var now = DateTime.Now;
         if (timeIndex == 1)
+        {
             baseQuery = baseQuery.Where(x => x.Book.UpdatedAt >= now.AddMinutes(-30));
+        }
         else if (timeIndex == 2)
+        {
             baseQuery = baseQuery.Where(x => x.Book.UpdatedAt >= now.Date);
+        }
         else if (timeIndex == 3)
+        {
             baseQuery = baseQuery.Where(x => x.Book.UpdatedAt >= now.Date.AddDays(-(int)now.DayOfWeek + 1));
+        }
         else if (timeIndex == 4)
+        {
             baseQuery = baseQuery.Where(x => x.Book.UpdatedAt >= new DateTime(now.Year, now.Month, 1));
+        }
         else if (timeIndex == 5)
+        {
             baseQuery = baseQuery.Where(x => x.Book.UpdatedAt >= new DateTime(now.Year, 1, 1));
+        }
 
         // -------- sort --------
-
         baseQuery = type switch
         {
             1 => baseQuery.OrderByDescending(x => x.Book.FavoriteCount),
             2 => baseQuery.OrderByDescending(x => x.Book.UpdatedAt),
-            _ => baseQuery.OrderByDescending(x => x.Book.Id)
+            _ => baseQuery.OrderByDescending(x => x.Book.Id),
         };
 
         // -------- paging --------
-
         var pageData = baseQuery
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
@@ -230,7 +267,6 @@ public class LayoutRepository : ILayoutRepository
         var bookIds = pageData.Select(x => x.Book.Id).ToList();
 
         // -------- first chapter --------
-
         var firstChapterMap =
             (from v in this.context.Volumes
              join c in this.context.Chapters on v.Id equals c.VolumeId
@@ -240,14 +276,13 @@ public class LayoutRepository : ILayoutRepository
              {
                  v.BookId,
                  v.Sort,
-                 c.ChapterNum
+                 c.ChapterNum,
              })
             .AsEnumerable()
             .GroupBy(x => x.BookId)
             .ToDictionary(g => g.Key, g => g.First());
 
         // -------- latest chapter --------
-
         var latestChapterMap =
             (from v in this.context.Volumes
              join c in this.context.Chapters on v.Id equals c.VolumeId
@@ -258,14 +293,13 @@ public class LayoutRepository : ILayoutRepository
                  v.BookId,
                  v.Sort,
                  c.ChapterNum,
-                 c.Title
+                 c.Title,
              })
             .AsEnumerable()
             .GroupBy(x => x.BookId)
             .ToDictionary(g => g.Key, g => g.First());
 
         // -------- flatten --------
-
         return pageData.Select(x =>
         {
             firstChapterMap.TryGetValue(x.Book.Id, out var first);
@@ -285,8 +319,7 @@ public class LayoutRepository : ILayoutRepository
                 FirstVolumeSort: first?.Sort,
                 FirstChapterNum: first?.ChapterNum,
                 LatestVolumeSort: latest?.Sort,
-                LatestChapterNum: latest?.ChapterNum
-            );
+                LatestChapterNum: latest?.ChapterNum);
         }).ToList();
     }
 }

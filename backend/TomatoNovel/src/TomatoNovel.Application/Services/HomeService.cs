@@ -76,7 +76,7 @@ public class HomeService : IHomeService
                 Desc = b.Intro,
                 CoverUrl = b.CoverUrl ?? string.Empty,
                 AuthorNickname = b.AuthorNickname,
-                Path = $"/bookinfo/{b.Id}"
+                Path = $"/bookinfo/{b.Id}",
             }).ToList(),
         };
     }
@@ -110,7 +110,7 @@ public class HomeService : IHomeService
                 Desc = b.Intro,
                 Path = $"/bookinfo/{b.Id}",
                 Pic = b.CoverUrl ?? string.Empty,
-                Author = b.AuthorNickname
+                Author = b.AuthorNickname,
             }).ToList(),
         };
     }

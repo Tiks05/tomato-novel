@@ -20,22 +20,22 @@ public class LayoutController : ControllerBase
     }
 
     /// <summary>
-    /// 更新用户资料
+    /// 更新用户资料.
     /// </summary>
     /// <summary>
-    /// 更新用户资料
+    /// 更新用户资料.
     /// </summary>
+    /// <returns></returns>
     [HttpPost("profile/update")]
     [Authorize]
     [ProducesResponseType(
         typeof(ApiResponse<UserProfileUpdateResponseDto>),
         StatusCodes.Status200OK)]
     public IActionResult UpdateProfile(
-        [FromForm] long Id,
-        [FromForm] string Name,
-        [FromForm] string Introduction,
-        IFormFile? Avatar
-    )
+        [FromForm] long id,
+        [FromForm] string name,
+        [FromForm] string introduction,
+        IFormFile? avatar)
     {
         try
         {
@@ -45,39 +45,36 @@ public class LayoutController : ControllerBase
             Stream? avatarStream = null;
             string? avatarFileName = null;
 
-            if (Avatar != null && Avatar.Length > 0)
+            if (avatar != null && avatar.Length > 0)
             {
-                avatarStream = Avatar.OpenReadStream();
+                avatarStream = avatar.OpenReadStream();
             }
 
             // -----------------------------
             // 调用业务层
             // -----------------------------
-            var response = layoutService.UpdateUserProfile(
-                Id,
-                Name,
-                Introduction,
-                avatarStream
-            );
+            var response = this.layoutService.UpdateUserProfile(
+                id,
+                name,
+                introduction,
+                avatarStream);
 
-            return Ok(
-                ApiResponse<UserProfileUpdateResponseDto>.Success(response)
-            );
+            return this.Ok(
+                ApiResponse<UserProfileUpdateResponseDto>.Success(response));
         }
         catch (Exception ex)
         {
-            return Ok(
+            return this.Ok(
                 ApiResponse<object>.Fail(
                     40020,
-                    ex.Message
-                )
-            );
+                    ex.Message));
         }
     }
 
     /// <summary>
-    /// 搜索书籍
+    /// 搜索书籍.
     /// </summary>
+    /// <returns></returns>
     [HttpGet("search-books")]
     [AllowAnonymous]
     [ProducesResponseType(
@@ -89,17 +86,14 @@ public class LayoutController : ControllerBase
         {
             var response = this.layoutService.SearchBooks(request);
             return this.Ok(
-                ApiResponse<SearchBookResponseDto>.Success(response)
-            );
+                ApiResponse<SearchBookResponseDto>.Success(response));
         }
         catch (Exception ex)
         {
             return this.Ok(
                 ApiResponse<object>.Fail(
                     40021,
-                    ex.Message
-                )
-            );
+                    ex.Message));
         }
     }
 }

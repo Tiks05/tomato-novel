@@ -6,12 +6,10 @@ using TomatoNovel.Application.DTOs.Layout.Responses;
 public interface ILayoutService
 {
     UserProfileUpdateResponseDto UpdateUserProfile(
-        long Id,
+        long id,
         string name,
         string introduction,
-        Stream? avatarStream
-    );
-
+        Stream? avatarStream);
 
     SearchBookResponseDto SearchBooks(SearchBookRequestDto request);
 }

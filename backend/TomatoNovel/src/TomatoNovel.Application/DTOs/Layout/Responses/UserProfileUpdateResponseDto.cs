@@ -3,17 +3,17 @@
 public class UserProfileUpdateResponseDto
 {
     /// <summary>
-    /// 头像（绝对路径）
+    /// Gets or sets 头像（绝对路径）.
     /// </summary>
     public string Avatar { get; set; } = string.Empty;
 
     /// <summary>
-    /// 昵称
+    /// Gets or sets 昵称.
     /// </summary>
     public string Nickname { get; set; } = string.Empty;
 
     /// <summary>
-    /// 个性签名
+    /// Gets or sets 个性签名.
     /// </summary>
     public string Signature { get; set; } = string.Empty;
 }

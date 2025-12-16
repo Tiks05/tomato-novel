@@ -42,7 +42,7 @@ public class CommonController : ControllerBase
         }
     }
 
-    [HttpGet("adaptlist")]
+    [HttpGet("adapt-list")]
     [AllowAnonymous]
     public IActionResult GetAdaptList([FromQuery] AdaptListRequestDto request)
     {

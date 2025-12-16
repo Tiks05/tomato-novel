@@ -6,6 +6,8 @@ import { Spin } from 'antd'
 import { authRoutes } from './routes/auth.routes'
 import { layoutRoutes } from './routes/layout.routes'
 import { notFoundRoutes } from './routes/not-found.routes'
+import { bookInfoRoutes } from './routes/book-info.routes'
+import { writerInfoRoutes } from './routes/writer-info.routes'
 
 const router = createBrowserRouter([
   {
@@ -15,6 +17,8 @@ const router = createBrowserRouter([
       ...authRoutes,
       ...notFoundRoutes,
       ...layoutRoutes,
+      ...bookInfoRoutes,
+      ...writerInfoRoutes,
     ],
   },
 ])

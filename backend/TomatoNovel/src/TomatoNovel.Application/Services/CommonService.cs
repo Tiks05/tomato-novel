@@ -47,7 +47,7 @@ public class CommonService : ICommonService
             Items = records.Select(record => new BannerItemDto
             {
                 BannerUrl = record.BannerUrl ?? string.Empty,
-                Path = $"/classroom/{record.Id}"
+                Path = $"/classroom/{record.Id}",
             }).ToList(),
         };
     }
@@ -62,7 +62,7 @@ public class CommonService : ICommonService
             {
                 Id = b.Id,
                 Pic = b.CoverUrl ?? string.Empty,
-                Path = $"/bookinfo/{b.Id}"
+                Path = $"/bookinfo/{b.Id}",
             }).ToList(),
         };
     }

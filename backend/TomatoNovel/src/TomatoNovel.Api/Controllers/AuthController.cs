@@ -18,7 +18,7 @@ using TomatoNovel.Application.Interfaces;
 /// Provides authentication endpoints including login and automatic registration.
 /// </summary>
 [ApiController]
-[Route("api/auth/login_or_register")]
+[Route("api/auth/login-or-register")]
 public class AuthController : ControllerBase
 {
     private readonly IAuthService _authService;
