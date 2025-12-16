@@ -10,7 +10,12 @@ import { notFoundRoutes } from './routes/not-found.routes'
 const router = createBrowserRouter([
   {
     path: '/',
-    children: [{ index: true, element: <Navigate to="/home" replace /> }, ...authRoutes, ...notFoundRoutes, ...layoutRoutes],
+    children: [
+      { index: true, element: <Navigate to="/home" replace /> },
+      ...authRoutes,
+      ...notFoundRoutes,
+      ...layoutRoutes,
+    ],
   },
 ])
 

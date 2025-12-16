@@ -27,7 +27,6 @@ public class FollowConfiguration : IEntityTypeConfiguration<Follow>
         // =========================
         // Foreign Keys
         // =========================
-
         builder.Property(f => f.FollowerId)
                .HasColumnName("follower_id")
                .IsRequired();
@@ -39,7 +38,6 @@ public class FollowConfiguration : IEntityTypeConfiguration<Follow>
         // =========================
         // Properties
         // =========================
-
         builder.Property(f => f.CreatedAt)
                .HasColumnName("created_at")
                .HasColumnType("datetime");

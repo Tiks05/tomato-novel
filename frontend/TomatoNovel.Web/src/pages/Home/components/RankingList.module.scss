@@ -192,10 +192,11 @@
     height: 44px;
     position: absolute;
     top: 50%;
-    transform: translateY(-21%);
+    transform: translateY(-50%);
     background-color: #fff;
     border-radius: 50%;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
   }
 
   :global(.swiper-button-prev) {
@@ -209,11 +210,11 @@
   }
 
   :global(.swiper-button-prev:hover) {
-    transform: translate(-8px, -50%);
+    transform: translateY(-50%) translateX(-8px);
   }
 
   :global(.swiper-button-next:hover) {
-    transform: translate(8px, -50%);
+    transform: translateY(-50%) translateX(8px);
   }
 
   :global(.swiper-button-prev::after),

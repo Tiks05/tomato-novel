@@ -27,7 +27,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         // =========================
         // Properties
         // =========================
-
         builder.Property(u => u.Phone)
                .HasColumnName("phone")
                .HasMaxLength(11)

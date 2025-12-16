@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿namespace TomatoNovel.Infrastructure.Repositories;
+
+using Microsoft.EntityFrameworkCore;
 using TomatoNovel.Domain.Interfaces;
 using TomatoNovel.Infrastructure.Persistence;
-
-namespace TomatoNovel.Infrastructure.Repositories;
 
 public class HomeRepository : IHomeRepository
 {
@@ -16,7 +16,7 @@ public class HomeRepository : IHomeRepository
     // ---------------- Top Books ----------------
     public List<(int Id, string Title, string? Tags, string? CoverUrl)> GetTopBooks()
     {
-        return db.Books
+        return this.db.Books
             .OrderByDescending(b => b.FavoriteCount)
             .Take(30)
             .Select(b => new { b.Id, b.Title, b.Tags, b.CoverUrl })
@@ -28,7 +28,7 @@ public class HomeRepository : IHomeRepository
     // ---------------- News ----------------
     public List<(int Id, string Title)> GetNewsList(int limit)
     {
-        return db.News
+        return this.db.News
             .OrderByDescending(n => n.CreatedAt)
             .Take(limit)
             .Select(n => new { n.Id, n.Title })
@@ -44,7 +44,7 @@ public class HomeRepository : IHomeRepository
         string AuthorLevel,
         string? LifePhoto)> GetWriterList()
     {
-        return db.Users
+        return this.db.Users
             .Where(u =>
                 u.AuthorLevel == "殿堂作家" ||
                 u.AuthorLevel == "金番作家")
@@ -55,16 +55,15 @@ public class HomeRepository : IHomeRepository
                 u.Nickname,
                 u.Masterpiece,
                 u.AuthorLevel,
-                u.LifePhoto
+                u.LifePhoto,
             })
-            .AsEnumerable()   // 🔑 切换到内存
+            .AsEnumerable() // 🔑 切换到内存
             .Select(u => (
                 u.Id,
                 u.Nickname,
                 u.Masterpiece,
                 u.AuthorLevel!,
-                u.LifePhoto
-            ))
+                u.LifePhoto))
             .ToList();
     }
 
@@ -79,11 +78,10 @@ public class HomeRepository : IHomeRepository
               string Title,
               string Intro,
               string? CoverUrl,
-              string AuthorNickname)> Female
-    ) GetRecommendBooks()
+              string AuthorNickname)> Female) GetRecommendBooks()
     {
         // 示例逻辑：你可以按原 Flask 逻辑细化
-        var books = db.Books
+        var books = this.db.Books
             .Include(b => b.Author)
             .OrderByDescending(b => b.FavoriteCount)
             .Take(10)
@@ -93,7 +91,7 @@ public class HomeRepository : IHomeRepository
                 b.Title,
                 b.Intro,
                 b.CoverUrl,
-                AuthorNickname = b.Author.Nickname
+                AuthorNickname = b.Author.Nickname,
             })
             .AsEnumerable()
             .Select(b => (
@@ -101,8 +99,7 @@ public class HomeRepository : IHomeRepository
                 b.Title,
                 b.Intro,
                 b.CoverUrl,
-                b.AuthorNickname
-            ))
+                b.AuthorNickname))
             .ToList();
 
         var male = books.Take(5).ToList();
@@ -122,10 +119,9 @@ public class HomeRepository : IHomeRepository
               string Title,
               string Intro,
               string? CoverUrl,
-              string AuthorNickname)> Newest
-    ) GetRanking(string readerType, string plotType)
+              string AuthorNickname)> Newest) GetRanking(string readerType, string plotType)
     {
-        var query = db.Books
+        var query = this.db.Books
             .Include(b => b.Author)
             .Where(b =>
                 b.PlotType == plotType &&
@@ -140,7 +136,7 @@ public class HomeRepository : IHomeRepository
                 b.Title,
                 b.Intro,
                 b.CoverUrl,
-                AuthorNickname = b.Author.Nickname
+                AuthorNickname = b.Author.Nickname,
             })
             .AsEnumerable()
             .Select(b => (
@@ -148,8 +144,7 @@ public class HomeRepository : IHomeRepository
                 b.Title,
                 b.Intro,
                 b.CoverUrl,
-                b.AuthorNickname
-            ))
+                b.AuthorNickname))
             .ToList();
 
         var newest = query
@@ -161,7 +156,7 @@ public class HomeRepository : IHomeRepository
                 b.Title,
                 b.Intro,
                 b.CoverUrl,
-                AuthorNickname = b.Author.Nickname
+                AuthorNickname = b.Author.Nickname,
             })
             .AsEnumerable()
             .Select(b => (
@@ -169,8 +164,7 @@ public class HomeRepository : IHomeRepository
                 b.Title,
                 b.Intro,
                 b.CoverUrl,
-                b.AuthorNickname
-            ))
+                b.AuthorNickname))
             .ToList();
 
         return (hot, newest);
@@ -183,14 +177,13 @@ public class HomeRepository : IHomeRepository
         int BookId,
         string ChapterTitle,
         string AuthorNickname,
-        DateTime UpdatedAt
-        )> GetRecentUpdates(int limit)
+        DateTime UpdatedAt)> GetRecentUpdates(int limit)
     {
         var list = (
-                from c in db.Chapters.AsNoTracking()
-                join v in db.Volumes.AsNoTracking() on c.VolumeId equals v.Id
-                join b in db.Books.AsNoTracking() on v.BookId equals b.Id
-                join a in db.Users.AsNoTracking() on b.UserId equals a.Id
+                from c in this.db.Chapters.AsNoTracking()
+                join v in this.db.Volumes.AsNoTracking() on c.VolumeId equals v.Id
+                join b in this.db.Books.AsNoTracking() on v.BookId equals b.Id
+                join a in this.db.Users.AsNoTracking() on b.UserId equals a.Id
                 orderby c.UpdatedAt descending
                 select new
                 {
@@ -199,9 +192,8 @@ public class HomeRepository : IHomeRepository
                     BookId = b.Id,
                     ChapterTitle = c.Title,
                     AuthorNickname = a.Nickname ?? "未知作者",
-                    UpdatedAt = c.UpdatedAt
-                }
-            )
+                    UpdatedAt = c.UpdatedAt,
+                })
             .Take(limit)
             .ToList();
 
@@ -211,7 +203,6 @@ public class HomeRepository : IHomeRepository
             x.BookId,
             x.ChapterTitle,
             x.AuthorNickname,
-            x.UpdatedAt
-        )).ToList();
+            x.UpdatedAt)).ToList();
     }
 }

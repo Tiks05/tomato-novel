@@ -13,7 +13,7 @@ import styles from './RankingList.module.scss'
 
 const RankingList = () => {
   const { goTo } = useGoTo()
-  
+
   const swiperRef = useRef<any>(null)
 
   const [rawData, setRawData] = useState<any[]>([])

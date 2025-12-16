@@ -27,7 +27,6 @@ public class FavoriteConfiguration : IEntityTypeConfiguration<Favorite>
         // =========================
         // Foreign Keys
         // =========================
-
         builder.Property(f => f.UserId)
                .HasColumnName("user_id")
                .IsRequired();
@@ -39,7 +38,6 @@ public class FavoriteConfiguration : IEntityTypeConfiguration<Favorite>
         // =========================
         // Properties
         // =========================
-
         builder.Property(f => f.CreatedAt)
                .HasColumnName("created_at")
                .HasColumnType("datetime");

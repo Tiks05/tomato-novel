@@ -1,9 +1,9 @@
-﻿using TomatoNovel.Application.DTOs.Home.Requests;
+﻿namespace TomatoNovel.Application.Services;
+
+using TomatoNovel.Application.DTOs.Home.Requests;
 using TomatoNovel.Application.DTOs.Home.Responses;
 using TomatoNovel.Application.Interfaces;
 using TomatoNovel.Domain.Interfaces;
-
-namespace TomatoNovel.Application.Services;
 
 public class HomeService : IHomeService
 {
@@ -16,7 +16,7 @@ public class HomeService : IHomeService
 
     public List<TopBookResponseDto> GetTopBooks()
     {
-        var data = homeRepository.GetTopBooks();
+        var data = this.homeRepository.GetTopBooks();
 
         return data.Select((b, index) => new TopBookResponseDto
         {
@@ -24,24 +24,24 @@ public class HomeService : IHomeService
             Title = b.Title,
             Desc = string.IsNullOrEmpty(b.Tags) ? "未知分类" : b.Tags.Split(',')[0],
             Pic = b.CoverUrl ?? string.Empty,
-            Path = $"/bookinfo/{b.Id}"
+            Path = $"/bookinfo/{b.Id}",
         }).ToList();
     }
 
     public List<NewsResponseDto> GetNewsList(NewsListRequestDto request)
     {
-        var data = homeRepository.GetNewsList(request.Limit);
+        var data = this.homeRepository.GetNewsList(request.Limit);
 
         return data.Select(n => new NewsResponseDto
         {
             Title = n.Title,
-            Path = $"/newsinfo/{n.Id}"
+            Path = $"/newsinfo/{n.Id}",
         }).ToList();
     }
 
     public List<WriterResponseDto> GetWriterList()
     {
-        var data = homeRepository.GetWriterList();
+        var data = this.homeRepository.GetWriterList();
 
         return data.Select(w => new WriterResponseDto
         {
@@ -49,13 +49,13 @@ public class HomeService : IHomeService
             Desc = w.Masterpiece ?? string.Empty,
             Type = w.AuthorLevel,
             Pic = w.LifePhoto ?? string.Empty,
-            Path = $"/writerinfo/{w.Id}"
+            Path = $"/writerinfo/{w.Id}",
         }).ToList();
     }
 
     public RecommendResponseDto GetRecommend()
     {
-        var (male, female) = homeRepository.GetRecommendBooks();
+        var (male, female) = this.homeRepository.GetRecommendBooks();
 
         return new RecommendResponseDto
         {
@@ -66,7 +66,7 @@ public class HomeService : IHomeService
                 Desc = b.Intro,
                 CoverUrl = b.CoverUrl ?? string.Empty,
                 AuthorNickname = b.AuthorNickname,
-                Path = $"/bookinfo/{b.Id}"
+                Path = $"/bookinfo/{b.Id}",
             }).ToList(),
 
             Female = female.Select(b => new BookResponseDto
@@ -77,16 +77,15 @@ public class HomeService : IHomeService
                 CoverUrl = b.CoverUrl ?? string.Empty,
                 AuthorNickname = b.AuthorNickname,
                 Path = $"/bookinfo/{b.Id}"
-            }).ToList()
+            }).ToList(),
         };
     }
 
     public BookRankingResponseDto GetRanking(RankingRequestDto request)
     {
-        var (hot, newest) = homeRepository.GetRanking(
+        var (hot, newest) = this.homeRepository.GetRanking(
             request.ReaderType,
-            request.PlotType
-        );
+            request.PlotType);
 
         return new BookRankingResponseDto
         {
@@ -100,7 +99,7 @@ public class HomeService : IHomeService
                 Desc = b.Intro,
                 Path = $"/bookinfo/{b.Id}",
                 Pic = b.CoverUrl ?? string.Empty,
-                Author = b.AuthorNickname
+                Author = b.AuthorNickname,
             }).ToList(),
 
             // 新书榜
@@ -112,14 +111,13 @@ public class HomeService : IHomeService
                 Path = $"/bookinfo/{b.Id}",
                 Pic = b.CoverUrl ?? string.Empty,
                 Author = b.AuthorNickname
-            }).ToList()
+            }).ToList(),
         };
     }
 
-
     public List<RecentUpdateResponseDto> GetRecentUpdates()
     {
-        var data = homeRepository.GetRecentUpdates(10);
+        var data = this.homeRepository.GetRecentUpdates(10);
 
         return data.Select(d => new RecentUpdateResponseDto
         {
@@ -128,7 +126,7 @@ public class HomeService : IHomeService
             Path = $"/bookinfo/{d.BookId}",
             Chapter = d.ChapterTitle,
             Author = d.AuthorNickname,
-            Time = d.UpdatedAt.ToString("yyyy-MM-dd HH:mm")
+            Time = d.UpdatedAt.ToString("yyyy-MM-dd HH:mm"),
         }).ToList();
     }
 }

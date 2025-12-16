@@ -1,7 +1,7 @@
-﻿using TomatoNovel.Application.DTOs.Home.Requests;
-using TomatoNovel.Application.DTOs.Home.Responses;
+﻿namespace TomatoNovel.Application.Interfaces;
 
-namespace TomatoNovel.Application.Interfaces;
+using TomatoNovel.Application.DTOs.Home.Requests;
+using TomatoNovel.Application.DTOs.Home.Responses;
 
 public interface IHomeService
 {

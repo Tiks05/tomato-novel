@@ -174,10 +174,12 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICommonService, CommonService>();
 builder.Services.AddScoped<IHomeService, HomeService>();
+builder.Services.AddScoped<ILayoutService, LayoutService>();
 
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<ICommonRepository, CommonRepository>();
 builder.Services.AddScoped<IHomeRepository, HomeRepository>();
+builder.Services.AddScoped<ILayoutRepository, LayoutRepository>();
 
 builder.Services.AddScoped<IOpenIddictTokenService, OpenIddictTokenService>();
 

@@ -187,11 +187,11 @@ const Sort = () => {
             ))}
           </Swiper>
 
-        {/* 上一页按钮 */}
-        <div className={`swiper-button-prev ${isBeginning ? 'swiper-button-disabled' : ''}`} onClick={slidePrev} />
+          {/* 上一页按钮 */}
+          <div className={`swiper-button-prev ${isBeginning ? 'swiper-button-disabled' : ''}`} onClick={slidePrev} />
 
-        {/* 下一页按钮 */}
-        <div className={`swiper-button-next ${isEnd ? 'swiper-button-disabled' : ''}`} onClick={slideNext} />
+          {/* 下一页按钮 */}
+          <div className={`swiper-button-next ${isEnd ? 'swiper-button-disabled' : ''}`} onClick={slideNext} />
         </div>
       </div>
     </div>

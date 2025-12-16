@@ -27,7 +27,6 @@ public class ClassroomConfiguration : IEntityTypeConfiguration<Classroom>
         // =========================
         // Properties
         // =========================
-
         builder.Property(c => c.Title)
                .HasColumnName("title")
                .HasMaxLength(255)
@@ -60,7 +59,6 @@ public class ClassroomConfiguration : IEntityTypeConfiguration<Classroom>
         // =========================
         // Indexes（可选）
         // =========================
-
         builder.HasIndex(c => c.CategoryType);
         builder.HasIndex(c => c.CreateAt);
 

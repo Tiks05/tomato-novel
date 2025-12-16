@@ -48,13 +48,13 @@ public class CommonService : ICommonService
             {
                 BannerUrl = record.BannerUrl ?? string.Empty,
                 Path = $"/classroom/{record.Id}"
-            }).ToList()
+            }).ToList(),
         };
     }
 
     public AdaptListResponseDto GetAdaptList(AdaptListRequestDto request)
     {
-        var data = commonRepository.GetAdaptBooks(request.Limit);
+        var data = this.commonRepository.GetAdaptBooks(request.Limit);
 
         return new AdaptListResponseDto
         {
@@ -63,7 +63,7 @@ public class CommonService : ICommonService
                 Id = b.Id,
                 Pic = b.CoverUrl ?? string.Empty,
                 Path = $"/bookinfo/{b.Id}"
-            }).ToList()
+            }).ToList(),
         };
     }
 }

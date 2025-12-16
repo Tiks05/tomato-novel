@@ -27,7 +27,6 @@ public class NewsConfiguration : IEntityTypeConfiguration<News>
         // =========================
         // Properties
         // =========================
-
         builder.Property(n => n.Title)
                .HasColumnName("title")
                .HasMaxLength(255)
@@ -74,7 +73,6 @@ public class NewsConfiguration : IEntityTypeConfiguration<News>
         // =========================
         // Indexes (optional but common)
         // =========================
-
         builder.HasIndex(n => n.Type);
         builder.HasIndex(n => n.IsBanner);
         builder.HasIndex(n => n.IsNotice);

@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace TomatoNovel.Domain.Entities;
 
-namespace TomatoNovel.Domain.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
 /// <summary>
 /// Represents a news or announcement entry.

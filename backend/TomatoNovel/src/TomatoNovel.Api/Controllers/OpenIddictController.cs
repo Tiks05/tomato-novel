@@ -29,7 +29,7 @@ public class OpenIddictController : ControllerBase
     /// OAuth2 / OpenID Connect token endpoint.
     /// ⚠️ 注意：不做密码校验，只做 Token 颁发.
     /// </summary>
-    /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     [HttpPost("~/connect/token")]
     [AllowAnonymous]
     [Consumes("application/x-www-form-urlencoded")]

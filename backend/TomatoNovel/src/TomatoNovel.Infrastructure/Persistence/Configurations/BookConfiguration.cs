@@ -34,7 +34,6 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
         // =========================
         // Properties
         // =========================
-
         builder.Property(b => b.Title)
                .HasColumnName("title")
                .HasMaxLength(255)
@@ -95,7 +94,6 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
         // =========================
         // Time fields
         // =========================
-
         builder.Property(b => b.CreatedAt)
                .HasColumnName("created_at")
                .HasColumnType("datetime");
@@ -107,7 +105,6 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
         // =========================
         // Indexes（可选但常用）
         // =========================
-
         builder.HasIndex(b => b.UserId);
         builder.HasIndex(b => b.ReaderType);
         builder.HasIndex(b => b.Status);

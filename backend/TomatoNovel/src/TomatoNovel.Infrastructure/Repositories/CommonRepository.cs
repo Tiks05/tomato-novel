@@ -1,8 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿namespace TomatoNovel.Infrastructure.Repositories;
+
 using TomatoNovel.Domain.Interfaces;
 using TomatoNovel.Infrastructure.Persistence;
-
-namespace TomatoNovel.Infrastructure.Repositories;
 
 public class CommonRepository : ICommonRepository
 {
@@ -16,6 +15,7 @@ public class CommonRepository : ICommonRepository
     /// <summary>
     /// Gets banner news records for homepage display.
     /// </summary>
+    /// <returns></returns>
     public List<(int Id, string? BannerUrl)> GetBannerNews(int limit)
     {
         return this.db.News
@@ -24,10 +24,10 @@ public class CommonRepository : ICommonRepository
             .Select(n => new
             {
                 n.Id,
-                n.BannerUrl
+                n.BannerUrl,
             })
             .Take(limit)
-            .AsEnumerable()          // ← 关键改动
+            .AsEnumerable() // ← 关键改动
             .Select(x => (x.Id, x.BannerUrl))
             .ToList();
     }
@@ -35,7 +35,7 @@ public class CommonRepository : ICommonRepository
     // ---------------- Adapt ----------------
     public List<(int Id, string? CoverUrl)> GetAdaptBooks(int? limit)
     {
-        return db.Books
+        return this.db.Books
             .Take(limit ?? 10)
             .Select(b => new { b.Id, b.CoverUrl })
             .AsEnumerable()

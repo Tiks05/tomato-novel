@@ -34,7 +34,6 @@ public class VolumeConfiguration : IEntityTypeConfiguration<Volume>
         // =========================
         // Properties
         // =========================
-
         builder.Property(v => v.Title)
                .HasColumnName("title")
                .HasMaxLength(255)
@@ -47,7 +46,6 @@ public class VolumeConfiguration : IEntityTypeConfiguration<Volume>
         // =========================
         // Time fields
         // =========================
-
         builder.Property(v => v.CreatedAt)
                .HasColumnName("created_at")
                .HasColumnType("datetime");
@@ -55,7 +53,6 @@ public class VolumeConfiguration : IEntityTypeConfiguration<Volume>
         // =========================
         // Indexes（常用）
         // =========================
-
         builder.HasIndex(v => v.BookId);
         builder.HasIndex(v => new { v.BookId, v.Sort });
 

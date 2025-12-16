@@ -34,7 +34,6 @@ public class ChapterConfiguration : IEntityTypeConfiguration<Chapter>
         // =========================
         // Properties
         // =========================
-
         builder.Property(c => c.ChapterNum)
                .HasColumnName("chapter_num")
                .IsRequired();
@@ -61,7 +60,6 @@ public class ChapterConfiguration : IEntityTypeConfiguration<Chapter>
         // =========================
         // Time fields
         // =========================
-
         builder.Property(c => c.CreatedAt)
                .HasColumnName("created_at")
                .HasColumnType("datetime");
@@ -73,7 +71,6 @@ public class ChapterConfiguration : IEntityTypeConfiguration<Chapter>
         // =========================
         // Indexes（常用）
         // =========================
-
         builder.HasIndex(c => c.VolumeId);
         builder.HasIndex(c => new { c.VolumeId, c.ChapterNum })
                .IsUnique();

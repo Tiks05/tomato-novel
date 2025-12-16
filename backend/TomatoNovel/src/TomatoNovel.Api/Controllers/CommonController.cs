@@ -19,8 +19,9 @@ public class CommonController : ControllerBase
     }
 
     /// <summary>
-    /// 获取 Banner 列表
+    /// 获取 Banner 列表.
     /// </summary>
+    /// <returns></returns>
     [HttpGet("banner-list")]
     [AllowAnonymous]
     [ProducesResponseType(
@@ -31,11 +32,11 @@ public class CommonController : ControllerBase
         try
         {
             var response = this.commonService.GetBannerList(request);
-            return Ok(ApiResponse<BannerListResponseDto>.Success(response));
+            return this.Ok(ApiResponse<BannerListResponseDto>.Success(response));
         }
         catch (Exception ex)
         {
-            return Ok(ApiResponse<object>.Fail(
+            return this.Ok(ApiResponse<object>.Fail(
                 40010,
                 ex.Message));
         }
@@ -45,7 +46,7 @@ public class CommonController : ControllerBase
     [AllowAnonymous]
     public IActionResult GetAdaptList([FromQuery] AdaptListRequestDto request)
     {
-        var result = commonService.GetAdaptList(request);
-        return Ok(ApiResponse<AdaptListResponseDto>.Success(result));
+        var result = this.commonService.GetAdaptList(request);
+        return this.Ok(ApiResponse<AdaptListResponseDto>.Success(result));
     }
 }

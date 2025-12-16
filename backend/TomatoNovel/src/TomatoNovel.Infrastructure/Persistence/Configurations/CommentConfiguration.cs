@@ -27,7 +27,6 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
         // =========================
         // Foreign Keys
         // =========================
-
         builder.Property(c => c.UserId)
                .HasColumnName("user_id")
                .IsRequired();
@@ -45,7 +44,6 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
         // =========================
         // Properties
         // =========================
-
         builder.Property(c => c.Content)
                .HasColumnName("content")
                .HasColumnType("text")
@@ -58,7 +56,6 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
         // =========================
         // Time fields
         // =========================
-
         builder.Property(c => c.CreatedAt)
                .HasColumnName("created_at")
                .HasColumnType("datetime");
@@ -66,7 +63,6 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
         // =========================
         // Indexes（常用）
         // =========================
-
         builder.HasIndex(c => c.BookId);
         builder.HasIndex(c => c.UserId);
         builder.HasIndex(c => c.ParentId);
@@ -97,7 +93,6 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
         // =========================
         // Self-reference（父评论 → 子评论）
         // =========================
-
         builder.HasOne(c => c.Parent)
                .WithMany(p => p.Replies)
                .HasForeignKey(c => c.ParentId)

@@ -6,7 +6,6 @@ import type { BannerListRequest } from '@/types/common/requests/banner-list-requ
 import type { AdaptListResponse } from '@/types/common/responses/adapt-list-response.types'
 import type { BannerItemResponse } from '@/types/common/responses/banner-item-response.types'
 
-
 export function getBannerList(params: BannerListRequest) {
   return request.get<BannerItemResponse>('/common/banner-list', { params })
 }
