@@ -12,8 +12,8 @@ using TomatoNovel.Infrastructure.Persistence;
 namespace TomatoNovel.Infrastructure.Migrations
 {
     [DbContext(typeof(TomatoNovelDbContext))]
-    [Migration("20251214053457_InitOpenIddict")]
-    partial class InitOpenIddict
+    [Migration("20251223020335_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -237,79 +237,103 @@ namespace TomatoNovel.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CoverUrl")
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("cover_url");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("created_at");
 
                     b.Property<int>("FavoriteCount")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasDefaultValue(0)
+                        .HasColumnName("favorite_count");
 
                     b.Property<string>("Hero")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)");
+                        .HasColumnType("varchar(64)")
+                        .HasColumnName("hero");
 
                     b.Property<string>("Intro")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("intro");
 
                     b.Property<string>("PlotType")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)");
+                        .HasColumnType("varchar(64)")
+                        .HasColumnName("plot_type");
 
                     b.Property<string>("ReaderType")
                         .HasMaxLength(8)
-                        .HasColumnType("varchar(8)");
+                        .HasColumnType("varchar(8)")
+                        .HasColumnName("reader_type");
 
                     b.Property<string>("RoleType")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)");
+                        .HasColumnType("varchar(64)")
+                        .HasColumnName("role_type");
 
                     b.Property<string>("SignStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(16)
                         .HasColumnType("varchar(16)")
-                        .HasDefaultValue("Unsigned");
+                        .HasDefaultValue("Unsigned")
+                        .HasColumnName("sign_status");
 
                     b.Property<string>("Status")
                         .HasMaxLength(16)
-                        .HasColumnType("varchar(16)");
+                        .HasColumnType("varchar(16)")
+                        .HasColumnName("status");
 
                     b.Property<string>("Tags")
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("tags");
 
                     b.Property<string>("ThemeType")
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)");
+                        .HasColumnType("varchar(64)")
+                        .HasColumnName("theme_type");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("title");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("updated_at");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("user_id");
 
                     b.Property<int?>("WordCount")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("word_count");
 
                     b.Property<string>("WordCountRange")
                         .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(20)")
+                        .HasColumnName("word_count_range");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedAt");
+
+                    b.HasIndex("ReaderType");
+
+                    b.HasIndex("Status");
 
                     b.HasIndex("UserId");
 
@@ -320,44 +344,56 @@ namespace TomatoNovel.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ChapterNum")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("chapter_num");
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("content");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("created_at");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)")
-                        .HasDefaultValue("published");
+                        .HasDefaultValue("published")
+                        .HasColumnName("status");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("title");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("updated_at");
 
                     b.Property<int>("VolumeId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("volume_id");
 
                     b.Property<int?>("WordCount")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("word_count");
 
                     b.HasKey("Id");
 
                     b.HasIndex("VolumeId");
+
+                    b.HasIndex("VolumeId", "ChapterNum")
+                        .IsUnique();
 
                     b.ToTable("chapter", (string)null);
                 });
@@ -366,39 +402,51 @@ namespace TomatoNovel.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CategoryType")
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("category_type");
 
                     b.Property<string>("Content")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("content");
 
                     b.Property<string>("CoverUrl")
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("cover_url");
 
                     b.Property<DateTime>("CreateAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("create_at");
 
                     b.Property<string>("Intro")
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("intro");
 
                     b.Property<bool>("IsIncludeVideo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_include_video");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("title");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryType");
+
+                    b.HasIndex("CreateAt");
 
                     b.ToTable("classroom", (string)null);
                 });
@@ -407,37 +455,47 @@ namespace TomatoNovel.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BookId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("book_id");
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("content");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("created_at");
 
                     b.Property<int?>("Likes")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasDefaultValue(0)
+                        .HasColumnName("likes");
 
                     b.Property<int?>("ParentId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("parent_id");
 
                     b.Property<int?>("ReplyToUserId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("reply_to_user_id");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BookId");
+
+                    b.HasIndex("CreatedAt");
 
                     b.HasIndex("ParentId");
 
@@ -452,22 +510,28 @@ namespace TomatoNovel.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BookId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("book_id");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("created_at");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BookId");
+
+                    b.HasIndex("UserId");
 
                     b.HasIndex("UserId", "BookId")
                         .IsUnique()
@@ -480,22 +544,28 @@ namespace TomatoNovel.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("created_at");
 
                     b.Property<int>("FollowedId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("followed_id");
 
                     b.Property<int>("FollowerId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("follower_id");
 
                     b.HasKey("Id");
 
                     b.HasIndex("FollowedId");
+
+                    b.HasIndex("FollowerId");
 
                     b.HasIndex("FollowerId", "FollowedId")
                         .IsUnique()
@@ -508,54 +578,73 @@ namespace TomatoNovel.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("BannerUrl")
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("banner_url");
 
                     b.Property<string>("Content")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("content");
 
                     b.Property<string>("CoverUrl")
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("cover_url");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("created_at");
 
                     b.Property<bool>("IsBanner")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_banner");
 
                     b.Property<bool>("IsNotice")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_notice");
 
                     b.Property<string>("NoticeUrl")
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("notice_url");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("title");
 
                     b.Property<string>("Type")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(16)
                         .HasColumnType("varchar(16)")
-                        .HasDefaultValue("notice");
+                        .HasDefaultValue("notice")
+                        .HasColumnName("type");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedAt");
+
+                    b.HasIndex("IsBanner");
+
+                    b.HasIndex("IsNotice");
+
+                    b.HasIndex("Type");
 
                     b.ToTable("news", (string)null);
                 });
@@ -641,29 +730,36 @@ namespace TomatoNovel.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BookId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("book_id");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime")
+                        .HasColumnName("created_at");
 
                     b.Property<int>("Sort")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasDefaultValue(0)
+                        .HasColumnName("sort");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("title");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BookId");
+
+                    b.HasIndex("BookId", "Sort");
 
                     b.ToTable("volume", (string)null);
                 });

@@ -3,7 +3,6 @@
 using TomatoNovel.Domain.Entities;
 using TomatoNovel.Domain.Interfaces;
 using TomatoNovel.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
 
 public class WriterRepository : IWriterRepository
 {

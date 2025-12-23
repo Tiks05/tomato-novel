@@ -1,7 +1,4 @@
 import { useEffect, useState } from 'react'
-
-import {} from '@/api/library.api'
-
 import styles from './TypeList.module.scss'
 
 const TypeList = ({ onUpdateFilters }: any) => {
@@ -127,21 +124,38 @@ const TypeList = ({ onUpdateFilters }: any) => {
     ],
   }
 
-  const [readersid, setReadersId] = useState(0)
+  /* ======================
+     state（唯一事实源）
+  ====================== */
+
+  const [readersId, setReadersId] = useState(0)
   const [readerType, setReaderType] = useState('')
+
   const [categoryGroup, setCategoryGroup] = useState('')
   const [categoryType, setCategoryType] = useState('')
   const [classifyChild, setClassifyChild] = useState<any[]>([])
+
   const [status, setStatus] = useState('')
   const [wordCountRange, setWordCountRange] = useState('')
 
+  /* ======================
+     初始化：默认选中第一个分类的第一个子项
+  ====================== */
+
   useEffect(() => {
-    changeClassify(typelist.classify[0])
-    emitFilters()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const firstClassify = typelist.classify[0]
+    const children = firstClassify.child || []
+
+    setCategoryGroup(firstClassify.group || '')
+    setClassifyChild(children)
+    setCategoryType(children.length > 0 ? children[0].title : '')
   }, [])
 
-  const emitFilters = () => {
+  /* ======================
+     统一 emit（唯一出口）
+  ====================== */
+
+  useEffect(() => {
     onUpdateFilters({
       reader_type: readerType,
       category_group: categoryGroup,
@@ -149,46 +163,51 @@ const TypeList = ({ onUpdateFilters }: any) => {
       status,
       word_count_range: wordCountRange,
     })
-  }
+  }, [readerType, categoryGroup, categoryType, status, wordCountRange])
+
+  /* ======================
+     事件：只改 state
+  ====================== */
 
   const changeReaders = (item: any) => {
     setReadersId(item.id)
     setReaderType(item.title === '全部' ? '' : item.title)
-    emitFilters()
   }
 
   const changeClassify = (item: any) => {
+    const children = item.child || []
+
     setCategoryGroup(item.group || '')
-    setClassifyChild(item.child || [])
-    setCategoryType(item.child?.[0]?.title ?? '')
-    emitFilters()
+    setClassifyChild(children)
+    setCategoryType(children.length > 0 ? children[0].title : '')
   }
 
   const changeChild = (item: any) => {
-    setCategoryType(item.title === '全部' ? '' : item.title)
-    emitFilters()
+    setCategoryType(item.title)
   }
 
   const changeStatus = (item: any) => {
     setStatus(item.title === '全部' ? '' : item.title)
-    emitFilters()
   }
 
   const changeWords = (item: any) => {
     setWordCountRange(item.title === '全部' ? '' : item.title)
-    emitFilters()
   }
+
+  /* ======================
+     render
+  ====================== */
 
   return (
     <div className={styles['library-typelist']}>
-      {/* 读者频道 */}
+      {/* 读者 */}
       <div className={styles.filter}>
         <div className={styles['filter-title']}>读者：</div>
         <div className={styles['filter-list']}>
           {typelist.readers.map(item => (
             <div
               key={item.id}
-              className={`${styles['filter-item']} ${readersid === item.id ? styles.on : ''}`}
+              className={`${styles['filter-item']} ${readersId === item.id ? styles.on : ''}`}
               onClick={() => changeReaders(item)}
             >
               {item.title}
@@ -217,9 +236,7 @@ const TypeList = ({ onUpdateFilters }: any) => {
             {classifyChild.map(item => (
               <div
                 key={item.id}
-                className={`${styles['child-item']} ${
-                  categoryType === item.title || (categoryType === '' && item.title === '全部') ? styles.on : ''
-                }`}
+                className={`${styles['child-item']} ${categoryType === item.title ? styles.on : ''}`}
                 onClick={() => changeChild(item)}
               >
                 <img src={item.pic} className={styles['child-icon']} />

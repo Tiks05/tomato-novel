@@ -1,0 +1,160 @@
+/* ===== 外层 ===== */
+.homeBookContainer {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+}
+
+.serialCard {
+  width: 100%;
+}
+
+/* ===== header ===== */
+.homeBookHeader {
+  width: 100%;
+  height: 32px;
+  line-height: 32px;
+}
+
+.headerTab {
+  color: #0006;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 20px;
+  margin: 0 14px;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+}
+
+.active {
+  color: #000;
+  font-weight: 500;
+}
+
+.headerLabel {
+  float: right;
+  font-size: 14px;
+  color: #999;
+  cursor: pointer;
+}
+
+/* ===== 月选择 ===== */
+.choseTime {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  :global(.ant-picker) {
+    width: 150px;
+  }
+}
+
+/* ===== 下拉书籍 ===== */
+.downBtn {
+  width: 110px;
+  height: 36px;
+  line-height: 36px;
+  font-size: 14px;
+  cursor: pointer;
+  position: relative;
+
+  img {
+    width: 12px;
+    position: absolute;
+    right: 0;
+    top: 12px;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover img {
+    transform: rotate(180deg);
+  }
+
+  &:hover .downLink {
+    display: block;
+  }
+}
+
+.downLink {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  display: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.08);
+
+  em {
+    display: block;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    font-style: normal;
+    background-color: #fff;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.03);
+    }
+  }
+}
+
+/* ===== 日历整体 ===== */
+.calendarCon {
+  margin-top: 10px;
+
+  /* 去 header */
+  :global(.ant-picker-calendar-header) {
+    display: none !important;
+  }
+
+  /* 去默认边框 */
+  :global(.ant-picker-calendar-date) {
+    border: none !important;
+    background: transparent !important;
+  }
+
+  /* 去默认选中 */
+  :global(.ant-picker-cell-selected),
+  :global(.ant-picker-cell:hover) {
+    background: transparent !important;
+  }
+
+  /* 星期栏 */
+  :global(.ant-picker-calendar thead th) {
+    font-weight: normal;
+    color: #666;
+  }
+}
+
+/* ===== 日期单元 ===== */
+.dateCell {
+  width: 100%;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+}
+
+/* 选中日期（矩形浅橙） */
+.selected {
+  background-color: #fff3e8;
+  color: #ff6a00;
+  border-radius: 4px;
+}
+
+/* 非当前月 */
+.disabled {
+  color: #bbb;
+}
+
+/* ===== 修复：隐藏多余的第 6 周 ===== */
+.calendarCon {
+  :global(.ant-picker-calendar tbody tr:nth-child(6)) {
+    display: none;
+  }
+}

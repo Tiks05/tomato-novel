@@ -23,6 +23,7 @@ interface UserState {
 
   // ---------- Actions ----------
   setUser: (data: LoginOrRegisterResponse) => void
+  updateUser: (partial: Partial<UserInfo>) => void
   logout: () => void
 }
 
@@ -56,10 +57,31 @@ export const useUserStore = create<UserState>()(
       authToken: () => get().accessToken,
 
       // ---------- Actions ----------
+
+      /**
+       * 用于：登录 / 注册 / 刷新 token
+       * 会整体替换 user + accessToken
+       */
       setUser: data => {
         set({
           user: data.user,
           accessToken: data.access_token,
+        })
+      },
+
+      /**
+       * 用于：申请作家 / 修改资料 / 更新头像等
+       * 只更新 user 的部分字段，不影响 token
+       */
+      updateUser: partial => {
+        const currentUser = get().user
+        if (!currentUser) return
+
+        set({
+          user: {
+            ...currentUser,
+            ...partial,
+          },
         })
       },
 

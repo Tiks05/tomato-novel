@@ -27,7 +27,6 @@ public class TomatoNovelDbContextFactory
             connectionString,
             ServerVersion.AutoDetect(connectionString));
 
-        // 🔥 关键：启用 OpenIddict EF Core
         optionsBuilder.UseOpenIddict();
 
         return new TomatoNovelDbContext(optionsBuilder.Options);

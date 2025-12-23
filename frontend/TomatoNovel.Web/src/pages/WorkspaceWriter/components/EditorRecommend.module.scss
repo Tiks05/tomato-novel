@@ -1,0 +1,114 @@
+.homeActivity {
+  background: #fff;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 10px;
+}
+
+.homeActivityTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h4 {
+    font-size: 20px;
+    font-weight: normal;
+  }
+}
+
+.more {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: #999;
+  cursor: pointer;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Swiper */
+.editorSwiper {
+  margin-top: 6px;
+  background: rgba(0, 0, 0, 0.02);
+  padding: 20px;
+  border-radius: 12px;
+
+  :global(.swiper-wrapper) {
+    height: 150px;
+  }
+
+  :global(.swiper-slide) {
+    height: 150px; /* ✅ 高度必须在这里 */
+  }
+
+  :global(.swiper-pagination) {
+    bottom: -6px !important;
+  }
+
+  :global(.swiper-pagination-bullet) {
+    width: 12px;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 1;
+    border-radius: 0;
+  }
+
+  :global(.swiper-pagination-bullet-active) {
+    background: rgba(0, 0, 0, 0.9);
+  }
+}
+
+.slideContent {
+  height: 100%;
+}
+
+/* 三段文字 */
+.title {
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.desc {
+  margin-top: 8px;
+  height: 45px;
+  font-size: 14px;
+  color: #999;
+  line-height: 22px;
+  overflow: hidden;
+}
+
+.mass {
+  margin-top: 10px;
+  height: 46px;
+  line-height: 46px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  padding-left: 32px;
+  padding-right: 10px;
+  position: relative;
+
+  p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.pic {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  img {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+  }
+}

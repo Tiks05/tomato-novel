@@ -20,7 +20,7 @@ const Classroom = () => {
 
   const loadClassroomData = async (index = activeIndex) => {
     const category = stypelist[index]
-    const res = await fetchClassroomList({category_type: category,})
+    const res = await fetchClassroomList({ category_type: category })
 
     setClasslist(Array.isArray(res) ? res : [])
   }

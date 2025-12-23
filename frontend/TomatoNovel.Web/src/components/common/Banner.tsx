@@ -22,7 +22,7 @@ export default function Banner() {
   const fetchBannerList = async () => {
     // request.ts 已经解包 data
     const res = await getBannerList({ limit: 5 })
-    setBannerList(res || [])
+    setBannerList(res.items)
   }
 
   const handleSwiper = (swiper: any) => {

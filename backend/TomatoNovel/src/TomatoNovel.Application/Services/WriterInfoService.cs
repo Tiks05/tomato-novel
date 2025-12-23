@@ -33,7 +33,7 @@ public class WriterInfoService : IWriterInfoService
                 Intro = author.Signature ?? string.Empty,
                 BecomeAuthorAt = author.BecomeAuthorAt?.ToString("O") ?? string.Empty,
                 TotalWords = totalWords,
-                FollowerCount = 0 // 预留：后续从 Follow 表统计
+                FollowerCount = 0, // 预留：后续从 Follow 表统计
             },
         };
     }

@@ -32,6 +32,7 @@ public class AuthRepository : IAuthRepository
             Role = "user",
             Nickname = nickname,
             Avatar = avatar,
+            Level = 1,
         };
 
         this.db.Users.Add(user);

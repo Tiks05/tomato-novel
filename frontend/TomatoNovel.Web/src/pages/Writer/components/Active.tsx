@@ -14,7 +14,7 @@ const Active = () => {
   const { goTo } = useGoTo()
   const userStore = useUserStore()
 
-  // ✅ 关键：显式声明 state 泛型，避免 never[]
+  // 显式声明 state 泛型，避免 never[]
   const [noticelist, setNoticelist] = useState<{
     picnotice: WriterPicNoticeResponse[]
     notice: WriterNoticeResponse[]
@@ -55,7 +55,7 @@ const Active = () => {
 
   const greetingDescHtml = useMemo(() => {
     if (userStore.isLogin() && userStore.isAuthor()) {
-      return `今天是你在番茄创作的第 <b class="highlight">${userStore.daysAsAuthor}</b> 天`
+      return `今天是你在番茄创作的第 <b class="highlight">${userStore.daysAsAuthor()}</b> 天`
     }
     return '欢迎成为番茄作家'
   }, [userStore])
@@ -104,7 +104,7 @@ const Active = () => {
           {userStore.isLogin() && (
             <span
               className={styles.btn1}
-              onClick={() => goTo(userStore.isAuthor() ? '/workspace/writer' : '/workspace')}
+              onClick={() => goTo(userStore.isAuthor() ? '/workspace/writer' : '/workspace/apply')}
             >
               工作台
             </span>

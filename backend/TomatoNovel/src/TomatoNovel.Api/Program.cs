@@ -179,6 +179,7 @@ builder.Services.AddScoped<ILibraryService, LibraryService>();
 builder.Services.AddScoped<IBookInfoService, BookInfoService>();
 builder.Services.AddScoped<IWriterInfoService, WriterInfoService>();
 builder.Services.AddScoped<IWriterService, WriterService>();
+builder.Services.AddScoped<IWorkspaceService, WorkspaceService>();
 
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<ICommonRepository, CommonRepository>();
@@ -188,6 +189,7 @@ builder.Services.AddScoped<ILibraryRepository, LibraryRepository>();
 builder.Services.AddScoped<IBookInfoRepository, BookInfoRepository>();
 builder.Services.AddScoped<IWriterInfoRepository, WriterInfoRepository>();
 builder.Services.AddScoped<IWriterRepository, WriterRepository>();
+builder.Services.AddScoped<IWorkspaceRepository, WorkspaceRepository>();
 
 builder.Services.AddScoped<IOpenIddictTokenService, OpenIddictTokenService>();
 
@@ -224,7 +226,7 @@ app.UseAuthorization();
 // -----------------------------------------------------------------------------
 // Endpoints
 // -----------------------------------------------------------------------------
-// app.UseExceptionMiddleware();
+app.UseExceptionMiddleware();
 
 app.UseEndpoints(endpoints =>
 {

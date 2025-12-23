@@ -83,7 +83,7 @@ public class Book
     /// <summary>
     /// Gets or sets the sign status, such as unsigned or signed.
     /// </summary>
-    public string SignStatus { get; set; } = "Unsigned";
+    public string SignStatus { get; set; } = "未签约";
 
     /// <summary>
     /// Gets or sets the creation timestamp.

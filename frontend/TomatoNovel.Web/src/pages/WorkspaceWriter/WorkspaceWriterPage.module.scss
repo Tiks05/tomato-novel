@@ -1,0 +1,101 @@
+.h64 {
+  height: 64px;
+}
+
+.index_wrapper {
+  width: 1240px;
+  margin: auto;
+}
+
+.AuthorWork_left {
+  position: fixed;
+  left: 50%;
+  width: 238px;
+  top: 80px;
+  bottom: 20px;
+  margin-left: -620px;
+}
+
+.left_con {
+  background-color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.tit {
+  position: relative;
+  height: 44px;
+  line-height: 44px;
+  padding-left: 60px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f6f6f6;
+  }
+}
+
+.on {
+  background-color: #ff5f000a;
+  color: #ff5f00;
+}
+
+.icon img {
+  position: absolute;
+  left: 26px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+}
+
+.img2 {
+  display: none;
+}
+
+.on .img2 {
+  display: block;
+}
+
+.on .img1 {
+  display: none;
+}
+
+.rr {
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  img {
+    width: 12px;
+  }
+}
+
+.rr.on img {
+  transform: rotate(180deg);
+}
+
+.down {
+  max-height: 0;
+  overflow: hidden;
+}
+
+.down.open {
+  max-height: 500px;
+}
+
+.nav {
+  padding-left: 60px;
+  height: 44px;
+  line-height: 44px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f6f6f6;
+  }
+}
+
+/* 整个作家工作台页面背景 */
+.pageBg {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}

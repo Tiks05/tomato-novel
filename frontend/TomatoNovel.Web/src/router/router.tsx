@@ -8,6 +8,7 @@ import { layoutRoutes } from './routes/layout.routes'
 import { notFoundRoutes } from './routes/not-found.routes'
 import { bookInfoRoutes } from './routes/book-info.routes'
 import { writerInfoRoutes } from './routes/writer-info.routes'
+import { workspaceRoutes } from './routes/workspace.routes'
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       ...layoutRoutes,
       ...bookInfoRoutes,
       ...writerInfoRoutes,
+      ...workspaceRoutes,
     ],
   },
 ])

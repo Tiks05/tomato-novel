@@ -18,8 +18,9 @@ public class WriterController : ControllerBase
     }
 
     /// <summary>
-    /// 获取作家资讯列表
+    /// 获取作家资讯列表.
     /// </summary>
+    /// <returns></returns>
     [HttpGet("news")]
     [AllowAnonymous]
     public IActionResult GetNewsList([FromQuery] WriterNewsQueryRequestDto request)
@@ -29,8 +30,9 @@ public class WriterController : ControllerBase
     }
 
     /// <summary>
-    /// 获取作家课堂列表
+    /// 获取作家课堂列表.
     /// </summary>
+    /// <returns></returns>
     [HttpGet("classroom")]
     [AllowAnonymous]
     public IActionResult GetClassroomList(

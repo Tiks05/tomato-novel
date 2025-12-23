@@ -50,19 +50,9 @@ function deepMap(obj: any, keyMapper: (k: string) => string): any {
 /**
  * 后端 → 前端
  * PascalCase → snake_case
- *
- * ⭐ 关键点：
- * 1. 只处理 body.data
- * 2. 自动摊平 { items: [] }，避免 bannerList.map 报错
  */
 export function mapResponse<T = any>(data: T): T {
   const mapped = deepMap(data, pascalToSnake)
-
-  // 🔑 自动处理列表响应：{ items: [...] } → [...]
-  if (mapped && typeof mapped === 'object' && 'items' in mapped && Array.isArray((mapped as any).items)) {
-    return (mapped as any).items
-  }
-
   return mapped
 }
 

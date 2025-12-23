@@ -1,0 +1,371 @@
+/* ===================== 根容器 ===================== */
+.tower_con {
+  margin-left: 250px;
+  padding-top: 15px;
+}
+
+.serial_card {
+  padding: 32px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+/* ===================== 顶部信息 ===================== */
+.book_info_container {
+  .book_info_header_back {
+    display: flex;
+    align-items: center;
+    color: var(--color_gray_100, #000);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 32px;
+    margin-bottom: 12px;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--color_brand, #ff5f00);
+    }
+
+    .icon_left {
+      font-size: 24px;
+      margin-right: 8px;
+    }
+  }
+
+  .book_info_tabs {
+    display: flex;
+    padding: 32px 0 12px;
+  }
+
+  .book_info_tabs_item {
+    color: var(--color_gray_40, #0006);
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 26px;
+
+    &:not(:last-of-type) {
+      margin-right: 40px;
+    }
+
+    &.tab_active {
+      color: var(--color_gray_100, #000);
+      font-weight: 500;
+    }
+  }
+}
+
+/* ===================== 强制清除 Arco Tabs 默认 padding ===================== */
+:global(.arco-tabs-content) {
+  padding: 0 !important;
+}
+
+:global(.arco-tabs-pane) {
+  padding: 0 !important;
+}
+
+/* ===================== 作品详情 - noveledit 布局 ===================== */
+.noveledit {
+  margin-top: 30px;
+  padding-left: 152px;
+  position: relative;
+
+  .pic {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 116px;
+    text-align: center;
+
+    img {
+      width: 116px;
+      height: 156px;
+      border-radius: 5px;
+      object-fit: cover;
+    }
+  }
+
+  .item {
+    margin-bottom: 30px;
+    padding-left: 116px;
+    position: relative;
+  }
+
+  .span {
+    position: absolute;
+    left: 0;
+    top: 11px;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .txt {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    line-height: 40px;
+    color: #000;
+  }
+
+  textarea.txt {
+    height: 170px;
+    padding: 12px;
+    resize: none;
+    font-family: '微软雅黑', sans-serif;
+    line-height: 1.6;
+  }
+
+  .btn {
+    text-align: right;
+    margin-top: 40px;
+
+    span {
+      display: inline-block;
+      width: 96px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      font-size: 14px;
+      margin-left: 20px;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+
+    .btn1 {
+      background-color: #ddd;
+      color: #333;
+
+      &:hover {
+        background-color: #ccc;
+      }
+    }
+
+    .btn2 {
+      color: #fff;
+      background: linear-gradient(96deg, #ff9a62, #ff5f00);
+
+      &:hover {
+        background: #ff5f00;
+      }
+    }
+  }
+}
+
+/* ===================== 签约管理页面 ===================== */
+.sign_manage_container {
+  margin-top: 30px;
+  padding: 40px;
+  background-color: #fafafa;
+  border-radius: 8px;
+}
+
+.sign_explain,
+.sign_process {
+  .section_title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 24px;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+
+    li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 14px;
+      color: #333;
+      line-height: 24px;
+      margin-bottom: 16px;
+
+      &::before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        color: #333;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.link {
+  color: #ff5f00;
+  text-decoration: underline;
+
+  &:hover {
+    color: #e65500;
+  }
+}
+
+.divider {
+  height: 1px;
+  background-color: #eee;
+  margin: 40px 0;
+}
+
+.process_list li::before {
+  color: #999 !important;
+}
+
+.tip_text {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #999;
+  line-height: 22px;
+}
+
+/* ===================== 福利信息 - 空状态（调整后不会太大） ===================== */
+.welfare_empty_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 400px; // 减小高度，不再撑满屏幕
+  padding: 60px 0; // 上下留白改为60px，适中舒适
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.author_empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    width: 180px;
+    height: auto;
+    margin-bottom: 28px; // 略微减小间距
+  }
+
+  span {
+    font-size: 16px;
+    color: #999999;
+    font-weight: normal;
+  }
+}
+
+/* ===================== 旧的全局样式（保留兼容） ===================== */
+:global(.book_detail) {
+  .book_detail_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    height: 32px;
+    line-height: 32px;
+    margin-top: 42px;
+  }
+
+  .book_detail_content {
+    margin-top: 44px;
+    padding-bottom: 18px;
+  }
+
+  .book_detail_flex {
+    display: flex;
+  }
+}
+
+:global(.right_btns) {
+  button {
+    width: 96px;
+    margin-left: 18px;
+    height: 36px;
+    border-radius: 50px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.05);
+    position: relative;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.08);
+    }
+
+    img {
+      width: 12px;
+      margin-left: 4px;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover img {
+      transform: rotate(180deg);
+    }
+
+    &.add {
+      background-image: linear-gradient(96deg, #ff9a62 0%, #ff5f00 100%);
+      color: #fff;
+
+      &:hover {
+        background: #ff5f00;
+      }
+    }
+
+    .down_link {
+      position: absolute;
+      z-index: 99;
+      width: 100%;
+      padding-top: 5px;
+      display: none;
+      top: 100%;
+      left: 0;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.08);
+
+      em {
+        display: block;
+        font-style: normal;
+        height: 36px;
+        background-color: #fff;
+        text-align: center;
+        line-height: 36px;
+
+        &:hover {
+          background-color: #f1f1f1;
+        }
+      }
+    }
+
+    &:hover .down_link {
+      display: block;
+    }
+  }
+}
+
+:global(.book_info_item) {
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  padding-bottom: 24px;
+
+  .info_label {
+    flex-shrink: 0;
+    min-width: 80px;
+    padding-right: 24px;
+  }
+
+  .info_text {
+    white-space: pre-wrap;
+  }
+
+  .muye_book_cover img {
+    width: 80px;
+    height: 107px;
+    vertical-align: middle;
+    border-radius: 4px;
+  }
+}
+
+:global(.book_info_sign_manage_new) {
+  .sign_manage_divider {
+    background-color: var(--color_gray_4, #0000000a);
+    height: 1px;
+  }
+}

@@ -42,7 +42,7 @@ public class BookInfoService : IBookInfoService
                 Nickname = book.Author.Nickname ?? string.Empty,
                 CoverUrl = book.Author.Avatar ?? string.Empty,
                 Signature = book.Author.Signature ?? string.Empty,
-                Path = $"/writerinfo/{book.Author.Id}"
+                Path = $"/writerinfo/{book.Author.Id}",
             },
         };
     }
@@ -68,7 +68,7 @@ public class BookInfoService : IBookInfoService
                         Title = c.Title,
                         Path = $"/read/{bookId}/{v.Sort}/{c.ChapterNum}"
                     })
-                    .ToList()
+                    .ToList(),
             }).ToList(),
         };
     }
