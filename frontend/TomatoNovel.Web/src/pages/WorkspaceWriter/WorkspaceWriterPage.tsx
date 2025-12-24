@@ -16,13 +16,13 @@ const WorkspaceWriterPage = () => {
     { path: '/home', label: '番茄小说网' },
     { path: '/classroom', label: '作家课堂' },
     { path: '/benefit', label: '作家福利' },
-    { path: '/notification', label: '消息通知' },
+    { path: '/workspace/writer/notifications', label: '消息通知' },
   ]
 
   const menus = [
     {
       id: 1,
-      path: '',
+      path: '/workspace/writer',
       label: '工作台',
       pic: '/src/assets/icons/work/i1.png',
       pic2: '/src/assets/icons/work/i1_2.png',

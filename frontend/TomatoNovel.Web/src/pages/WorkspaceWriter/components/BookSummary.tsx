@@ -11,14 +11,12 @@ const BookSummary = () => {
   const { goTo } = useGoTo()
   const userStore = useUserStore()
 
-  // ===== 从 store 取“值”（你的 store 是 getter 风格）=====
   const userId = userStore.id()
   const isLogin = userStore.isLogin()
 
   const [type, setType] = useState<1 | 2>(1)
   const [booklist, setBooklist] = useState<any[]>([])
 
-  // ===== 拉取我的作品：依赖 userId（登录后会重新请求）=====
   useEffect(() => {
     if (!userId) {
       setBooklist([])
@@ -28,9 +26,7 @@ const BookSummary = () => {
     const fetchMyBooks = async () => {
       try {
         const res: any = await getMyBookList({ user_id: userId })
-
-        // 兼容两种 request 封装：return data 或 return axios response
-        const books = res?.books ?? res?.data?.books ?? []
+        const books = res.books
         setBooklist(Array.isArray(books) ? books : [])
       } catch (e) {
         console.error('获取我的作品失败:', e)
@@ -91,7 +87,6 @@ const BookSummary = () => {
               短故事
             </span>
 
-            {/* 右侧：查看全部（小说） */}
             {showNovel && (
               <div className={[styles['header-label'], styles['header-label_right']].join(' ')}>
                 <div className={styles['hoverup']}>
@@ -101,7 +96,6 @@ const BookSummary = () => {
               </div>
             )}
 
-            {/* 左侧：创建入口（小说/短故事） */}
             {showNovel && (
               <div className={[styles['header-label'], styles['header-label_left']].join(' ')}>
                 <span className={styles['write-button']}>
@@ -131,7 +125,6 @@ const BookSummary = () => {
           {/* 小说列表 */}
           {showNovel && (
             <div className={styles['home-book-list']}>
-              {/* 未登录 / 无数据 */}
               {!isLogin || booklist.length === 0
                 ? renderEmpty
                 : booklist.map((item: any, i: number) => {
@@ -144,6 +137,8 @@ const BookSummary = () => {
                     const pic = item.pic ?? ''
                     const title = item.title ?? ''
                     const id = item.id
+
+                    const currentStep = item.state != null ? Number(item.state) : 1
 
                     return (
                       <div
@@ -208,7 +203,7 @@ const BookSummary = () => {
                           </div>
                         </div>
 
-                        {/* 流程条结构完全保留（你原来就留了占位） */}
+                        {/* 流程条 */}
                         <div
                           className={[
                             styles['book-tip-step-outer'],
@@ -217,10 +212,64 @@ const BookSummary = () => {
                           ].join(' ')}
                         >
                           <div className={styles['book-tip-step']}>
-                            <div
-                              className={styles['book-tip-step-content']}
-                              style={{ display: 'flex', width: 'auto', opacity: 1 }}
-                            />
+                            <div className={styles['book-tip-step-content']}>
+                              {[
+                                { label: '创建作品', step: 0 },
+                                { label: '作品可搜', step: 1 },
+                                { label: '作品签约', step: 2 },
+                                { label: '作品推荐', step: 3 },
+                                { label: '作品完结', step: 4 },
+                              ].map((s, idx) => {
+                                const isDone = currentStep >= s.step
+                                const isCurrent = currentStep === s.step
+                                const isFuture = currentStep < s.step
+
+                                return (
+                                  <div
+                                    key={idx}
+                                    className={[
+                                      styles['tip-step'],
+                                      isDone && styles['tip-step-done'],
+                                      isCurrent && styles['tip-step-current'],
+                                      isFuture && styles['tip-step-future'],
+                                    ]
+                                      .filter(Boolean)
+                                      .join(' ')}
+                                  >
+                                    <div className={styles['tip-step-line']}>
+                                      {isCurrent ? (
+                                        <svg
+                                          className={styles['tip-step-line-icon']}
+                                          width="22"
+                                          height="22"
+                                          viewBox="0 0 22 22"
+                                          fill="none"
+                                        >
+                                          <path
+                                            fill="#FF5F00"
+                                            stroke="#fff"
+                                            strokeWidth="1.5"
+                                            d="M16.657 13.435Zm0 0-.003-.004m.003.004-.003-.004m0 0ZM5.869 12.9l-.108.11.108-.11a7.03 7.03 0 0 1 0-10.06C8.701.053 13.3.053 16.131 2.84a7.03 7.03 0 0 1 0 10.06l.133.135-.133-.135L11 17.948 5.87 12.9z"
+                                          />
+                                          <circle cx="11" cy="8" r="2" fill="#FBFBFB" />
+                                        </svg>
+                                      ) : (
+                                        <span className={styles['tip-step-line-dot-wrapper']}>
+                                          <span className={styles['tip-step-line-dot']} />
+                                        </span>
+                                      )}
+                                    </div>
+
+                                    <div className={styles['tip-step-text']}>
+                                      {s.label}
+                                      {s.label === '作品可搜' && !isFuture && (
+                                        <span className={styles['tip-step-tag']}>实名认证</span>
+                                      )}
+                                    </div>
+                                  </div>
+                                )
+                              })}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -229,7 +278,6 @@ const BookSummary = () => {
             </div>
           )}
 
-          {/* 短故事 */}
           {showStory && (
             <div className={styles['home-book-list']}>
               <div className={styles['home-book-empty']}>

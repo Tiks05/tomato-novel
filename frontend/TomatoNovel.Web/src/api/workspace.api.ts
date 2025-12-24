@@ -8,6 +8,8 @@ import type { ChapterCreateRequest } from '@/types/workspace/requests/chapter-cr
 import type { ChapterListRequest } from '@/types/workspace/requests/chapter-list-request.types'
 import type { ChapterUpdateRequest } from '@/types/workspace/requests/chapter-update-request.types'
 import type { MyBookListRequest } from '@/types/workspace/requests/my-book-list-request.types'
+import type { GetUserMessagesRequest } from '@/types/workspace/requests/get-user-messages-request.types'
+import type { MarkMessagesAsReadRequest } from '@/types/workspace/requests/mark-messages-as-read-request.types'
 
 // ===== response types =====
 import type { AuthorApplyResponse } from '@/types/workspace/responses/author-apply-response.types'
@@ -22,6 +24,7 @@ import type { ChapterListResponse } from '@/types/workspace/responses/chapter-li
 import type { ChapterDetailResponse } from '@/types/workspace/responses/chapter-detail-response.types'
 import type { LastChapterResponse } from '@/types/workspace/responses/last-chapter-response.types'
 import type { LatestChapterResponse } from '@/types/workspace/responses/latest-chapter-response.types'
+import type { MessagesResponse } from '@/types/workspace/responses/messages-response.types'
 
 // ============================
 // 作家 / 作者
@@ -169,3 +172,12 @@ export const getLatestChapterByBookId = (bookId: number) =>
   request.get<LatestChapterResponse>('/workspace/writer/latest-chapter', {
     params: { book_id: bookId },
   })
+
+export const getUserMessages = (params: GetUserMessagesRequest) =>
+  request.get<MessagesResponse>('/workspace/writer/messages', {
+    params,
+  })
+
+export const markMessagesAsRead = (data: MarkMessagesAsReadRequest) => {
+  return request.post('/workspace/writer/messages/read', data)
+}

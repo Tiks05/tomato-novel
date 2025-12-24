@@ -52,8 +52,7 @@ public class WorkspaceController : ControllerBase
                 id,
                 name,
                 introduction,
-                avatarStream
-            );
+                avatarStream);
 
             return this.Ok(
                 ApiResponse<AuthorApplyResponseDto>.Success(response));
@@ -67,15 +66,13 @@ public class WorkspaceController : ControllerBase
         }
     }
 
-
-
     // 2. 作家统计
     [HttpGet("writer/stats/{userId:int}")]
     [AllowAnonymous]
     public IActionResult GetWriterStats([FromRoute] int userId)
     {
-        var result = workspaceService.GetWriterStats(userId);
-        return Ok(ApiResponse<WriterStatsResponseDto>.Success(result));
+        var result = this.workspaceService.GetWriterStats(userId);
+        return this.Ok(ApiResponse<WriterStatsResponseDto>.Success(result));
     }
 
     // 3. 公告列表
@@ -83,8 +80,8 @@ public class WorkspaceController : ControllerBase
     [AllowAnonymous]
     public IActionResult GetNoticeList([FromQuery] int limit = 3)
     {
-        var result = workspaceService.GetNoticeList(limit);
-        return Ok(ApiResponse<NoticeListResponseDto>.Success(result));
+        var result = this.workspaceService.GetNoticeList(limit);
+        return this.Ok(ApiResponse<NoticeListResponseDto>.Success(result));
     }
 
     // 4. 活动列表
@@ -92,8 +89,8 @@ public class WorkspaceController : ControllerBase
     [AllowAnonymous]
     public IActionResult GetNewsList([FromQuery] int limit = 4)
     {
-        var result = workspaceService.GetNewsList(limit);
-        return Ok(ApiResponse<NewsListResponseDto>.Success(result));
+        var result = this.workspaceService.GetNewsList(limit);
+        return this.Ok(ApiResponse<NewsListResponseDto>.Success(result));
     }
 
     // 5. 榜单
@@ -101,8 +98,8 @@ public class WorkspaceController : ControllerBase
     [AllowAnonymous]
     public IActionResult GetBookRank([FromQuery] string type, [FromQuery] string category)
     {
-        var result = workspaceService.GetBookRank(type, category);
-        return Ok(ApiResponse<BookRankResponseDto>.Success(result));
+        var result = this.workspaceService.GetBookRank(type, category);
+        return this.Ok(ApiResponse<BookRankResponseDto>.Success(result));
     }
 
     // 6. 创建书籍
@@ -127,7 +124,7 @@ public class WorkspaceController : ControllerBase
                 coverStream = cover.OpenReadStream();
             }
 
-            workspaceService.CreateBook(
+            this.workspaceService.CreateBook(
                 id,
                 name,
                 reader_type,
@@ -135,15 +132,14 @@ public class WorkspaceController : ControllerBase
                 hero1,
                 hero2,
                 introduction,
-                coverStream
-            );
+                coverStream);
 
-            return Ok(ApiResponse<object>.Success(null));
+            return this.Ok(ApiResponse<object>.Success(null));
         }
         catch (Exception ex)
         {
             var msg = ex.InnerException?.Message ?? ex.Message;
-            return Ok(ApiResponse<object>.Fail(500, msg));
+            return this.Ok(ApiResponse<object>.Fail(500, msg));
         }
     }
 
@@ -151,24 +147,24 @@ public class WorkspaceController : ControllerBase
     [HttpGet("writer/my-book-list")]
     public IActionResult GetMyBookList([FromQuery] MyBookListRequestDto request)
     {
-        var result = workspaceService.GetMyBookList(request);
-        return Ok(ApiResponse<MyBookListResponseDto>.Success(result));
+        var result = this.workspaceService.GetMyBookList(request);
+        return this.Ok(ApiResponse<MyBookListResponseDto>.Success(result));
     }
 
     // 8. 书籍详情
     [HttpGet("writer/book-overview/{bookId:int}")]
     public IActionResult GetBookOverview([FromRoute] int bookId)
     {
-        var result = workspaceService.GetBookDetail(bookId);
-        return Ok(ApiResponse<BookDetailResponseDto>.Success(result));
+        var result = this.workspaceService.GetBookDetail(bookId);
+        return this.Ok(ApiResponse<BookDetailResponseDto>.Success(result));
     }
 
     // 9. 删除书籍
     [HttpDelete("writer/delete-book/{bookId:int}")]
     public IActionResult DeleteBook([FromRoute] int bookId)
     {
-        workspaceService.DeleteBook(bookId);
-        return Ok(ApiResponse<object>.Success(null));
+        this.workspaceService.DeleteBook(bookId);
+        return this.Ok(ApiResponse<object>.Success(null));
     }
 
     // 10. 更新书籍
@@ -192,7 +188,7 @@ public class WorkspaceController : ControllerBase
                 coverStream = cover.OpenReadStream();
             }
 
-            workspaceService.UpdateBook(
+            this.workspaceService.UpdateBook(
                 book_id,
                 name,
                 reader_type,
@@ -200,111 +196,124 @@ public class WorkspaceController : ControllerBase
                 hero1,
                 hero2,
                 introduction,
-                coverStream
-            );
+                coverStream);
 
-            return Ok(ApiResponse<object>.Success(null));
+            return this.Ok(ApiResponse<object>.Success(null));
         }
         catch (Exception ex)
         {
             var msg = ex.InnerException?.Message ?? ex.Message;
-            return Ok(ApiResponse<object>.Fail(500, msg));
+            return this.Ok(ApiResponse<object>.Fail(500, msg));
         }
     }
-
 
     // 11. 最近章节信息
     [HttpGet("writer/get-last-chapterInfo")]
     public IActionResult GetLastChapterInfo([FromQuery] int bookId)
     {
-        var result = workspaceService.GetLastChapterInfo(bookId);
-        return Ok(ApiResponse<LastChapterInfoResponseDto>.Success(result));
+        var result = this.workspaceService.GetLastChapterInfo(bookId);
+        return this.Ok(ApiResponse<LastChapterInfoResponseDto>.Success(result));
     }
 
     // 12. 创建章节
     [HttpPost("writer/create-chapter")]
     public IActionResult CreateChapter([FromBody] ChapterCreateRequestDto request)
     {
-        workspaceService.CreateChapter(request);
-        return Ok(ApiResponse<object>.Success(null));
+        this.workspaceService.CreateChapter(request);
+        return this.Ok(ApiResponse<object>.Success(null));
     }
 
     // 13. 章节列表
     [HttpGet("writer/chapter-list")]
     public IActionResult GetChapterList([FromQuery] ChapterListRequestDto request)
     {
-        var result = workspaceService.GetChapterList(request);
-        return Ok(ApiResponse<ChapterListResponseDto>.Success(result));
+        var result = this.workspaceService.GetChapterList(request);
+        return this.Ok(ApiResponse<ChapterListResponseDto>.Success(result));
     }
 
     // 14. 删除章节
     [HttpDelete("writer/delete-chapter/{chapterId:int}")]
     public IActionResult DeleteChapter([FromRoute] int chapterId)
     {
-        workspaceService.DeleteChapter(chapterId);
-        return Ok(ApiResponse<object>.Success(null));
+        this.workspaceService.DeleteChapter(chapterId);
+        return this.Ok(ApiResponse<object>.Success(null));
     }
 
     // 15. 更新章节
     [HttpPost("writer/update-chapter")]
     public IActionResult UpdateChapter([FromBody] ChapterUpdateRequestDto request)
     {
-        workspaceService.UpdateChapter(request);
-        return Ok(ApiResponse<object>.Success(null));
+        this.workspaceService.UpdateChapter(request);
+        return this.Ok(ApiResponse<object>.Success(null));
     }
 
     // 16. 章节详情
     [HttpGet("writer/chapter-detail")]
     public IActionResult GetChapterDetail([FromQuery] ChapterDetailRequestDto dto)
     {
-        var result = workspaceService.GetChapterDetail(dto.BookId, dto.ChapterId);
-        return Ok(ApiResponse<ChapterDetailResponseDto>.Success(result));
+        var result = this.workspaceService.GetChapterDetail(dto.BookId, dto.ChapterId);
+        return this.Ok(ApiResponse<ChapterDetailResponseDto>.Success(result));
     }
-
 
     // 17. 删除分卷
     [HttpDelete("writer/delete-volume")]
     public IActionResult DeleteVolume([FromQuery] int bookId, [FromQuery] int volumeId)
     {
-        workspaceService.DeleteVolume(bookId, volumeId);
-        return Ok(ApiResponse<object>.Success(null));
+        this.workspaceService.DeleteVolume(bookId, volumeId);
+        return this.Ok(ApiResponse<object>.Success(null));
     }
 
     [HttpPost("writer/create-volume")]
     public IActionResult CreateVolume([FromBody] CreateVolumeRequestDto dto)
     {
-        workspaceService.CreateVolume(dto.BookId, dto.Title, dto.Sort);
-        return Ok(ApiResponse<object>.Success(null));
+        this.workspaceService.CreateVolume(dto.BookId, dto.Title, dto.Sort);
+        return this.Ok(ApiResponse<object>.Success(null));
     }
 
     [HttpPost("writer/update-volume")]
     public IActionResult UpdateVolume([FromBody] UpdateVolumeRequestDto dto)
     {
-        workspaceService.UpdateVolume(dto.Id, dto.BookId, dto.Title);
-        return Ok(ApiResponse<object>.Success(null));
+        this.workspaceService.UpdateVolume(dto.Id, dto.BookId, dto.Title);
+        return this.Ok(ApiResponse<object>.Success(null));
     }
 
     // 20. 最后章节（按书）
     [HttpGet("writer/last-chapter")]
     public IActionResult GetLastChapterByBook([FromQuery] int bookId)
     {
-        var result = workspaceService.GetLastChapterByBook(bookId);
-        return Ok(ApiResponse<LastChapterResponseDto>.Success(result));
+        var result = this.workspaceService.GetLastChapterByBook(bookId);
+        return this.Ok(ApiResponse<LastChapterResponseDto>.Success(result));
     }
 
     // 21. 最后章节（按卷）
     [HttpGet("writer/last-chapter-by-volume")]
     public IActionResult GetLastChapterByVolume([FromQuery] int bookId, [FromQuery] int volumeId)
     {
-        var result = workspaceService.GetLastChapterByVolume(bookId, volumeId);
-        return Ok(ApiResponse<LastChapterResponseDto>.Success(result));
+        var result = this.workspaceService.GetLastChapterByVolume(bookId, volumeId);
+        return this.Ok(ApiResponse<LastChapterResponseDto>.Success(result));
     }
 
     // 22. 最新章节
     [HttpGet("writer/latest-chapter")]
     public IActionResult GetLatestChapter([FromQuery] int bookId)
     {
-        var result = workspaceService.GetLatestChapter(bookId);
-        return Ok(ApiResponse<LatestChapterResponseDto>.Success(result));
+        var result = this.workspaceService.GetLatestChapter(bookId);
+        return this.Ok(ApiResponse<LatestChapterResponseDto>.Success(result));
+    }
+
+    // 23. 作家消息列表
+    [HttpGet("writer/messages")]
+    public IActionResult GetWriterMessages([FromQuery] GetUserMessagesRequestDto request)
+    {
+        var result = this.workspaceService.GetUserMessages(request);
+        return this.Ok(ApiResponse<MessagesResponseDto>.Success(result));
+    }
+
+    // 24. 标记消息为已读
+    [HttpPost("writer/messages/read")]
+    public IActionResult MarkMessagesAsRead([FromBody] MarkMessagesAsReadRequestDto request)
+    {
+        this.workspaceService.MarkMessagesAsRead(request);
+        return this.Ok(ApiResponse<object>.Success(null));
     }
 }

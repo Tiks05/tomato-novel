@@ -66,7 +66,7 @@ public class BookInfoService : IBookInfoService
                     .Select(c => new BookChapterDto
                     {
                         Title = c.Title,
-                        Path = $"/read/{bookId}/{v.Sort}/{c.ChapterNum}"
+                        Path = $"/read/{bookId}/{v.Sort}/{c.ChapterNum}",
                     })
                     .ToList(),
             }).ToList(),

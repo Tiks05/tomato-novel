@@ -67,16 +67,14 @@ public class WorkspaceService : IWorkspaceService
             Nickname = user.Nickname,
             Signature = user.Signature,
             BecomeAuthorAt = user.BecomeAuthorAt?
-                .ToString("yyyy-MM-dd HH:mm:ss")
+                .ToString("yyyy-MM-dd HH:mm:ss"),
         };
     }
-
-
 
     // 2. 作家统计
     public WriterStatsResponseDto GetWriterStats(int userId)
     {
-        var books = repository.GetBooksByUser(userId);
+        var books = this.repository.GetBooksByUser(userId);
 
         var totalWords = books.Sum(b => b.WordCount ?? 0);
 
@@ -86,14 +84,14 @@ public class WorkspaceService : IWorkspaceService
         return new WriterStatsResponseDto
         {
             FansCount = fansCount,
-            TotalWords = totalWords
+            TotalWords = totalWords,
         };
     }
 
     // 3. 公告列表
     public NoticeListResponseDto GetNoticeList(int limit)
     {
-        var notices = repository.GetNotices(limit);
+        var notices = this.repository.GetNotices(limit);
 
         return new NoticeListResponseDto
         {
@@ -103,14 +101,14 @@ public class WorkspaceService : IWorkspaceService
                 Title = n.Title,
                 Time = n.UpdatedAt.ToString("MM.dd"),
                 Path = $"/newsinfo/{n.Id}"
-            }).ToList()
+            }).ToList(),
         };
     }
 
     // 4. 活动列表
     public NewsListResponseDto GetNewsList(int limit)
     {
-        var news = repository.GetNews(limit);
+        var news = this.repository.GetNews(limit);
 
         return new NewsListResponseDto
         {
@@ -118,14 +116,14 @@ public class WorkspaceService : IWorkspaceService
             {
                 Title = n.Title,
                 Path = $"/newsinfo/{n.Id}"
-            }).ToList()
+            }).ToList(),
         };
     }
 
     // 5. 榜单
     public BookRankResponseDto GetBookRank(string readerType, string category)
     {
-        var books = repository.GetRankBooks(readerType, category);
+        var books = this.repository.GetRankBooks(readerType, category);
 
         var items = books.Select((b, index) => new BookRankItemDto
         {
@@ -134,13 +132,13 @@ public class WorkspaceService : IWorkspaceService
             Path = $"/bookinfo/{b.Id}",
             Pic = b.CoverUrl ?? string.Empty,
             Author = b.Author?.Nickname ?? string.Empty,
-            Desc = b.Intro ?? string.Empty
+            Desc = b.Intro ?? string.Empty,
         }).ToList();
 
         return new BookRankResponseDto
         {
             PlotType = category,
-            Child = items
+            Child = items,
         };
     }
 
@@ -153,17 +151,17 @@ public class WorkspaceService : IWorkspaceService
         string hero1,
         string hero2,
         string introduction,
-        Stream? coverStream
-    )
+        Stream? coverStream)
     {
         string readerTypeText = readerType switch
         {
             1 => "男生",
             2 => "女生",
-            _ => "未知"
+            _ => "未知",
         };
 
-        var hero = string.Join(" / ",
+        var hero = string.Join(
+            " / ",
             new[] { hero1, hero2 }
                 .Where(h => !string.IsNullOrWhiteSpace(h)));
 
@@ -173,7 +171,7 @@ public class WorkspaceService : IWorkspaceService
             coverUuid = Guid.NewGuid().ToString("N");
         }
 
-        var user = repository.GetUser((int)userId);
+        var user = this.repository.GetUser((int)userId);
 
         var book = new Book
         {
@@ -196,25 +194,24 @@ public class WorkspaceService : IWorkspaceService
             CoverUrl = "/uploads/covers/default_cover.png",
 
             CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
+            UpdatedAt = DateTime.UtcNow,
         };
 
-
-        repository.AddBook(book, coverStream, coverUuid);
-        repository.SaveChanges();
+        this.repository.AddBook(book, coverStream, coverUuid);
+        this.repository.SaveChanges();
     }
-
 
     // 7. 我的书籍
     public MyBookListResponseDto GetMyBookList(MyBookListRequestDto request)
     {
-        var books = repository.GetBooksByUser(request.UserId);
+        var books = this.repository.GetBooksByUser(request.UserId);
 
         var items = books.Select(b =>
         {
-            var volumes = repository.GetVolumesByBook(b.Id);
+            var volumes = this.repository.GetVolumesByBook(b.Id);
+
             var chapters = volumes
-                .SelectMany(v => repository.GetChaptersByBook(b.Id))
+                .SelectMany(v => this.repository.GetChaptersByVolume(v.Id))
                 .ToList();
 
             var latestChapter = chapters
@@ -231,17 +228,22 @@ public class WorkspaceService : IWorkspaceService
                 TotalChapters = chapters.Count,
                 Words = chapters.Sum(c => c.WordCount ?? 0),
                 Status = b.Status ?? "连载中",
-                Path = $"/bookinfo/{b.Id}"
+                Path = $"/bookinfo/{b.Id}",
+                State = b.State,
             };
         }).ToList();
 
-        return new MyBookListResponseDto { Books = items };
+        return new MyBookListResponseDto
+        {
+            Books = items
+        };
     }
+
 
     // 8. 书籍详情
     public BookDetailResponseDto GetBookDetail(int bookId)
     {
-        var book = repository.GetBook(bookId);
+        var book = this.repository.GetBook(bookId);
 
         return new BookDetailResponseDto
         {
@@ -255,16 +257,16 @@ public class WorkspaceService : IWorkspaceService
             CreatedAt = book.CreatedAt.ToString("yyyy-MM-dd HH:mm"),
             Status = "正常",
             ContractStatus = book.SignStatus,
-            UpdateStatus = book.Status ?? "连载中"
+            UpdateStatus = book.Status ?? "连载中",
         };
     }
 
     // 9. 删除书籍
     public void DeleteBook(int bookId)
     {
-        var book = repository.GetBook(bookId);
-        repository.RemoveBook(book);
-        repository.SaveChanges();
+        var book = this.repository.GetBook(bookId);
+        this.repository.RemoveBook(book);
+        this.repository.SaveChanges();
     }
 
     // 10. 更新书籍
@@ -276,21 +278,21 @@ public class WorkspaceService : IWorkspaceService
         string hero1,
         string hero2,
         string introduction,
-        Stream? coverStream
-    )
+        Stream? coverStream)
     {
-        var book = repository.GetBook((int)bookId);
+        var book = this.repository.GetBook((int)bookId);
 
         // readerType 转文字（和 CreateBook 保持一致）
         string readerTypeText = readerType switch
         {
             1 => "男生",
             2 => "女生",
-            _ => "未知"
+            _ => "未知",
         };
 
         // 主角拼接逻辑（和 CreateBook 一致）
-        var hero = string.Join(" / ",
+        var hero = string.Join(
+            " / ",
             new[] { hero1, hero2 }
                 .Where(h => !string.IsNullOrWhiteSpace(h)));
 
@@ -309,32 +311,36 @@ public class WorkspaceService : IWorkspaceService
         {
             var coverUuid = Guid.NewGuid().ToString("N");
 
-            repository.UpdateBook(
+            this.repository.UpdateBook(
                 book,
                 coverStream,
-                coverUuid
-            );
+                coverUuid);
         }
 
-        repository.SaveChanges();
+        this.repository.SaveChanges();
     }
-
 
     // 11. 最近章节信息
     public LastChapterInfoResponseDto GetLastChapterInfo(int bookId)
     {
-        var volume = repository.GetLastVolume(bookId);
-        if (volume == null) return new LastChapterInfoResponseDto();
+        var volume = this.repository.GetLastVolume(bookId);
+        if (volume == null)
+        {
+            return new LastChapterInfoResponseDto();
+        }
 
-        var chapter = repository.GetLastChapterByVolume(volume.Id);
-        if (chapter == null) return new LastChapterInfoResponseDto();
+        var chapter = this.repository.GetLastChapterByVolume(volume.Id);
+        if (chapter == null)
+        {
+            return new LastChapterInfoResponseDto();
+        }
 
         return new LastChapterInfoResponseDto
         {
             VolumeIndex = volume.Sort,
             VolumeTitle = volume.Title,
             ChapterIndex = chapter.ChapterNum,
-            ChapterTitle = chapter.Title
+            ChapterTitle = chapter.Title,
         };
     }
 
@@ -345,28 +351,28 @@ public class WorkspaceService : IWorkspaceService
 
         if (request.VolumeId.HasValue)
         {
-            volume = repository.GetVolume(request.VolumeId.Value)
+            volume = this.repository.GetVolume(request.VolumeId.Value)
                 ?? throw new BusinessException(40004, "分卷不存在");
         }
         else
         {
-            volume = repository.GetLastVolume(request.BookId)
+            volume = this.repository.GetLastVolume(request.BookId)
                 ?? new Volume
                 {
                     BookId = request.BookId,
                     Title = "第一卷",
                     Sort = 1,
-                    CreatedAt = DateTime.UtcNow
+                    CreatedAt = DateTime.UtcNow,
                 };
 
             if (volume.Id == 0)
             {
-                repository.AddVolume(volume);
-                repository.SaveChanges();
+                this.repository.AddVolume(volume);
+                this.repository.SaveChanges();
             }
         }
 
-        var lastChapter = repository.GetLastChapterByVolume(volume.Id);
+        var lastChapter = this.repository.GetLastChapterByVolume(volume.Id);
         var nextNum = (lastChapter?.ChapterNum ?? 0) + 1;
 
         var chapter = new Chapter
@@ -377,35 +383,45 @@ public class WorkspaceService : IWorkspaceService
             Content = request.Content,
             WordCount = request.WordCount,
             CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
+            UpdatedAt = DateTime.UtcNow,
         };
 
-        repository.AddChapter(chapter);
-        repository.SaveChanges();
+        this.repository.AddChapter(chapter);
+        this.repository.SaveChanges();
     }
 
     // 13. 章节列表
     public ChapterListResponseDto GetChapterList(ChapterListRequestDto request)
     {
         if (request.BookId <= 0)
+        {
             throw new BusinessException(40003, "BookId 无效");
+        }
 
-        var book = repository.GetBook(request.BookId);
+        var book = this.repository.GetBook(request.BookId);
         if (book == null)
+        {
             throw new BusinessException(40004, "书籍不存在");
+        }
 
-        var volumes = repository.GetVolumesByBook(request.BookId).ToList();
-        var chapters = repository.GetChaptersByBook(request.BookId);
+        var volumes = this.repository.GetVolumesByBook(request.BookId).ToList();
+        var chapters = this.repository.GetChaptersByBook(request.BookId);
 
         if (!string.IsNullOrWhiteSpace(request.Title))
+        {
             chapters = chapters.Where(c => c.Title.Contains(request.Title));
+        }
 
         if (!string.IsNullOrWhiteSpace(request.VolumeId)
             && int.TryParse(request.VolumeId, out var volumeId))
+        {
             chapters = chapters.Where(c => c.VolumeId == volumeId);
+        }
 
         if (!string.IsNullOrWhiteSpace(request.Status))
+        {
             chapters = chapters.Where(c => c.Status == request.Status);
+        }
 
         return new ChapterListResponseDto
         {
@@ -416,7 +432,7 @@ public class WorkspaceService : IWorkspaceService
                 BookId = v.BookId,
                 Title = v.Title,
                 Sort = v.Sort,
-                CreatedAt = v.CreatedAt.ToString("yyyy-MM-dd HH:mm")
+                CreatedAt = v.CreatedAt.ToString("yyyy-MM-dd HH:mm"),
             }).ToList(),
 
             List = chapters
@@ -432,25 +448,24 @@ public class WorkspaceService : IWorkspaceService
                     Status = c.Status,
                     StatusText = c.Status,
                     TypoCount = 0
-                }).ToList()
+                }).ToList(),
         };
     }
-
 
     // 14. 删除章节
     public void DeleteChapter(int chapterId)
     {
-        var chapter = repository.GetChapter(chapterId)
+        var chapter = this.repository.GetChapter(chapterId)
             ?? throw new BusinessException(40004, "章节不存在");
 
-        repository.RemoveChapter(chapter);
-        repository.SaveChanges();
+        this.repository.RemoveChapter(chapter);
+        this.repository.SaveChanges();
     }
 
     // 15. 更新章节
     public void UpdateChapter(ChapterUpdateRequestDto request)
     {
-        var chapter = repository.GetChapter(request.ChapterId)
+        var chapter = this.repository.GetChapter(request.ChapterId)
             ?? throw new BusinessException(40004, "章节不存在");
 
         chapter.ChapterNum = request.ChapterNum;
@@ -459,13 +474,13 @@ public class WorkspaceService : IWorkspaceService
         chapter.WordCount = request.WordCount;
         chapter.UpdatedAt = DateTime.UtcNow;
 
-        repository.SaveChanges();
+        this.repository.SaveChanges();
     }
 
     // 16. 章节详情
     public ChapterDetailResponseDto GetChapterDetail(int bookId, int chapterId)
     {
-        var chapter = repository.GetChapter(chapterId)
+        var chapter = this.repository.GetChapter(chapterId)
             ?? throw new BusinessException(40004, "章节不存在");
 
         return new ChapterDetailResponseDto
@@ -474,28 +489,28 @@ public class WorkspaceService : IWorkspaceService
             VolumeTitle = chapter.Volume.Title,
             ChapterNum = chapter.ChapterNum,
             Title = chapter.Title,
-            Content = chapter.Content
+            Content = chapter.Content,
         };
     }
 
     // 17. 删除分卷
     public void DeleteVolume(int bookId, int volumeId)
     {
-        var volume = repository.GetVolume(volumeId)
+        var volume = this.repository.GetVolume(volumeId)
             ?? throw new BusinessException(40004, "分卷不存在");
 
-        repository.RemoveVolume(volume);
-        repository.SaveChanges();
+        this.repository.RemoveVolume(volume);
+        this.repository.SaveChanges();
     }
 
     // 18. 更新分卷
     public void UpdateVolume(int volumeId, int bookId, string title)
     {
-        var volume = repository.GetVolume(volumeId)
+        var volume = this.repository.GetVolume(volumeId)
             ?? throw new BusinessException(40004, "分卷不存在");
 
         volume.Title = title;
-        repository.SaveChanges();
+        this.repository.SaveChanges();
     }
 
     // 19. 创建分卷
@@ -506,20 +521,23 @@ public class WorkspaceService : IWorkspaceService
             BookId = bookId,
             Title = title,
             Sort = sort,
-            CreatedAt = DateTime.UtcNow
+            CreatedAt = DateTime.UtcNow,
         };
 
-        repository.AddVolume(volume);
-        repository.SaveChanges();
+        this.repository.AddVolume(volume);
+        this.repository.SaveChanges();
     }
 
     // 20. 最后章节（按书）
     public LastChapterResponseDto GetLastChapterByBook(int bookId)
     {
-        var volume = repository.GetLastVolume(bookId);
-        if (volume == null) return new LastChapterResponseDto();
+        var volume = this.repository.GetLastVolume(bookId);
+        if (volume == null)
+        {
+            return new LastChapterResponseDto();
+        }
 
-        var chapter = repository.GetLastChapterByVolume(volume.Id);
+        var chapter = this.repository.GetLastChapterByVolume(volume.Id);
 
         return new LastChapterResponseDto
         {
@@ -527,20 +545,20 @@ public class WorkspaceService : IWorkspaceService
             LastVolumeTitle = volume.Title,
             ChapterIndex = chapter?.ChapterNum ?? 0,
             ChapterTitle = chapter?.Title ?? string.Empty,
-            UpdatedAt = chapter?.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss")
+            UpdatedAt = chapter?.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss"),
         };
     }
 
     // 21. 最后章节（按卷）
     public LastChapterResponseDto GetLastChapterByVolume(int bookId, int volumeId)
     {
-        var current = repository.GetVolume(volumeId)
+        var current = this.repository.GetVolume(volumeId)
             ?? throw new BusinessException(40004, "分卷不存在");
 
-        var lastVolume = repository.GetLastVolume(bookId)
+        var lastVolume = this.repository.GetLastVolume(bookId)
             ?? throw new BusinessException(40004, "书籍不存在");
 
-        var lastChapter = repository.GetLastChapterByVolume(lastVolume.Id);
+        var lastChapter = this.repository.GetLastChapterByVolume(lastVolume.Id);
 
         return new LastChapterResponseDto
         {
@@ -550,22 +568,64 @@ public class WorkspaceService : IWorkspaceService
             LastVolumeTitle = lastVolume.Title,
             ChapterIndex = lastChapter?.ChapterNum ?? 0,
             ChapterTitle = lastChapter?.Title ?? string.Empty,
-            UpdatedAt = lastChapter?.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss")
+            UpdatedAt = lastChapter?.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss"),
         };
     }
 
     // 22. 最新章节
     public LatestChapterResponseDto GetLatestChapter(int bookId)
     {
-        var chapter = repository.GetLatestChapterByBook(bookId);
-        if (chapter == null) return new LatestChapterResponseDto();
+        var chapter = this.repository.GetLatestChapterByBook(bookId);
+        if (chapter == null)
+        {
+            return new LatestChapterResponseDto();
+        }
 
         return new LatestChapterResponseDto
         {
             LatestVolumeSort = chapter.Volume.Sort,
             LatestChapterNum = chapter.ChapterNum,
             LatestChapterTitle = chapter.Title,
-            LatestChapterUpdatedAt = chapter.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss")
+            LatestChapterUpdatedAt = chapter.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss"),
         };
+    }
+
+    public MessagesResponseDto GetUserMessages(GetUserMessagesRequestDto request)
+    {
+        var totalCount = this.repository.CountMessages(
+            request.UserId,
+            request.Type);
+
+        var messages = this.repository.GetMessages(
+            request.UserId,
+            request.Type,
+            request.Page,
+            request.PageSize);
+
+        var items = messages.Select(m => new MessageItemDto
+        {
+            Id = m.Id,
+            Category = m.Type,
+            Title = m.Title ?? string.Empty,
+            Content = m.Content,
+            IsRead = m.IsRead,
+            Time = m.CreatedAt.ToString("MM-dd"),
+        }).ToList();
+
+        return new MessagesResponseDto
+        {
+            Items = items,
+            TotalCount = totalCount,
+        };
+    }
+
+    public void MarkMessagesAsRead(MarkMessagesAsReadRequestDto request)
+    {
+        if (request.MessageIds == null || request.MessageIds.Count == 0)
+        {
+            return;
+        }
+
+        this.repository.MarkMessagesAsRead(request.MessageIds);
     }
 }

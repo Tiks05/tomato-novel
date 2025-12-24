@@ -3,5 +3,6 @@
 public class WriterStatsResponseDto
 {
     public int FansCount { get; set; }
+
     public int TotalWords { get; set; }
 }

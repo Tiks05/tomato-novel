@@ -3,7 +3,7 @@
   background-color: #fff;
   margin-top: 15px;
   border-radius: 10px;
-  padding: 20px;
+  padding: 20px 20px 8px 20px;
   width: 100%;
 }
 
@@ -430,14 +430,14 @@
 
 .right-btns {
   button {
-    display: inline-flex;        /* ⭐ 关键 */
-    align-items: center;         /* 垂直居中 */                   /* 文本和图标间距 */
+    display: inline-flex; /* ⭐ 关键 */
+    align-items: center; /* 垂直居中 */ /* 文本和图标间距 */
     justify-content: center;
-    white-space: nowrap;         /* ⭐ 禁止换行 */
+    white-space: nowrap; /* ⭐ 禁止换行 */
   }
 
   button img {
-    flex-shrink: 0;              /* 防止被压缩换行 */
+    flex-shrink: 0; /* 防止被压缩换行 */
   }
 }
 
@@ -736,17 +736,14 @@
 }
 
 .book-tip-step .tip-step-line-icon {
-  display: block;
+  display: inline-block;
 }
 
 .book-tip-step .tip-step-line-dot {
-  background-color: #e5e5e5;
-  border: 1.5px solid #fff;
-  border-radius: 50%;
-  box-sizing: initial;
-  display: block;
-  height: 6px;
-  width: 6px;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .book-tip-step .tip-step-done {
@@ -902,4 +899,161 @@
 
 .author-empty-footer .btn.btn2:hover {
   background: #ff5f00;
+}
+
+/* ===============================
+   流程条 Step Bar（完整修改版）
+   =============================== */
+
+/* 外层容器保持不变 */
+.book-tip-step-outer {
+  background-color: #00000005;
+  border-radius: 8px;
+  margin: 24px 0 12px;
+}
+
+.book-tip-step {
+  padding: 4px 24px 4px;
+  position: relative;
+}
+
+.book-tip-step-content {
+  display: flex;
+  width: auto;
+  opacity: 1;
+}
+
+/* 每个步骤项 */
+.tip-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 24px;
+  position: relative;
+  color: #0006;
+}
+
+/* 连接线容器 */
+.tip-step-line {
+  top: -12px;
+  height: 1px;
+  width: 100%;
+  position: relative;
+}
+
+/* 使用 ::before 和 ::after 分别控制左右半段线 */
+.tip-step-line::before,
+.tip-step-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 1px;
+  width: 50%;
+}
+
+.tip-step-line::before {
+  left: 0;
+  border-top: 1px #0000001a; /* 默认灰色 */
+}
+
+.tip-step-line::after {
+  right: 0;
+  border-top: 1px #0000001a; /* 默认灰色 */
+}
+
+/* 已完成状态：整条线橙色 */
+.tip-step-done .tip-step-line::before,
+.tip-step-done .tip-step-line::after {
+  border-color: #ffa773 !important;
+}
+
+/* 当前状态：前半段橙色，后半段灰色 */
+.tip-step-current .tip-step-line::before {
+  border-color: #ffa773 !important;
+}
+
+.tip-step-current .tip-step-line::after {
+  border-color: #0000001a !important;
+}
+
+/* 未开始状态：整条灰色 */
+.tip-step-future .tip-step-line::before,
+.tip-step-future .tip-step-line::after {
+  border-color: #0000001a !important;
+}
+
+/* 圆点容器 - 固定位置 */
+.tip-step-line-dot-wrapper {
+  margin-top: -3.5px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, 50%) !important;
+  z-index: 1;
+}
+
+/* 圆点样式 */
+.tip-step-line-dot {
+  width: 8px; /* 稍大一点，更好看 */
+  height: 8px;
+  border-radius: 50%;
+  background: #e5e5e5;
+  border: 1.5px solid #fff;
+  box-sizing: border-box;
+}
+
+/* 已完成圆点为橙色 */
+.tip-step-done .tip-step-line-dot {
+  background: #ffa773;
+}
+
+/* 当前状态隐藏圆点 */
+.tip-step-current .tip-step-line-dot-wrapper {
+  display: none;
+}
+
+/* 指针 SVG - 关键修改：放在文字正上方 */
+.tip-step-line-icon {
+  position: absolute;
+  left: 50%;
+  bottom: 100%; /* 紧贴文字上方 */
+  transform: translate(-50%, 50%); /* 垂直偏移，让它正好居中在上方 */
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 文字颜色 */
+.tip-step-done,
+.tip-step-current {
+  color: #000c;
+}
+
+.tip-step-future {
+  color: #0006;
+}
+
+/* 文字样式 */
+.tip-step-text {
+  font-size: 14px;
+  line-height: 24px;
+  margin-top: 4px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 标签 */
+.tip-step-tag {
+  background: #0000000a;
+  border-radius: 4px;
+  color: #0006;
+  font-size: 12px;
+  padding: 2px 6px;
+  margin-left: 6px;
+}
+
+/* 首尾半段线处理（必须保留） */
+.tip-step:first-child .tip-step-line::before,
+.tip-step:last-child .tip-step-line::after {
+  width: 50%;
 }

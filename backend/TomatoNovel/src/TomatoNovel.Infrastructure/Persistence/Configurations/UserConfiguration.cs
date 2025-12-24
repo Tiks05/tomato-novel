@@ -106,5 +106,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                .WithOne(f => f.Follower)
                .HasForeignKey(f => f.FollowerId)
                .OnDelete(DeleteBehavior.Cascade);
+
+        // User → Messages (1:N)
+        builder.HasMany(u => u.Messages)
+               .WithOne(m => m.User)
+               .HasForeignKey(m => m.UserId)
+               .OnDelete(DeleteBehavior.Cascade);
     }
 }

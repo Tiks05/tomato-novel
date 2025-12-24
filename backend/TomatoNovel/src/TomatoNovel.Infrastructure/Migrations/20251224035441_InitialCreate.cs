@@ -242,11 +242,13 @@ namespace TomatoNovel.Infrastructure.Migrations
                     sign_status = table.Column<string>(type: "varchar(16)", maxLength: 16, nullable: false, defaultValue: "Unsigned")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     created_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false)
+                    updated_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    state = table.Column<int>(type: "int", nullable: false, defaultValue: 0)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_book", x => x.id);
+                    table.CheckConstraint("CK_book_state", "`state` >= 0 AND `state` <= 4");
                     table.ForeignKey(
                         name: "FK_book_user_user_id",
                         column: x => x.user_id,
@@ -278,6 +280,35 @@ namespace TomatoNovel.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_follow_user_follower_id",
                         column: x => x.follower_id,
+                        principalTable: "user",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "message",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    user_id = table.Column<int>(type: "int", nullable: false),
+                    type = table.Column<string>(type: "varchar(16)", maxLength: 16, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    title = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    content = table.Column<string>(type: "text", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    is_read = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
+                    read_at = table.Column<DateTime>(type: "datetime", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_message", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_message_user_user_id",
+                        column: x => x.user_id,
                         principalTable: "user",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -465,6 +496,11 @@ namespace TomatoNovel.Infrastructure.Migrations
                 column: "reader_type");
 
             migrationBuilder.CreateIndex(
+                name: "IX_book_state",
+                table: "book",
+                column: "state");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_book_status",
                 table: "book",
                 column: "status");
@@ -553,6 +589,26 @@ namespace TomatoNovel.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_message_created_at",
+                table: "message",
+                column: "created_at");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_message_is_read",
+                table: "message",
+                column: "is_read");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_message_type",
+                table: "message",
+                column: "type");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_message_user_id",
+                table: "message",
+                column: "user_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_news_created_at",
                 table: "news",
                 column: "created_at");
@@ -639,6 +695,9 @@ namespace TomatoNovel.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "follow");
+
+            migrationBuilder.DropTable(
+                name: "message");
 
             migrationBuilder.DropTable(
                 name: "news");

@@ -63,6 +63,11 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
                .HasColumnName("status")
                .HasMaxLength(16);
 
+        builder.Property(b => b.State)
+               .HasColumnName("state")
+               .IsRequired()
+               .HasDefaultValue(0);
+
         builder.Property(b => b.WordCount)
                .HasColumnName("word_count");
 
@@ -103,12 +108,21 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
                .HasColumnType("datetime");
 
         // =========================
-        // Indexes（可选但常用）
+        // Indexes
         // =========================
         builder.HasIndex(b => b.UserId);
         builder.HasIndex(b => b.ReaderType);
         builder.HasIndex(b => b.Status);
+        builder.HasIndex(b => b.State);
         builder.HasIndex(b => b.CreatedAt);
+
+        // =========================
+        // Constraints
+        // =========================
+        builder.HasCheckConstraint(
+            "CK_book_state",
+            "`state` >= 0 AND `state` <= 4"
+        );
 
         // =========================
         // Relationships

@@ -76,11 +76,29 @@ public class User
     // -------------------------------------------------------
     // Navigation properties
     // -------------------------------------------------------
+
+    /// <summary>
+    /// Gets or sets the collection of books authored by the user.
+    /// </summary>
     public ICollection<Book> Books { get; set; } = new List<Book>();
 
+    /// <summary>
+    /// Gets or sets the collection of comments created by the user.
+    /// </summary>
     public ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
+    /// <summary>
+    /// Gets or sets the collection of favorite records created by the user.
+    /// </summary>
     public ICollection<Favorite> Favorites { get; set; } = new List<Favorite>();
 
+    /// <summary>
+    /// Gets or sets the collection of follow relationships.
+    /// </summary>
     public ICollection<Follow> Follows { get; set; } = new List<Follow>();
+
+    /// <summary>
+    /// Gets or sets the collection of messages received by the user.
+    /// </summary>
+    public ICollection<Message> Messages { get; set; } = new List<Message>();
 }

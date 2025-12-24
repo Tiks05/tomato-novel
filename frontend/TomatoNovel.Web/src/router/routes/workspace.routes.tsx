@@ -15,6 +15,7 @@ const CreateBookPage = lazy(() => import('@/pages/WorkspaceWriter/components/Cre
 const BookOverviewPage = lazy(() => import('@/pages/WorkspaceWriter/components/BookOverview'))
 const UpdateBookPage = lazy(() => import('@/pages/WorkspaceWriter/components/UpdateBook'))
 const ChapterManagePage = lazy(() => import('@/pages/WorkspaceWriter/components/ChapterManage'))
+const NotificationCenterPage = lazy(() => import('@/pages/WorkspaceWriter/components/NotificationCenter'))
 
 // independent writer pages
 const CreateChapterPage = lazy(() => import('@/pages/WorkspaceWriter/components/CreateChapter'))
@@ -91,6 +92,13 @@ export const workspaceRoutes: RouteObject[] = [
         element: <ChapterManagePage />,
         handle: {
           title: '章节管理',
+        },
+      },
+      {
+        path: 'notifications',
+        element: <NotificationCenterPage />,
+        handle: {
+          title: '消息通知',
         },
       },
     ],

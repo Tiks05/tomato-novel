@@ -8,4 +8,5 @@ export interface MyBookItem {
   words: number
   status: string
   path: string
+  state: string
 }

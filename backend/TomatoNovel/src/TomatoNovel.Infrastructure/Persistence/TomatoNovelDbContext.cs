@@ -67,6 +67,11 @@ public class TomatoNovelDbContext : DbContext
     /// </summary>
     public DbSet<News> News { get; set; } = default!;
 
+    /// <summary>
+    /// Gets or sets the message entity set.
+    /// </summary>
+    public DbSet<Message> Messages { get; set; } = default!;
+
     // -------------------------
     // Model configuration
     // -------------------------

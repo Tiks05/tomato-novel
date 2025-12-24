@@ -95,6 +95,16 @@ public class Book
     /// </summary>
     public DateTime UpdatedAt { get; set; }
 
+    /// <summary>
+    /// Gets or sets the state of the book.
+    /// 0: Created
+    /// 1: Searchable
+    /// 2: Signed
+    /// 3: Recommended
+    /// 4: Finished
+    /// </summary>
+    public int State { get; set; } = 0;
+
     // -------------------------
     // Navigation properties
     // -------------------------

@@ -12,7 +12,7 @@ using TomatoNovel.Infrastructure.Persistence;
 namespace TomatoNovel.Infrastructure.Migrations
 {
     [DbContext(typeof(TomatoNovelDbContext))]
-    [Migration("20251223020335_InitialCreate")]
+    [Migration("20251224035441_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -289,6 +289,12 @@ namespace TomatoNovel.Infrastructure.Migrations
                         .HasDefaultValue("Unsigned")
                         .HasColumnName("sign_status");
 
+                    b.Property<int>("State")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0)
+                        .HasColumnName("state");
+
                     b.Property<string>("Status")
                         .HasMaxLength(16)
                         .HasColumnType("varchar(16)")
@@ -333,11 +339,16 @@ namespace TomatoNovel.Infrastructure.Migrations
 
                     b.HasIndex("ReaderType");
 
+                    b.HasIndex("State");
+
                     b.HasIndex("Status");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("book", (string)null);
+                    b.ToTable("book", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_book_state", "`state` >= 0 AND `state` <= 4");
+                        });
                 });
 
             modelBuilder.Entity("TomatoNovel.Domain.Entities.Chapter", b =>
@@ -572,6 +583,62 @@ namespace TomatoNovel.Infrastructure.Migrations
                         .HasDatabaseName("uniq_follow");
 
                     b.ToTable("follow", (string)null);
+                });
+
+            modelBuilder.Entity("TomatoNovel.Domain.Entities.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("content");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("created_at");
+
+                    b.Property<bool>("IsRead")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_read");
+
+                    b.Property<DateTime?>("ReadAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("read_at");
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("title");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("varchar(16)")
+                        .HasColumnName("type");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedAt");
+
+                    b.HasIndex("IsRead");
+
+                    b.HasIndex("Type");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("message", (string)null);
                 });
 
             modelBuilder.Entity("TomatoNovel.Domain.Entities.News", b =>
@@ -880,6 +947,17 @@ namespace TomatoNovel.Infrastructure.Migrations
                     b.Navigation("Follower");
                 });
 
+            modelBuilder.Entity("TomatoNovel.Domain.Entities.Message", b =>
+                {
+                    b.HasOne("TomatoNovel.Domain.Entities.User", "User")
+                        .WithMany("Messages")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("TomatoNovel.Domain.Entities.Volume", b =>
                 {
                     b.HasOne("TomatoNovel.Domain.Entities.Book", "Book")
@@ -926,6 +1004,8 @@ namespace TomatoNovel.Infrastructure.Migrations
                     b.Navigation("Favorites");
 
                     b.Navigation("Follows");
+
+                    b.Navigation("Messages");
                 });
 
             modelBuilder.Entity("TomatoNovel.Domain.Entities.Volume", b =>

@@ -3,7 +3,6 @@ import { useRef, useState } from 'react'
 import { useGoTo } from '@/hooks/use-go-to'
 import {} from '@/api/book-info.api'
 
-// ⚠️ 这里假设你 React 侧已有等价的 user store hook
 import { useUserStore } from '@/store/use-user-store'
 
 import styles from './ReaderHeader.module.scss'
