@@ -8,6 +8,7 @@ using TomatoNovel.Application.Interfaces;
 
 [ApiController]
 [Route("api/writer")]
+[AllowAnonymous]
 public class WriterController : ControllerBase
 {
     private readonly IWriterService writerService;
@@ -22,7 +23,6 @@ public class WriterController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("news")]
-    [AllowAnonymous]
     public IActionResult GetNewsList([FromQuery] WriterNewsQueryRequestDto request)
     {
         var result = this.writerService.GetNewsList(request);
@@ -34,7 +34,6 @@ public class WriterController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("classroom")]
-    [AllowAnonymous]
     public IActionResult GetClassroomList(
         [FromQuery] WriterClassroomQueryRequestDto request)
     {

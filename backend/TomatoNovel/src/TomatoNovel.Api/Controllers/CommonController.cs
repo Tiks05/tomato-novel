@@ -9,6 +9,7 @@ using TomatoNovel.Application.Interfaces;
 
 [ApiController]
 [Route("api/common")]
+[AllowAnonymous]
 public class CommonController : ControllerBase
 {
     private readonly ICommonService commonService;
@@ -23,7 +24,6 @@ public class CommonController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("banner-list")]
-    [AllowAnonymous]
     [ProducesResponseType(
         typeof(ApiResponse<BannerListResponseDto>),
         StatusCodes.Status200OK)]
@@ -43,7 +43,6 @@ public class CommonController : ControllerBase
     }
 
     [HttpGet("adapt-list")]
-    [AllowAnonymous]
     public IActionResult GetAdaptList([FromQuery] AdaptListRequestDto request)
     {
         var result = this.commonService.GetAdaptList(request);

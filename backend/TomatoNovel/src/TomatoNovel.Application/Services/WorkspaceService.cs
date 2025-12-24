@@ -100,7 +100,7 @@ public class WorkspaceService : IWorkspaceService
                 NoticeUrl = n.NoticeUrl ?? string.Empty,
                 Title = n.Title,
                 Time = n.UpdatedAt.ToString("MM.dd"),
-                Path = $"/newsinfo/{n.Id}"
+                Path = $"/newsinfo/{n.Id}",
             }).ToList(),
         };
     }
@@ -115,7 +115,7 @@ public class WorkspaceService : IWorkspaceService
             Items = news.Select(n => new NewsItemDto
             {
                 Title = n.Title,
-                Path = $"/newsinfo/{n.Id}"
+                Path = $"/newsinfo/{n.Id}",
             }).ToList(),
         };
     }
@@ -235,10 +235,9 @@ public class WorkspaceService : IWorkspaceService
 
         return new MyBookListResponseDto
         {
-            Books = items
+            Books = items,
         };
     }
-
 
     // 8. 书籍详情
     public BookDetailResponseDto GetBookDetail(int bookId)
@@ -447,7 +446,7 @@ public class WorkspaceService : IWorkspaceService
                     UpdatedAt = c.UpdatedAt.ToString("yyyy-MM-dd HH:mm"),
                     Status = c.Status,
                     StatusText = c.Status,
-                    TypoCount = 0
+                    TypoCount = 0,
                 }).ToList(),
         };
     }

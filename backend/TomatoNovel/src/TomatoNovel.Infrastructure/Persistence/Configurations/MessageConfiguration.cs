@@ -36,7 +36,6 @@ public class MessageConfiguration : IEntityTypeConfiguration<Message>
         // =========================
         builder.Property(m => m.Type)
                .HasColumnName("type")
-               .HasMaxLength(16)
                .IsRequired();
 
         builder.Property(m => m.Title)

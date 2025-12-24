@@ -8,6 +8,7 @@ using TomatoNovel.Application.Interfaces;
 
 [ApiController]
 [Route("api/writer-info")]
+[AllowAnonymous]
 public class WriterInfoController : ControllerBase
 {
     private readonly IWriterInfoService writerInfoService;
@@ -18,7 +19,6 @@ public class WriterInfoController : ControllerBase
     }
 
     [HttpGet("header/{writerId}")]
-    [AllowAnonymous]
     [ProducesResponseType(
         typeof(ApiResponse<WriterHeaderResponseDto>),
         StatusCodes.Status200OK)]
@@ -36,7 +36,6 @@ public class WriterInfoController : ControllerBase
     }
 
     [HttpGet("works/{writerId}")]
-    [AllowAnonymous]
     [ProducesResponseType(
         typeof(ApiResponse<WriterWorksResponseDto>),
         StatusCodes.Status200OK)]

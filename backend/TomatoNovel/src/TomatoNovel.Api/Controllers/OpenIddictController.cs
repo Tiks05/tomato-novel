@@ -16,6 +16,7 @@ using OpenIddict.Server.AspNetCore;
 using TomatoNovel.Infrastructure.Persistence;
 
 [ApiController]
+[AllowAnonymous]
 public class OpenIddictController : ControllerBase
 {
     private readonly TomatoNovelDbContext dbContext;
@@ -27,11 +28,10 @@ public class OpenIddictController : ControllerBase
 
     /// <summary>
     /// OAuth2 / OpenID Connect token endpoint.
-    /// ⚠️ 注意：不做密码校验，只做 Token 颁发.
+    /// 注意：不做密码校验，只做 Token 颁发.
     /// </summary>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     [HttpPost("~/connect/token")]
-    [AllowAnonymous]
     [Consumes("application/x-www-form-urlencoded")]
     [Produces("application/json")]
     public async Task<IActionResult> ExchangeAsync()

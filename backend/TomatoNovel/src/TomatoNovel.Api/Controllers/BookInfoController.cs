@@ -9,6 +9,7 @@ using TomatoNovel.Application.Interfaces;
 
 [ApiController]
 [Route("api/book-info")]
+[AllowAnonymous]
 public class BookInfoController : ControllerBase
 {
     private readonly IBookInfoService bookInfoService;
@@ -19,7 +20,6 @@ public class BookInfoController : ControllerBase
     }
 
     [HttpGet("header/{bookId}")]
-    [AllowAnonymous]
     public IActionResult GetBookHeader([FromRoute] int bookId)
     {
         var result = this.bookInfoService.GetBookHeader(bookId);
@@ -27,7 +27,6 @@ public class BookInfoController : ControllerBase
     }
 
     [HttpGet("content/{bookId}")]
-    [AllowAnonymous]
     public IActionResult GetBookContent([FromRoute] int bookId)
     {
         var result = this.bookInfoService.GetBookContent(bookId);
@@ -35,7 +34,6 @@ public class BookInfoController : ControllerBase
     }
 
     [HttpGet("chapter")]
-    [AllowAnonymous]
     public IActionResult ReadChapter([FromQuery] ChapterReadRequestDto request)
     {
         var result = this.bookInfoService.ReadChapter(request);

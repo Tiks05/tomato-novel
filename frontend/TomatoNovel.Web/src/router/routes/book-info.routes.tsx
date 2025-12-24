@@ -11,7 +11,6 @@ export const bookInfoRoutes: RouteObject[] = [
     element: <BookInfoPage />,
     handle: {
       title: '小说详情',
-      requiresAuth: false,
     },
   },
 
@@ -21,7 +20,6 @@ export const bookInfoRoutes: RouteObject[] = [
     element: <ReaderPage />,
     handle: {
       title: '阅读章节',
-      requiresAuth: false,
     },
   },
 ]

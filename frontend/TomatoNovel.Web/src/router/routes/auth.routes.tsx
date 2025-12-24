@@ -13,7 +13,6 @@ export const authRoutes: RouteObject[] = [
     element: <AuthPage />,
     handle: {
       title: '登录',
-      requiresAuth: false,
     },
     children: [
       {

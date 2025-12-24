@@ -1,4 +1,4 @@
-﻿namespace TomatoNovel.WebAPI.Controllers;
+﻿namespace TomatoNovel.Api.Controllers;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -10,7 +10,6 @@ using TomatoNovel.Application.Interfaces;
 
 [ApiController]
 [Route("api/workspace")]
-[Authorize]
 public class WorkspaceController : ControllerBase
 {
     private readonly IWorkspaceService workspaceService;
@@ -22,7 +21,6 @@ public class WorkspaceController : ControllerBase
 
     // 1. 申请作家
     [HttpPost("apply")]
-    [Authorize]
     [Consumes("multipart/form-data")]
     [ProducesResponseType(
         typeof(ApiResponse<AuthorApplyResponseDto>),
@@ -68,7 +66,6 @@ public class WorkspaceController : ControllerBase
 
     // 2. 作家统计
     [HttpGet("writer/stats/{userId:int}")]
-    [AllowAnonymous]
     public IActionResult GetWriterStats([FromRoute] int userId)
     {
         var result = this.workspaceService.GetWriterStats(userId);
@@ -77,7 +74,6 @@ public class WorkspaceController : ControllerBase
 
     // 3. 公告列表
     [HttpGet("writer/notice-list")]
-    [AllowAnonymous]
     public IActionResult GetNoticeList([FromQuery] int limit = 3)
     {
         var result = this.workspaceService.GetNoticeList(limit);
@@ -86,7 +82,6 @@ public class WorkspaceController : ControllerBase
 
     // 4. 活动列表
     [HttpGet("writer/news-list")]
-    [AllowAnonymous]
     public IActionResult GetNewsList([FromQuery] int limit = 4)
     {
         var result = this.workspaceService.GetNewsList(limit);
@@ -95,7 +90,6 @@ public class WorkspaceController : ControllerBase
 
     // 5. 榜单
     [HttpGet("writer/book-rank")]
-    [AllowAnonymous]
     public IActionResult GetBookRank([FromQuery] string type, [FromQuery] string category)
     {
         var result = this.workspaceService.GetBookRank(type, category);
@@ -104,7 +98,6 @@ public class WorkspaceController : ControllerBase
 
     // 6. 创建书籍
     [HttpPost("writer/create-book")]
-    [Authorize]
     public IActionResult CreateBook(
         [FromForm] long id,
         [FromForm] string name,

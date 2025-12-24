@@ -1,5 +1,6 @@
 import { lazy } from 'react'
 import type { RouteObject } from 'react-router-dom'
+import { RouteGuard } from '@/router/guards/RouteGuard'
 
 // ===== 懒加载页面 =====
 
@@ -25,20 +26,26 @@ export const workspaceRoutes: RouteObject[] = [
   // ===== 申请作家 =====
   {
     path: 'workspace/apply',
-    element: <WorkspaceApplyPage />,
+    element: (
+      <RouteGuard>
+        <WorkspaceApplyPage />
+      </RouteGuard>
+    ),
     handle: {
       title: '申请作家',
-      requiresAuth: true,
     },
   },
 
   // ===== 创建 / 编辑章节（非 writer 子路由）=====
   {
     path: 'workspace/writer/create-chapter/:bookId/:volumeId?',
-    element: <CreateChapterPage />,
+    element: (
+      <RouteGuard requireAuthor>
+        <CreateChapterPage />
+      </RouteGuard>
+    ),
     handle: {
       title: '创建章节',
-      requiresAuth: true,
     },
   },
   {
@@ -53,53 +60,44 @@ export const workspaceRoutes: RouteObject[] = [
   // ===== 作家工作台 =====
   {
     path: 'workspace/writer',
-    element: <WorkspaceWriterPage />,
+    element: (
+      <RouteGuard requireAuthor>
+        <WorkspaceWriterPage />
+      </RouteGuard>
+    ),
     handle: {
       title: '作家工作台',
-      requiresAuth: true,
     },
     children: [
       {
         index: true,
         element: <AuthorSummaryPage />,
-        handle: {
-          title: '工作台首页',
-        },
+        handle: { title: '工作台首页' },
       },
       {
         path: 'create-book',
         element: <CreateBookPage />,
-        handle: {
-          title: '创建新书',
-        },
+        handle: { title: '创建新书' },
       },
       {
         path: 'book-overview/:bookId',
         element: <BookOverviewPage />,
-        handle: {
-          title: '作品总览',
-        },
+        handle: { title: '作品总览' },
       },
       {
         path: 'update-book/:bookId',
         element: <UpdateBookPage />,
-        handle: {
-          title: '修改书籍',
-        },
+        handle: { title: '修改书籍' },
       },
       {
         path: 'manage-chapter/:bookId',
         element: <ChapterManagePage />,
-        handle: {
-          title: '章节管理',
-        },
+        handle: { title: '章节管理' },
       },
       {
         path: 'notifications',
         element: <NotificationCenterPage />,
-        handle: {
-          title: '消息通知',
-        },
+        handle: { title: '消息通知' },
       },
     ],
   },

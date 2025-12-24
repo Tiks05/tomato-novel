@@ -11,7 +11,7 @@
  Target Server Version : 80043 (8.0.43)
  File Encoding         : 65001
 
- Date: 24/12/2025 11:52:51
+ Date: 24/12/2025 21:19:51
 */
 
 SET NAMES utf8mb4;
@@ -385,6 +385,46 @@ CREATE TABLE `follow`  (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for message
+-- ----------------------------
+DROP TABLE IF EXISTS `message`;
+CREATE TABLE `message`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `type` int NOT NULL COMMENT '0-4：审核提醒 / 作品通知 / 活动通知 / 系统通知 / 互动通知',
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `is_read` tinyint(1) NOT NULL DEFAULT 0,
+  `read_at` datetime NULL DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `IX_message_created_at`(`created_at` ASC) USING BTREE,
+  INDEX `IX_message_is_read`(`is_read` ASC) USING BTREE,
+  INDEX `IX_message_type`(`type` ASC) USING BTREE,
+  INDEX `IX_message_user_id`(`user_id` ASC) USING BTREE,
+  CONSTRAINT `FK_message_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of message
+-- ----------------------------
+INSERT INTO `message` VALUES (1, 2, 1, '作品通知：作品书名释放提醒', '作者你好，你的作品《Tikers的新书》已连续6个月未更新，平台将释放书名，将其书名重置为《Tiks的第1本书》并调整为隐藏状态，你可在「作品设置」页面重新修改书名并取消隐藏。<span class=\"link\">点此前往作品信息修改页面</span>', 0, NULL, '2025-12-24 12:00:09');
+INSERT INTO `message` VALUES (2, 2, 3, '系统通知：笔名释放提醒', '作者你好，你创建的作品书名已全部被释放，平台将释放你的作者笔名为「作者4ed9rr」，你可在「账号设置」页面重新修改笔名。', 1, '2025-12-24 04:00:51', '2025-12-24 12:00:09');
+INSERT INTO `message` VALUES (3, 2, 1, '作品通知：作品书名释放提醒', '作者你好，你的作品《Tikers的新书》已连续2个月未更新，作品断更6个月后，平台将释放该书名，请尽快更新。若你的全部作品书名全被释放，平台将释放你的作者笔名。如果没有写作思路，可观看作者小课堂获取灵感：<span class=\"link\">点此跳转</span>', 0, '2025-12-24 12:00:09', '2025-12-24 12:00:09');
+INSERT INTO `message` VALUES (4, 2, 3, '系统通知：作者信息审核已通过', '你提交的作者信息审核已通过。', 0, '2025-12-24 12:00:09', '2025-12-24 12:00:09');
+INSERT INTO `message` VALUES (5, 2, 0, '审核提醒：作品审核已通过', '您的作品《Tikers的新书》已通过审核，请尽快更新至2万字进行签约评估，签约通过的作品可以被用户搜索 / 在分类查看。', 1, '2025-12-24 12:00:09', '2025-12-24 12:00:09');
+INSERT INTO `message` VALUES (6, 2, 1, '作品通知：作品书名释放提醒', '作者你好，你的作品《Tikers的新书》已连续6个月未更新，平台将释放书名，将其书名重置为《Tiks的第1本书》并调整为隐藏状态，你可在「作品设置」页面重新修改书名并取消隐藏。<span class=\"link\">点此前往作品信息修改页面</span>', 1, '2025-12-24 04:06:17', '2025-12-24 12:02:34');
+INSERT INTO `message` VALUES (7, 2, 3, '系统通知：笔名释放提醒', '作者你好，你创建的作品书名已全部被释放，平台将释放你的作者笔名为「作者4ed9rr」，你可在「账号设置」页面重新修改笔名。', 1, '2025-12-24 04:07:32', '2025-12-24 12:02:34');
+INSERT INTO `message` VALUES (8, 2, 1, '作品通知：作品书名释放提醒', '作者你好，你的作品《Tikers的新书》已连续2个月未更新，作品断更6个月后，平台将释放该书名，请尽快更新。若你的全部作品书名全被释放，平台将释放你的作者笔名。如果没有写作思路，可观看作者小课堂获取灵感：<span class=\"link\">点此跳转</span>', 1, '2025-12-24 12:02:34', '2025-12-24 12:02:34');
+INSERT INTO `message` VALUES (9, 2, 3, '系统通知：作者信息审核已通过', '你提交的作者信息审核已通过。', 1, '2025-12-24 12:02:34', '2025-12-24 12:02:34');
+INSERT INTO `message` VALUES (10, 2, 0, '审核提醒：作品审核已通过', '您的作品《Tikers的新书》已通过审核，请尽快更新至2万字进行签约评估，签约通过的作品可以被用户搜索 / 在分类查看。', 1, '2025-12-24 12:02:34', '2025-12-24 12:02:34');
+INSERT INTO `message` VALUES (11, 2, 2, '活动通知：创作激励活动开启', '作者你好，本月创作激励活动已开启，符合条件的作品可获得额外稿费奖励，详情请前往「作家福利」页面查看。', 0, NULL, '2025-12-24 12:02:34');
+INSERT INTO `message` VALUES (12, 2, 4, '互动通知：有新的读者评论', '你的作品《Tikers的新书》收到了一条新的读者评论，快去看看读者怎么说吧。', 0, NULL, '2025-12-24 12:02:34');
+INSERT INTO `message` VALUES (13, 2, 3, '系统通知：账号安全提醒', '系统检测到你的账号在新设备上登录，如非本人操作，请及时修改密码。', 1, '2025-12-24 12:02:34', '2025-12-24 12:02:34');
+INSERT INTO `message` VALUES (14, 2, 1, '作品通知：作品数据周报', '你的作品《Tikers的新书》本周新增阅读量 1,245 次，新增收藏 38 次，继续加油创作吧。', 1, '2025-12-24 12:02:34', '2025-12-24 12:02:34');
+INSERT INTO `message` VALUES (15, 2, 0, '审核提醒：章节内容审核通过', '你提交的最新章节内容已通过平台审核，章节现已对读者可见。', 1, '2025-12-24 12:02:34', '2025-12-24 12:02:34');
+
+-- ----------------------------
 -- Table structure for news
 -- ----------------------------
 DROP TABLE IF EXISTS `news`;
@@ -535,6 +575,7 @@ CREATE TABLE `openiddicttokens`  (
 -- ----------------------------
 INSERT INTO `openiddicttokens` VALUES ('00fee965-cb32-4be8-b718-a4a150646686', NULL, NULL, '80b34558-6b41-40ec-a6eb-3cff03cfa19b', '2025-12-17 07:13:10.000000', '2025-12-17 08:13:10.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('043e52cb-d367-474e-83d4-90ee35f94158', NULL, NULL, '8f8d9284-a587-4ae5-9c85-9926c18020f7', '2025-12-15 13:11:59.000000', '2025-12-15 13:31:59.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
+INSERT INTO `openiddicttokens` VALUES ('04bf7fc8-cfbe-45cc-8628-1204c01edb93', NULL, NULL, '43ddaa80-3d7c-43a4-bf2b-d7359dded79f', '2025-12-24 09:53:18.000000', '2025-12-24 10:13:18.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('06a08c23-c019-442a-8c24-bf6adacb3c0e', NULL, NULL, '09f8bfa0-85b9-43d2-b6fc-64c195417322', '2025-12-17 09:17:48.000000', '2025-12-17 10:17:48.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('08af8240-6f03-4cf5-881b-29016dfaea43', NULL, NULL, '744d7b3e-48d7-4eda-a647-980498ad0910', '2025-12-15 08:47:06.000000', '2025-12-15 09:07:06.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('0a9e0944-a529-49a5-b6c7-7346c4369fe3', NULL, NULL, 'f6730466-5ac6-45fe-8b6c-6fed25f79570', '2025-12-17 08:34:56.000000', '2025-12-17 08:54:56.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
@@ -555,15 +596,20 @@ INSERT INTO `openiddicttokens` VALUES ('1dda2bea-9709-4239-9053-c32d56a21720', N
 INSERT INTO `openiddicttokens` VALUES ('2066a6ff-d153-4f53-8ad8-162d26fd0744', NULL, NULL, 'bef66a46-5e01-4277-92cf-3d9ea41bc426', '2025-12-17 07:13:10.000000', '2025-12-17 07:33:10.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('23e6ffb3-e35d-4581-82df-669e0f2ecf87', NULL, NULL, '6b543995-b1e3-4b4c-9f27-1e486fd372c2', '2025-12-16 13:18:37.000000', '2025-12-16 13:38:37.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('252908c7-b743-4d30-9906-92a1386d0bf7', NULL, NULL, '70c24e65-feac-4075-ad1e-791346d5ea61', '2025-12-17 07:09:03.000000', '2025-12-17 08:09:03.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
+INSERT INTO `openiddicttokens` VALUES ('25d2a1ab-3092-47c3-93a6-06f30a90d0d5', NULL, NULL, '4b70c733-fcfd-4340-a90e-4728ed020f1c', '2025-12-24 12:32:16.000000', '2025-12-24 12:52:16.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('266196f4-7aee-4f66-9376-4bfc6f630a90', NULL, NULL, '9fd132d3-f99e-41fb-9a2c-40adee867ef4', '2025-12-17 09:39:33.000000', '2025-12-17 10:39:33.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('26a8ac7d-6ce8-4c16-8903-7343da026b8c', NULL, NULL, '32839e2d-7376-4b88-afa9-931f3c572f05', '2025-12-15 13:17:35.000000', '2025-12-15 14:17:35.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('26d2d2c8-cf17-4710-ab40-629b08a9bbb7', NULL, NULL, '2cd5a12e-d3e9-4f95-a664-06c5e47271cd', '2025-12-17 09:17:48.000000', '2025-12-17 09:37:48.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('2716c783-8649-4b33-94c3-dde09755cb34', NULL, NULL, '73a04fd1-d6f4-403c-a579-1dbed0f79b5f', '2025-12-14 06:06:22.000000', '2025-12-14 06:26:22.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
+INSERT INTO `openiddicttokens` VALUES ('2813166b-dc32-4814-b1d5-6422c5e5497b', NULL, NULL, 'ee3cd7b3-8e79-4db9-9041-72a8cd0abdda', '2025-12-24 06:36:59.000000', '2025-12-24 07:36:59.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('28e974c0-2589-4fad-90c4-636c2dbaa693', NULL, NULL, '7a1b8126-7bd9-422a-aa34-0074f6a838c0', '2025-12-17 04:33:52.000000', '2025-12-17 05:33:52.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('299a29f7-fbf0-46af-a44c-6857dc24092d', NULL, NULL, 'ecf6be09-30ab-4247-8af8-64d2d10543f0', '2025-12-23 06:00:22.000000', '2025-12-23 06:20:22.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
+INSERT INTO `openiddicttokens` VALUES ('2da74e46-d004-48b9-94bd-af19d3307fbc', NULL, NULL, '2f31eaee-eab8-459b-8d6d-3d3f245d528a', '2025-12-24 08:25:35.000000', '2025-12-24 08:45:35.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('317a356b-db37-4a37-ba51-889490a2aff2', NULL, NULL, 'd5e991ce-aac8-4ab9-bc4d-2eb44b3bd14f', '2025-12-17 08:38:56.000000', '2025-12-17 09:38:56.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
+INSERT INTO `openiddicttokens` VALUES ('31a74654-5a7c-47db-9063-3b4884044962', NULL, NULL, 'f3445aab-df25-4d44-9c80-a68e94cd4458', '2025-12-24 10:05:37.000000', '2025-12-24 10:25:37.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('31dac68b-12ea-4cd0-b274-4d87f424ca2f', NULL, NULL, 'fd292a35-191d-41c1-86d4-44de2be9a014', '2025-12-23 07:55:52.000000', '2025-12-23 08:15:52.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('35042b5e-db93-4fb7-a2ac-99b54471f1f3', NULL, NULL, '8ff42144-af5a-459a-b1ee-d2b36ac96b1d', '2025-12-17 08:14:12.000000', '2025-12-17 09:14:12.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
+INSERT INTO `openiddicttokens` VALUES ('365dbb9f-0073-48c9-92d6-af4c3f9f9faa', NULL, NULL, '7a03ba11-ecd0-45d8-abaf-37b42a86b760', '2025-12-24 09:53:06.000000', '2025-12-24 10:13:06.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('372cdf5d-feb3-4207-a43f-bed0e5d53906', NULL, NULL, '0fd70009-ea96-47fb-9c12-818dfe43f020', '2025-12-23 07:26:02.000000', '2025-12-23 08:26:02.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('378d82d6-c41f-4a57-a664-b32e9ab5cff9', NULL, NULL, '3a74479d-e8aa-4ba4-84cc-2e97a6c05ffc', '2025-12-16 12:54:01.000000', '2025-12-16 13:14:01.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('3840d63e-abbf-4494-a5e1-f76b40bcd7fa', NULL, NULL, 'be966d9f-92b6-4152-9662-64d68e887528', '2025-12-23 07:26:02.000000', '2025-12-23 07:46:02.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
@@ -573,18 +619,24 @@ INSERT INTO `openiddicttokens` VALUES ('3bebc3f8-2aeb-423b-9b45-87d3aff17496', N
 INSERT INTO `openiddicttokens` VALUES ('3e51bce0-49f4-4dba-b8b5-70a6dc679dc3', NULL, NULL, '423a0c16-3953-46ad-9b45-3e4cebd60a62', '2025-12-23 08:52:34.000000', '2025-12-23 09:12:34.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('4629371e-d293-4703-9a35-87627594ca37', NULL, NULL, '17a5ec36-68b6-457b-b1f1-a46f828107fd', '2025-12-17 08:18:32.000000', '2025-12-17 09:18:32.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('495126d6-7a6d-4a78-bbb8-28bd2eb9cec9', NULL, NULL, '7ba324e9-a122-4db8-9b8b-dac5ecd5bc2d', '2025-12-15 08:47:06.000000', '2025-12-15 09:47:06.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
+INSERT INTO `openiddicttokens` VALUES ('4b59e400-73d6-481b-b193-abd6016be50f', NULL, NULL, '0173635c-6d4e-467e-a0f1-f6b1e0cab1ca', '2025-12-24 12:32:16.000000', '2025-12-24 13:32:16.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('4bb42a42-e8fe-4cb2-98d8-65514e80e90d', NULL, NULL, 'cad1744f-2191-4b34-8d52-3f59f909f9f6', '2025-12-17 03:56:17.000000', '2025-12-17 04:56:17.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('4c86604a-3190-406f-be2b-8f313a8c63bb', NULL, NULL, 'c8f5902f-de97-4d67-aa55-7e67a5b79684', '2025-12-23 02:12:07.000000', '2025-12-23 02:32:07.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('4d3d5803-f30d-435a-82f2-26196dbc593a', NULL, NULL, '22c44b55-b6cc-4b4e-8c83-b65b261f3230', '2025-12-17 06:18:28.000000', '2025-12-17 07:18:28.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('4e7b1ab9-a8e4-4d08-a376-0fbc758e0f13', NULL, NULL, 'e74de3df-a3df-445f-b4cf-3be2e884b73e', '2025-12-14 09:29:06.000000', '2025-12-14 09:49:06.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('500da328-56ca-4768-93cc-80c2753efd80', NULL, NULL, 'e1c13add-4535-4407-b495-5aa01b280bc1', '2025-12-17 04:33:52.000000', '2025-12-17 04:53:52.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('529fd5ee-d00f-4ead-a5a1-9d7e2e38e26d', NULL, NULL, '38814399-3c01-49fd-80ea-8be2aa0eff5a', '2025-12-23 06:16:01.000000', '2025-12-23 07:16:01.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
+INSERT INTO `openiddicttokens` VALUES ('55c25345-34c6-41c1-9258-160821066996', NULL, NULL, '23649a76-5c09-40d1-8e71-3544d35c643a', '2025-12-24 09:53:06.000000', '2025-12-24 10:53:06.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
+INSERT INTO `openiddicttokens` VALUES ('568021ca-93ce-4193-a181-1ffd8077160a', NULL, NULL, '1dbe1573-1bd4-4795-bac6-b4e50bc3250b', '2025-12-24 03:55:51.000000', '2025-12-24 04:15:51.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
+INSERT INTO `openiddicttokens` VALUES ('570c5185-7651-46a1-9c90-3788c5fcf0fe', NULL, NULL, '31fcbca5-43ba-46fc-8495-3180b8e6dc55', '2025-12-24 09:53:18.000000', '2025-12-24 10:53:18.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('58818d21-c205-44d8-b87f-c68044bf2510', NULL, NULL, 'b4e5a07c-89c7-4073-b73b-daea95cf32d0', '2025-12-17 09:13:18.000000', '2025-12-17 10:13:18.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('5afe95d1-bacb-4bb3-968a-5ad25c0db9e2', NULL, NULL, '8cd0ae25-4af8-4f0e-8a3f-50f8a886e623', '2025-12-17 06:38:20.000000', '2025-12-17 06:58:20.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('65ef9f40-ecfb-4a83-8eab-887ac935a206', NULL, NULL, 'eb0a77a6-9c91-424f-a150-bf92a059a5bf', '2025-12-23 03:49:30.000000', '2025-12-23 04:49:30.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('66470c3b-ec04-4beb-bb54-910fd576eec0', NULL, NULL, '2fef2b1b-bb46-44e2-a804-a2ca79aa0009', '2025-12-23 03:49:30.000000', '2025-12-23 04:09:30.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('693645e1-57ec-4f52-8928-3eb816adacf8', NULL, NULL, '4139c058-4157-4f98-9ed4-45dc07232bed', '2025-12-23 02:31:32.000000', '2025-12-23 03:31:32.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
+INSERT INTO `openiddicttokens` VALUES ('69a83fba-34ab-4c9d-bca1-71b000f28c50', NULL, NULL, '9f1976c0-25c1-4ebc-bdd8-6e5eaf689deb', '2025-12-24 13:19:05.000000', '2025-12-24 14:19:05.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('6bf7de61-01f0-4235-bd4e-fa4d03c42654', NULL, NULL, '4e4afee2-0c14-49bf-8f4d-ec7dd97fec3e', '2025-12-17 09:19:31.000000', '2025-12-17 09:39:31.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
+INSERT INTO `openiddicttokens` VALUES ('6cf7f17f-b7fc-47fa-9ac2-b36c53dcc8b8', NULL, NULL, 'c957c71a-7131-49a4-97f3-b89781db5117', '2025-12-24 08:25:35.000000', '2025-12-24 09:25:35.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('6d04b4b5-3bda-4346-bd01-02634fa552f4', NULL, NULL, 'ab0ba491-9413-48cd-8388-7aed2874ce6c', '2025-12-17 11:32:19.000000', '2025-12-17 12:32:19.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('6ecc2f25-e321-4b60-8fa4-e60e7f9d2984', NULL, NULL, '880d2076-324a-4c57-9427-4eb2f29fcc69', '2025-12-17 03:56:17.000000', '2025-12-17 04:16:17.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('70b2b5f8-5a07-4702-9ed3-780366a93afd', NULL, NULL, '844429bd-32a5-4655-891a-f504916c8f29', '2025-12-23 02:37:16.000000', '2025-12-23 02:57:16.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
@@ -594,10 +646,12 @@ INSERT INTO `openiddicttokens` VALUES ('7573a215-fc1e-433b-9929-51b45c6ef3f9', N
 INSERT INTO `openiddicttokens` VALUES ('75d6102e-8a6c-4493-a0b7-7e01443921a2', NULL, NULL, '36f0c1b1-fb2e-403f-8934-39e31b37a836', '2025-12-23 02:04:52.000000', '2025-12-23 02:24:52.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('77809932-4544-4357-953e-b425dc261c16', NULL, NULL, '9b15d63f-bd24-4bc9-bfa4-531df4c0493a', '2025-12-17 05:40:29.000000', '2025-12-17 06:00:29.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('78d1ee01-6f49-4024-98c9-18485b3f1800', NULL, NULL, '9c09b10f-1465-460d-b89b-877757fb9541', '2025-12-23 06:36:52.000000', '2025-12-23 07:36:52.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
+INSERT INTO `openiddicttokens` VALUES ('7a634d63-b296-4e98-be16-f3afbd8cce9a', NULL, NULL, '835b3021-e51c-40b1-b96a-17004fa0fc1e', '2025-12-24 03:55:51.000000', '2025-12-24 04:55:51.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('7aabf15e-a487-4c87-ae59-7f2160329bec', NULL, NULL, '47eed189-044d-4dc6-be15-7fbf214e2602', '2025-12-17 05:59:43.000000', '2025-12-17 06:59:43.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('7cb31153-19c5-4c5c-8b00-c75123814a1b', NULL, NULL, '49c1f84d-8710-46f4-9ac9-f8a153ee24fd', '2025-12-14 06:15:20.000000', '2025-12-14 07:15:20.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('7efb0dcf-3787-4f64-8a04-a6eb5295bef4', NULL, NULL, 'fb5ab315-777a-4608-b029-4228d08d5c06', '2025-12-14 09:14:38.000000', '2025-12-14 09:34:38.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('818877b1-5b2b-4926-8780-735119def880', NULL, NULL, '06f9fb54-7d2d-48b7-9db8-e0753873a70e', '2025-12-17 07:09:03.000000', '2025-12-17 07:29:03.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
+INSERT INTO `openiddicttokens` VALUES ('848b9d33-98d5-4954-8bb4-edeb193c00f6', NULL, NULL, 'f8022507-0fd3-4a32-9b67-c8b874f132b8', '2025-12-24 11:16:37.000000', '2025-12-24 11:36:37.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('85baddef-b387-4ea2-b36e-bc32b770a839', NULL, NULL, '24dca607-8a29-4f63-8902-a81238793b11', '2025-12-23 02:48:18.000000', '2025-12-23 03:48:18.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('863afdc1-4920-41fc-9d89-b873b8ae2276', NULL, NULL, 'e7c87f6f-bedc-425b-b95c-edf0887682c8', '2025-12-23 02:10:18.000000', '2025-12-23 03:10:18.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('87dc133b-2dd7-4b49-960e-bc70bf1aad31', NULL, NULL, '7b3dbaa7-2564-408b-9406-7b92771e825a', '2025-12-17 05:41:04.000000', '2025-12-17 06:01:04.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
@@ -609,7 +663,9 @@ INSERT INTO `openiddicttokens` VALUES ('8db9aaa0-f1f4-4bb2-ae12-9ea959ee97ab', N
 INSERT INTO `openiddicttokens` VALUES ('8dd8d921-1fd8-4227-9bca-2e41e63c605f', NULL, NULL, '690df4ce-c748-4c6b-b6b2-bff6a418b748', '2025-12-23 07:55:52.000000', '2025-12-23 08:55:52.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('8ec15453-f017-4ff7-8289-1da6eb1af371', NULL, NULL, '41e7aa96-b678-43a5-a147-4fec7decf086', '2025-12-16 13:19:23.000000', '2025-12-16 14:19:23.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('904066b0-1369-4162-aaec-6a90aede5058', NULL, NULL, '3f300091-56c6-4159-ac1f-b79811a2f952', '2025-12-23 06:16:01.000000', '2025-12-23 06:36:01.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
+INSERT INTO `openiddicttokens` VALUES ('92f46954-814c-43e6-806b-bcef6eff7121', NULL, NULL, '16b90d5c-9e59-43c7-8543-ff7f203dcb9f', '2025-12-24 09:56:44.000000', '2025-12-24 10:16:44.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('940eb8b6-d908-4bb0-b32b-e3c837cf6a0f', NULL, NULL, '7593903d-ef19-4cd7-ad3f-561ea0b335f7', '2025-12-23 02:48:18.000000', '2025-12-23 03:08:18.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
+INSERT INTO `openiddicttokens` VALUES ('9659eea4-ca50-492d-a310-4579b3ae2778', NULL, NULL, '7ee59dfd-0bbd-4bf4-9d4a-f8be203cbf4a', '2025-12-24 11:16:37.000000', '2025-12-24 12:16:37.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('97082ee6-39d7-4a06-b21a-9dde8123c432', NULL, NULL, '97b490ff-a9a5-4faf-96b1-f093e58aec70', '2025-12-23 02:33:00.000000', '2025-12-23 03:33:00.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('9c0c4fe6-c969-43ff-80c5-fb39cfd3be00', NULL, NULL, '78865e4a-3dd9-4250-b739-3d24031ebcdd', '2025-12-16 09:14:21.000000', '2025-12-16 10:14:21.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('a1a5c841-d514-40e8-a18c-b57fa47ba276', NULL, NULL, '016f435e-af57-45b8-a737-ad6dd8fedf9b', '2025-12-23 02:12:07.000000', '2025-12-23 03:12:07.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
@@ -624,6 +680,7 @@ INSERT INTO `openiddicttokens` VALUES ('aef6cd00-73e6-4167-abc1-221c6dfed457', N
 INSERT INTO `openiddicttokens` VALUES ('af155b63-f63f-4f87-9c79-0fbaa8fe774f', NULL, NULL, 'a992a6c4-e944-4404-b85f-5791b6758b5c', '2025-12-23 02:10:18.000000', '2025-12-23 02:30:18.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('b06f2f70-9526-425b-9ed5-61963eff1f65', NULL, NULL, 'fd5fa561-e58c-418f-878d-ffa06b91e907', '2025-12-17 07:20:05.000000', '2025-12-17 08:20:05.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('b0dfbb82-0d93-452b-9fa7-192d3c4200cb', NULL, NULL, '4f4a65b0-b58b-4db6-81dc-32515ee0ed72', '2025-12-14 06:06:22.000000', '2025-12-14 07:06:22.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
+INSERT INTO `openiddicttokens` VALUES ('b2bb11f0-4ef7-4629-bc51-86ef6633ef6d', NULL, NULL, '02d9251f-bba1-4935-a9eb-6a8005bcbecf', '2025-12-24 13:19:05.000000', '2025-12-24 13:39:05.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('b73c81ed-37a4-48f8-85c6-6f12e0526e8b', NULL, NULL, 'f0c39c1d-aa2d-4d37-8191-12b7471cbb33', '2025-12-16 12:56:03.000000', '2025-12-16 13:56:03.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('b869f35e-251a-4992-9191-254185afcee2', NULL, NULL, '850c6ae5-ad99-4a3b-8b3f-38cb2451ba4f', '2025-12-16 13:17:36.000000', '2025-12-16 14:17:36.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('b9ce2aff-bf5d-4a41-abd4-7dbc7543a8c1', NULL, NULL, '56390ef5-f9b5-4613-999c-71edc4330c66', '2025-12-17 08:11:19.000000', '2025-12-17 08:31:19.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
@@ -631,7 +688,9 @@ INSERT INTO `openiddicttokens` VALUES ('be1bbdac-91a8-4ae1-be06-a9b4a1f33ea5', N
 INSERT INTO `openiddicttokens` VALUES ('bee72f0f-1c1c-401e-af7f-b7e4d4212021', NULL, NULL, '1353b668-fa4e-4d44-9b5b-d12b6f400256', '2025-12-15 13:06:09.000000', '2025-12-15 14:06:09.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('bfafd44b-8c94-47d2-abe9-53f82537a2c7', NULL, NULL, 'c27f11b1-c774-4008-9f8c-dccd1c09681f', '2025-12-17 09:13:18.000000', '2025-12-17 09:33:18.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('c11ad3cf-99e9-483d-a282-98c889b554b6', NULL, NULL, '166f54f6-000f-4f1c-8b77-a1099739b1fb', '2025-12-24 02:05:00.000000', '2025-12-24 03:05:00.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
+INSERT INTO `openiddicttokens` VALUES ('c1dcad3d-a533-4dbe-a8cb-bafda795b269', NULL, NULL, 'a7bfa680-98d2-4818-be6f-15f1eaa48f6a', '2025-12-24 06:36:59.000000', '2025-12-24 06:56:59.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('c2593de4-6efc-4f65-a6cc-aff4026ce7fd', NULL, NULL, '3ac76415-2088-4c8d-99de-c5ab421bec89', '2025-12-23 09:19:25.000000', '2025-12-23 09:39:25.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
+INSERT INTO `openiddicttokens` VALUES ('c2f7ccdc-91ff-408c-ba94-dea1a3104e7e', NULL, NULL, 'f77c0208-b126-4fe0-befb-ea7f8ab2a0ae', '2025-12-24 10:05:37.000000', '2025-12-24 11:05:37.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('c5e17d75-199b-4b31-ab8b-b05f13d7f198', NULL, NULL, 'd12bd6cf-c63e-4e1e-9395-849df79cb92f', '2025-12-17 09:36:47.000000', '2025-12-17 09:56:47.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('c732ce6c-0124-45fc-91d7-bceb2a29e23e', NULL, NULL, '84f7180c-8bbb-4ed9-8da2-7b87d2c5f701', '2025-12-17 09:54:22.000000', '2025-12-17 10:54:22.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('c94a819b-5200-42d9-b0b3-59e672d0e3b8', NULL, NULL, '4a725b33-2521-4edc-9a28-27b89b2ca746', '2025-12-14 06:15:20.000000', '2025-12-14 06:35:20.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
@@ -645,14 +704,17 @@ INSERT INTO `openiddicttokens` VALUES ('d2d4a249-4f2b-4acb-9855-56ab2f821872', N
 INSERT INTO `openiddicttokens` VALUES ('d3f3de29-9f82-4b5a-8f14-d663a4651644', NULL, NULL, '0a1d07c9-5d9f-4854-82c0-66acccd9c0f1', '2025-12-17 08:31:02.000000', '2025-12-17 09:31:02.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('d4f41193-5409-48b2-9d46-1294d4d837b7', NULL, NULL, '0373bdf4-68af-4ef6-9677-5ba1879db0b5', '2025-12-17 11:39:00.000000', '2025-12-17 12:39:00.000000', NULL, NULL, NULL, NULL, 'valid', '1187', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('db53c54a-8310-40f1-8acc-28935fef4f5f', NULL, NULL, 'd6c75ee5-3541-46ae-abcf-9b17d7426fda', '2025-12-17 08:31:02.000000', '2025-12-17 08:51:02.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
+INSERT INTO `openiddicttokens` VALUES ('dd3fd089-9185-4d01-b04f-d45cebc0714e', NULL, NULL, '59889b93-684a-4156-9a80-b9ac794f78bd', '2025-12-24 09:56:44.000000', '2025-12-24 10:56:44.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('de1fbdfc-0ac2-466f-9198-950bdcefab72', NULL, NULL, 'ef74e936-b7aa-42a4-939b-e76e036dc24d', '2025-12-17 09:39:33.000000', '2025-12-17 09:59:33.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('de4045a6-73ac-4fbd-b94b-732b792d281d', NULL, NULL, '927f1426-cd8c-4c15-a611-d1cece8899b3', '2025-12-16 12:56:03.000000', '2025-12-16 13:16:03.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('e44e1e1e-d771-4cf8-9935-e68717fd47d6', NULL, NULL, 'bd0f7182-4c88-4863-8c2c-4ccf26b9cf7c', '2025-12-17 07:06:49.000000', '2025-12-17 07:26:49.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('e8aa9faa-cc08-4966-9af9-c773e6c206ac', NULL, NULL, '3717f789-c41a-4d63-a576-dd8114ade426', '2025-12-16 12:54:01.000000', '2025-12-16 13:54:01.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('e956c183-0aa3-470d-9f9e-de3c11f552e9', NULL, NULL, '6fca4e8a-f1f5-4d0d-af49-70f67f6db5c1', '2025-12-17 07:17:41.000000', '2025-12-17 07:37:41.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
+INSERT INTO `openiddicttokens` VALUES ('e9de13df-53a9-4a7e-b018-d5a83b527041', NULL, NULL, '4b1d5d18-0c6e-4ec3-8895-f4c97bfec7bf', '2025-12-24 09:52:34.000000', '2025-12-24 10:12:34.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('ef8df956-b7d0-4a08-b340-f14e02bfa9f2', NULL, NULL, 'cf1dfe80-322c-4832-9ced-2d5053ae4856', '2025-12-17 05:41:04.000000', '2025-12-17 06:41:04.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('effac379-0705-4f3f-a0e7-49c2698acb1c', NULL, NULL, 'f4274672-5e31-4ad0-9ea5-67d48b6e16bb', '2025-12-24 02:05:00.000000', '2025-12-24 02:25:00.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('f0a59feb-1c42-43da-95d2-1ed5d1d4c5e3', NULL, NULL, 'a02a9d38-cdf7-40ee-9f9d-e760533c129c', '2025-12-14 06:21:24.000000', '2025-12-14 07:21:24.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
+INSERT INTO `openiddicttokens` VALUES ('f1469f4d-bd1b-438b-8e99-246a717e0277', NULL, NULL, '46bf64bb-e8d2-409d-8f10-c1e6a90af6c0', '2025-12-24 09:52:34.000000', '2025-12-24 10:52:34.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
 INSERT INTO `openiddicttokens` VALUES ('f2710cb1-f9e0-4443-9725-497cc2b6b30c', NULL, NULL, 'dea3d37f-3632-4e42-b142-5b151ff6dcdf', '2025-12-17 08:14:12.000000', '2025-12-17 08:34:12.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('f5bff0c0-ce89-446b-8cb0-d5d4c325b815', NULL, NULL, 'c2679377-d5cf-49e2-9347-b46b8d69f116', '2025-12-24 03:51:54.000000', '2025-12-24 04:11:54.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:id_token');
 INSERT INTO `openiddicttokens` VALUES ('f6312e8d-0a1d-458f-b152-eaba92143915', NULL, NULL, '36f8795b-6bd5-4f14-a99d-acd88e74e838', '2025-12-15 13:11:59.000000', '2025-12-15 14:11:59.000000', NULL, NULL, NULL, NULL, 'valid', '2', 'urn:ietf:params:oauth:token-type:access_token');
@@ -687,7 +749,7 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (2, '18405892782', '$2b$12$/5xqNN/xIOtsuDaMRpkptOgtgweLtnvxrxWIvwwBD0Q2ZIHXgTCCC', 'Tiks', 'author', '2025-05-28 17:43:24', '/uploads/user/avatars/c994eb9f4f2e4596bc720fca4e6e3058.png', '写故事，也写心事，一起成长进步。', NULL, NULL, '签约作家', '2025-12-16 13:19:28', 3);
+INSERT INTO `user` VALUES (2, '18405892782', '$2b$12$/5xqNN/xIOtsuDaMRpkptOgtgweLtnvxrxWIvwwBD0Q2ZIHXgTCCC', 'Tiks', 'author', '2025-05-28 17:43:24', '/uploads/user/avatars/c994eb9f4f2e4596bc720fca4e6e3058.png', '写故事，也写心事，一起成长进步。', NULL, NULL, '签约作家', '2025-12-24 12:36:11', 3);
 INSERT INTO `user` VALUES (1001, '13918572453', '$2b$12$/5xqNN/xIOtsuDaMRpkptOgtgweLtnvxrxWIvwwBD0Q2ZIHXgTCCC', '杀虫队队员', 'author', '2021-12-05 14:26:23', '/uploads/user/avatars/870f26a47a1a4e1894917463c8b790b0.png', '心中有个世界，想带你们去看看。', '/uploads/user/life/1001.png', '《十日终焉》', '金番作家', '2021-12-05 14:26:23', 9);
 INSERT INTO `user` VALUES (1002, '13765098342', '$2b$12$/5xqNN/xIOtsuDaMRpkptOgtgweLtnvxrxWIvwwBD0Q2ZIHXgTCCC', '三音九域', 'author', '2021-02-01 14:26:23', '/uploads/user/avatars/be546b6aa2c2455cad24b9474f3b26fd.png', '用心写出不一样的故事', '/uploads/user/life/1002.png', '《我在精神病院学斩神》', '殿堂作家', '2021-02-01 14:26:23', 18);
 INSERT INTO `user` VALUES (1003, '18629374850', '$2b$12$/5xqNN/xIOtsuDaMRpkptOgtgweLtnvxrxWIvwwBD0Q2ZIHXgTCCC', '澎湃', 'author', '2021-09-02 14:26:23', '/assets/avatars/icons8-user-pulsar-color-32.png', '我的作品希望你喜欢', NULL, NULL, '签约作家', '2021-09-02 14:26:23', 4);

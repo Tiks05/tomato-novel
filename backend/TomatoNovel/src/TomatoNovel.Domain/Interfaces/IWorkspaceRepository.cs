@@ -36,8 +36,8 @@ public interface IWorkspaceRepository
     /// <summary>
     /// Get all chapters under a specific volume.
     /// </summary>
-    /// <param name="volumeId">Volume identifier</param>
-    /// <returns>List of chapters</returns>
+    /// <param name="volumeId">Volume identifier.</param>
+    /// <returns>List of chapters.</returns>
     IEnumerable<Chapter> GetChaptersByVolume(int volumeId);
 
     IEnumerable<Chapter> GetChaptersByBook(int bookId);
@@ -62,11 +62,11 @@ public interface IWorkspaceRepository
 
     void RemoveChapter(Chapter chapter);
 
-    int CountMessages(int userId, string? type);
+    int CountMessages(int userId, int? type);
 
     List<Message> GetMessages(
         int userId,
-        string? type,
+        int? type,
         int page,
         int pageSize);
 

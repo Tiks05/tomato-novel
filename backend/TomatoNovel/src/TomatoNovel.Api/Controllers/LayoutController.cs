@@ -27,7 +27,6 @@ public class LayoutController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpPost("profile/update")]
-    [Authorize]
     [ProducesResponseType(
         typeof(ApiResponse<UserProfileUpdateResponseDto>),
         StatusCodes.Status200OK)]

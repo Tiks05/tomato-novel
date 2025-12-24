@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.OpenApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -22,7 +23,6 @@ using TomatoNovel.Application.Services;
 using TomatoNovel.Domain.Interfaces;
 using TomatoNovel.Infrastructure.Persistence;
 using TomatoNovel.Infrastructure.Repositories;
-using TomatoNovel.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +35,21 @@ var builder = WebApplication.CreateBuilder(args);
 /// </summary>
 builder.Services.AddControllers();
 
+// -----------------------------------------------------------------------------
+// CORS
+// -----------------------------------------------------------------------------
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:5173")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 /// <summary>
 /// Registers IHttpContextAccessor for accessing the current HttpContext.
 /// Required by OpenIddictTokenService.
@@ -42,7 +57,7 @@ builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
 
 // -----------------------------------------------------------------------------
-// OpenAPI (Swagger) - New .NET 9 API Documentation System
+// OpenAPI (Swagger) - New .NET 9 OpenAPI System
 // -----------------------------------------------------------------------------
 
 /// <summary>
@@ -120,7 +135,7 @@ builder.Services.AddOpenIddict()
         options.AllowPasswordFlow();
         options.AllowRefreshTokenFlow();
 
-        // 注册完整且“规范”的 Scope
+        // Register standard and custom scopes
         options.RegisterScopes(
             OpenIddictConstants.Scopes.OpenId,
             OpenIddictConstants.Scopes.OfflineAccess,
@@ -128,11 +143,12 @@ builder.Services.AddOpenIddict()
             "onlinestudy_api.write"
         );
 
-        // MySQL 方案（你这块写得是对的）
+        // Development signing / encryption keys
         options.AddEphemeralEncryptionKey()
             .AddEphemeralSigningKey()
             .DisableAccessTokenEncryption();
 
+        // Allow public (anonymous) OAuth clients
         options.AcceptAnonymousClients();
 
         options.UseAspNetCore()
@@ -144,13 +160,12 @@ builder.Services.AddOpenIddict()
         options.UseAspNetCore();
     });
 
-
 // -----------------------------------------------------------------------------
 // ASP.NET Core Authentication / Authorization
 // -----------------------------------------------------------------------------
 
 /// <summary>
-/// Enables authentication using OpenIddict.
+/// Enables authentication using OpenIddict validation.
 /// </summary>
 builder.Services.AddAuthentication(options =>
 {
@@ -161,7 +176,22 @@ builder.Services.AddAuthentication(options =>
         OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
 });
 
-builder.Services.AddAuthorization();
+/// <summary>
+/// Enables authorization with a global fallback policy.
+/// Default: all endpoints require authentication.
+/// Guest access must be explicitly marked with [AllowAnonymous].
+/// </summary>
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+});
+
+// -----------------------------------------------------------------------------
+// HttpClient Factory
+// -----------------------------------------------------------------------------
+
 builder.Services.AddHttpClient();
 
 // -----------------------------------------------------------------------------
@@ -169,7 +199,7 @@ builder.Services.AddHttpClient();
 // -----------------------------------------------------------------------------
 
 /// <summary>
-/// Registers application/infrastructure services.
+/// Registers application and infrastructure services.
 /// </summary>
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICommonService, CommonService>();
@@ -191,10 +221,8 @@ builder.Services.AddScoped<IWriterInfoRepository, WriterInfoRepository>();
 builder.Services.AddScoped<IWriterRepository, WriterRepository>();
 builder.Services.AddScoped<IWorkspaceRepository, WorkspaceRepository>();
 
-builder.Services.AddScoped<IOpenIddictTokenService, OpenIddictTokenService>();
-
 // -----------------------------------------------------------------------------
-// Build the application
+// Build Application
 // -----------------------------------------------------------------------------
 
 var app = builder.Build();
@@ -203,14 +231,13 @@ var app = builder.Build();
 // OpenAPI + Scalar UI
 // -----------------------------------------------------------------------------
 
-/// <summary>
-/// Maps OpenAPI schema endpoints.
-/// </summary>
-app.MapOpenApi();
+app.MapOpenApi()
+    .AllowAnonymous();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapScalarApiReference();
+    app.MapScalarApiReference()
+        .AllowAnonymous();;
 }
 
 // -----------------------------------------------------------------------------
@@ -220,12 +247,16 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+app.UseCors("AllowFrontend");
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 // -----------------------------------------------------------------------------
 // Endpoints
 // -----------------------------------------------------------------------------
+
 app.UseExceptionMiddleware();
 
 app.UseEndpoints(endpoints =>

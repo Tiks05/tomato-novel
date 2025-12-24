@@ -14,7 +14,7 @@ public class GetUserMessagesRequestDto
     /// 审核提醒 / 作品通知 / 活动通知 / 系统通知 / 互动通知
     /// Null or empty means all types.
     /// </summary>
-    public string? Type { get; set; }
+    public int? Type { get; set; }
 
     /// <summary>
     /// Gets or sets the page number.

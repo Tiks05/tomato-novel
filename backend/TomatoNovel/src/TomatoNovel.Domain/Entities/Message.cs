@@ -17,9 +17,9 @@ public sealed class Message
 
     /// <summary>
     /// Gets or sets the message type.
-    /// 审核提醒 / 作品通知 / 活动通知 / 系统通知 / 互动通知
+    /// 审核提醒 / 作品通知 / 活动通知 / 系统通知 / 互动通知.
     /// </summary>
-    public string Type { get; set; } = string.Empty;
+    public int Type { get; set; }
 
     /// <summary>
     /// Gets or sets the message title.

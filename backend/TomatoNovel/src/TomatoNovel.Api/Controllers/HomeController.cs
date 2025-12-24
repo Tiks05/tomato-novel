@@ -9,6 +9,7 @@ using TomatoNovel.Application.Interfaces;
 
 [ApiController]
 [Route("api/home")]
+[AllowAnonymous]
 public class HomeController : ControllerBase
 {
     private readonly IHomeService homeService;
@@ -19,7 +20,6 @@ public class HomeController : ControllerBase
     }
 
     [HttpGet("top-books")]
-    [AllowAnonymous]
     public IActionResult GetTopBooks()
     {
         var result = this.homeService.GetTopBooks();
@@ -27,7 +27,6 @@ public class HomeController : ControllerBase
     }
 
     [HttpGet("news-list")]
-    [AllowAnonymous]
     public IActionResult GetNewsList([FromQuery] NewsListRequestDto request)
     {
         var result = this.homeService.GetNewsList(request);
@@ -35,7 +34,6 @@ public class HomeController : ControllerBase
     }
 
     [HttpGet("writer-list")]
-    [AllowAnonymous]
     public IActionResult GetWriterList()
     {
         var result = this.homeService.GetWriterList();
@@ -43,7 +41,6 @@ public class HomeController : ControllerBase
     }
 
     [HttpGet("recommend")]
-    [AllowAnonymous]
     public IActionResult Recommend()
     {
         var result = this.homeService.GetRecommend();
@@ -51,7 +48,6 @@ public class HomeController : ControllerBase
     }
 
     [HttpGet("ranking")]
-    [AllowAnonymous]
     public IActionResult GetRanking([FromQuery] RankingRequestDto request)
     {
         var result = this.homeService.GetRanking(request);
@@ -59,7 +55,6 @@ public class HomeController : ControllerBase
     }
 
     [HttpGet("recent-updates")]
-    [AllowAnonymous]
     public IActionResult GetRecentUpdates()
     {
         var result = this.homeService.GetRecentUpdates();

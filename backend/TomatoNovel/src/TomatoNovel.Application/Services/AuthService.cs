@@ -10,14 +10,10 @@ using TomatoNovel.Domain.Interfaces;
 public class AuthService : IAuthService
 {
     private readonly IAuthRepository authRepository;
-    private readonly IOpenIddictTokenService tokenService;
 
-    public AuthService(
-        IAuthRepository authRepository,
-        IOpenIddictTokenService tokenService)
+    public AuthService(IAuthRepository authRepository)
     {
         this.authRepository = authRepository;
-        this.tokenService = tokenService;
     }
 
     public async Task<LoginOrRegisterResponseDto> LoginOrRegisterAsync(
@@ -62,41 +58,18 @@ public class AuthService : IAuthService
         }
 
         // ---------------------------------------------------------------------
-        // 调用 OpenIddict 的 /connect/token（授权层）
+        // 只返回业务结果，不返回 Token
         // ---------------------------------------------------------------------
-        string accessToken;
-
-        try
-        {
-            accessToken = await this.tokenService.GenerateTokenAsync(
-                username: request.Phone,
-                password: request.Password);
-        }
-        catch (Exception ex)
-        {
-            throw new BusinessException(
-                40004,
-                $"Failed to issue access token: {ex.Message}");
-        }
-
-        // ---------------------------------------------------------------------
-        // 组装返回 DTO（Application → API）
-        // ---------------------------------------------------------------------
-        return new LoginOrRegisterResponseDto
-        {
-            User = new UserInfoDto
-            {
-                Id = user.Id,
-                Phone = user.Phone,
-                Role = user.Role,
-                Nickname = user.Nickname,
-                Avatar = user.Avatar,
-                BecomeAuthorAt = user.BecomeAuthorAt?
-                    .ToString("yyyy-MM-dd HH:mm:ss") ?? string.Empty,
-                Signature = user.Signature,
-                Level = user.Level,
-            },
-            AccessToken = accessToken,
+        return new LoginOrRegisterResponseDto{
+            Id = user.Id,
+            Phone = user.Phone,
+            Role = user.Role,
+            Nickname = user.Nickname,
+            Avatar = user.Avatar,
+            BecomeAuthorAt = user.BecomeAuthorAt?
+                .ToString("yyyy-MM-dd HH:mm:ss") ?? string.Empty,
+            Signature = user.Signature,
+            Level = user.Level,
         };
     }
 }

@@ -12,9 +12,9 @@ public class MessageItemDto
 
     /// <summary>
     /// Gets or sets the message category.
-    /// 审核提醒 / 作品通知 / 活动通知 / 系统通知 / 互动通知
+    /// 审核提醒 / 作品通知 / 活动通知 / 系统通知 / 互动通知.
     /// </summary>
-    public string Category { get; set; } = string.Empty;
+    public int Category { get; set; }
 
     /// <summary>
     /// Gets or sets the message title.

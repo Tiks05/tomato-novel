@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Form, Input, Checkbox, Button, message } from 'antd'
 import { loginByPassword } from '@/api/auth.api'
+import { fetchTokenByPassword } from '@/utils/oauth'
 import { useUserStore } from '@/store/use-user-store'
 import { useGoTo } from '@/hooks/use-go-to'
 
@@ -9,19 +10,21 @@ import arrowLeft from '@/assets/icons/arrow-left/icons8-arrow-50.png'
 
 const LoginPwdForm = () => {
   const { goTo } = useGoTo()
+
   const setUser = useUserStore(s => s.setUser)
+  const setTokens = useUserStore(s => s.setTokens)
 
   const [form] = Form.useForm()
   const [submitting, setSubmitting] = useState(false)
 
-  /** ⭐ 使用 Form.useWatch 才能监听实时输入 */
+  /** 实时监听 */
   const account = Form.useWatch('account', form)
   const password = Form.useWatch('password', form)
   const agree = Form.useWatch('agree', form)
 
   const canSubmit = Boolean(account?.trim() && password?.trim() && agree)
 
-  /** 登录逻辑 */
+  /** 登录逻辑（⭐ 企业标准写法） */
   const handleLogin = async () => {
     await form.validateFields()
 
@@ -30,9 +33,22 @@ const LoginPwdForm = () => {
 
       const { account, password } = form.getFieldsValue()
 
-      const res = await loginByPassword({ phone: account, password })
+      // ① 业务登录（只校验账号密码，拿 UserInfo）
+      const user = await loginByPassword({
+        phone: account,
+        password,
+      })
 
-      setUser(res)
+      // ② OAuth 登录（拿 access_token / refresh_token）
+      const token = await fetchTokenByPassword(account, password)
+
+      // ③ 写入 store
+      setUser(user)
+      setTokens({
+        accessToken: token.access_token,
+        refreshToken: token.refresh_token,
+        expiresIn: token.expires_in,
+      })
 
       message.success('登录成功')
       goTo('/home')
@@ -46,19 +62,17 @@ const LoginPwdForm = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        {/* 返回箭头 */}
+        {/* 返回 */}
         <div className={styles.backTab} onClick={() => goTo('/login/sms')}>
           <img src={arrowLeft} className={styles.backIcon} />
           密码登录
         </div>
 
         <Form form={form} layout="vertical" className={styles.loginForm}>
-          {/* 手机号 */}
           <Form.Item name="account" rules={[{ required: true, message: '请输入手机号' }]}>
             <Input placeholder="请输入手机号" className={styles.inputRounded} />
           </Form.Item>
 
-          {/* 密码 */}
           <Form.Item name="password" rules={[{ required: true, message: '请输入密码' }]}>
             <Input
               type="password"
@@ -72,7 +86,6 @@ const LoginPwdForm = () => {
             />
           </Form.Item>
 
-          {/* 协议 */}
           <div className={styles.agreeLine}>
             <Form.Item name="agree" valuePropName="checked" noStyle>
               <Checkbox />
@@ -83,7 +96,6 @@ const LoginPwdForm = () => {
             </span>
           </div>
 
-          {/* 登录按钮 */}
           <Button
             className={`${styles.loginBtn} ${canSubmit ? styles.active : ''}`}
             style={{
@@ -91,7 +103,7 @@ const LoginPwdForm = () => {
               pointerEvents: canSubmit ? 'auto' : 'none',
             }}
             loading={submitting}
-            onClick={() => (canSubmit ? handleLogin() : null)}
+            onClick={canSubmit ? handleLogin : undefined}
           >
             登录
           </Button>

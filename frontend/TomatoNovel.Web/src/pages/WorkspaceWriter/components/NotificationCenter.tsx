@@ -4,11 +4,36 @@ import styles from './NotificationCenter.module.scss'
 import { getUserMessages, markMessagesAsRead } from '@/api/workspace.api'
 import { useUserStore } from '@/store/use-user-store'
 
-const TABS = ['全部', '审核提醒', '作品通知', '活动通知', '系统通知', '互动通知']
+/**
+ * 通知类型映射（前端 ↔ 后端）
+ * - Tabs 展示中文
+ * - 请求后端使用 0–4
+ */
+const MESSAGE_TYPE_MAP = {
+  全部: undefined,
+  审核提醒: 0,
+  作品通知: 1,
+  活动通知: 2,
+  系统通知: 3,
+  互动通知: 4,
+} as const
+
+const MESSAGE_TYPE_LABEL_MAP = {
+  0: '审核提醒',
+  1: '作品通知',
+  2: '活动通知',
+  3: '系统通知',
+  4: '互动通知',
+} as const
+
+type MessageTab = keyof typeof MESSAGE_TYPE_MAP
+
+const TABS = Object.keys(MESSAGE_TYPE_MAP) as MessageTab[]
+
 const PAGE_SIZE = 10
 
 const NotificationCenter = () => {
-  const [activeTab, setActiveTab] = useState('全部')
+  const [activeTab, setActiveTab] = useState<MessageTab>('全部')
 
   const [page, setPage] = useState(1)
   const [total, setTotal] = useState(0)
@@ -43,12 +68,17 @@ const NotificationCenter = () => {
     try {
       const res = await getUserMessages({
         user_id: userId,
-        type: activeTab === '全部' ? undefined : activeTab,
+        type: MESSAGE_TYPE_MAP[activeTab],
         page,
         page_size: PAGE_SIZE,
       })
 
-      setList(res.items)
+      setList(
+        res.items.map((item: any) => ({
+          ...item,
+          typeLabel: MESSAGE_TYPE_LABEL_MAP[item.type as keyof typeof MESSAGE_TYPE_LABEL_MAP],
+        })),
+      )
       setTotal(res.total_count)
     } finally {
       setLoading(false)
@@ -84,7 +114,6 @@ const NotificationCenter = () => {
       message_ids: Array.from(readIdsRef.current),
     })
 
-    // 可选：提交后清空，防止重复提交
     readIdsRef.current.clear()
   }
 
@@ -103,10 +132,7 @@ const NotificationCenter = () => {
     }
 
     window.addEventListener('beforeunload', handleBeforeUnload)
-
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload)
-    }
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -151,6 +177,8 @@ const NotificationCenter = () => {
                 <div className={styles.itemTitle}>{item.title}</div>
                 <span className={styles.time}>{item.time}</span>
               </div>
+
+              <div className={styles.type}>{item.typeLabel}</div>
 
               <div className={styles.content} dangerouslySetInnerHTML={{ __html: item.content }} />
             </div>

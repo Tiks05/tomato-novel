@@ -153,7 +153,7 @@ public class WorkspaceRepository : IWorkspaceRepository
 
     public IEnumerable<Chapter> GetChaptersByVolume(int volumeId)
     {
-        return db.Chapters
+        return this.db.Chapters
             .Where(c => c.VolumeId == volumeId)
             .OrderBy(c => c.ChapterNum)
             .AsNoTracking()
@@ -199,14 +199,14 @@ public class WorkspaceRepository : IWorkspaceRepository
 
     public void RemoveChapter(Chapter chapter) => this.db.Chapters.Remove(chapter);
 
-    public int CountMessages(int userId, string? type)
+    public int CountMessages(int userId, int? type)
     {
         var query = this.db.Messages
             .Where(m => m.UserId == userId);
 
-        if (!string.IsNullOrWhiteSpace(type))
+        if (type.HasValue)
         {
-            query = query.Where(m => m.Type == type);
+            query = query.Where(m => m.Type == type.Value);
         }
 
         return query.Count();
@@ -214,16 +214,16 @@ public class WorkspaceRepository : IWorkspaceRepository
 
     public List<Message> GetMessages(
         int userId,
-        string? type,
+        int? type,
         int page,
         int pageSize)
     {
         var query = this.db.Messages
             .Where(m => m.UserId == userId);
 
-        if (!string.IsNullOrWhiteSpace(type))
+        if (type.HasValue)
         {
-            query = query.Where(m => m.Type == type);
+            query = query.Where(m => m.Type == type.Value);
         }
 
         return query

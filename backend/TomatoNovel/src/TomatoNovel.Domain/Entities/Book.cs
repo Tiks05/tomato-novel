@@ -101,7 +101,7 @@ public class Book
     /// 1: Searchable
     /// 2: Signed
     /// 3: Recommended
-    /// 4: Finished
+    /// 4: Finished.
     /// </summary>
     public int State { get; set; } = 0;
 

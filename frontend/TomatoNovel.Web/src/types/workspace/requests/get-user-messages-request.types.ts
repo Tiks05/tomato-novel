@@ -12,7 +12,7 @@ export interface GetUserMessagesRequest {
    * 审核提醒 / 作品通知 / 活动通知 / 系统通知 / 互动通知
    * Undefined or empty means all types
    */
-  type?: string
+  type?: number
 
   /**
    * Page number

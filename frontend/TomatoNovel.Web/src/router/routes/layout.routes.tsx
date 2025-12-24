@@ -1,5 +1,6 @@
 import { lazy } from 'react'
 import type { RouteObject } from 'react-router-dom'
+import { RouteGuard } from '@/router/guards/RouteGuard'
 
 // ===== 懒加载页面 =====
 const HomePage = lazy(() => import('@/pages/Home/HomePage'))
@@ -15,7 +16,6 @@ export const layoutRoutes: RouteObject[] = [
     element: <HomePage />,
     handle: {
       title: '首页',
-      requiresAuth: false,
     },
   },
 
@@ -25,7 +25,6 @@ export const layoutRoutes: RouteObject[] = [
     element: <LibraryPage />,
     handle: {
       title: '书库',
-      requiresAuth: false,
     },
   },
 
@@ -35,17 +34,19 @@ export const layoutRoutes: RouteObject[] = [
     element: <WriterPage />,
     handle: {
       title: '作家首页',
-      requiresAuth: false,
     },
   },
 
   // /profile（需要登录）
   {
     path: 'profile',
-    element: <ProfilePage />,
+    element: (
+      <RouteGuard>
+        <ProfilePage />
+      </RouteGuard>
+    ),
     handle: {
       title: '个人信息',
-      requiresAuth: true,
     },
   },
 
@@ -55,7 +56,6 @@ export const layoutRoutes: RouteObject[] = [
     element: <SearchPage />,
     handle: {
       title: '搜索结果页',
-      requiresAuth: false,
     },
   },
 ]

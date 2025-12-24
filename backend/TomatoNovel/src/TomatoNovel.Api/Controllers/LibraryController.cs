@@ -9,6 +9,7 @@ using TomatoNovel.Application.Interfaces;
 
 [ApiController]
 [Route("api/library")]
+[AllowAnonymous]
 public class LibraryController : ControllerBase
 {
     private readonly ILibraryService libraryService;
@@ -23,7 +24,6 @@ public class LibraryController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("books")]
-    [AllowAnonymous]
     [ProducesResponseType(
         typeof(ApiResponse<BookListResponseDto>),
         StatusCodes.Status200OK)]

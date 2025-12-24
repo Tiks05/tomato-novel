@@ -121,8 +121,7 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
         // =========================
         builder.HasCheckConstraint(
             "CK_book_state",
-            "`state` >= 0 AND `state` <= 4"
-        );
+            "`state` >= 0 AND `state` <= 4");
 
         // =========================
         // Relationships
