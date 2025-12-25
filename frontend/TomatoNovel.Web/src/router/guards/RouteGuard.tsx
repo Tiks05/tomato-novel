@@ -19,7 +19,7 @@ export function RouteGuard({ children, requireAuthor }: RouteGuardProps) {
   useEffect(() => {
     if (!isLoggedIn) {
       message.warning('请先登录')
-      navigate('/auth', {
+      navigate('/login', {
         replace: true,
         state: { from: location.pathname },
       })
